@@ -84,7 +84,6 @@ header {
   top: 3.2rem;
   right: -6.2rem;
   width: 12rem;
-  /* width: 20rem; */
   padding-block: 2rem;
   padding-inline: 1.2rem;
   background-color: white;
@@ -163,31 +162,6 @@ button {
   color: #f1efc8;
 }
 
-.home img {
-  width: 100%;
-  height: 100vh;
-}
-
-.home .text {
-  position: absolute;
-  top: 60%;
-  left: 5%;
-}
-
-.home .text h1 {
-  font-size: 80px;
-  font-family: "Poppins";
-  font-weight: 600;
-}
-
-.home p {
-  margin: 20px 0;
-  font-weight: 400;
-}
-
-.home button {
-  margin-right: 20px;
-}
 .footer_container {
   display: flex;
   justify-content: center;
@@ -208,9 +182,6 @@ button {
   color: white;
   margin-top: 0;
 }
-.footer_container .footer_items a {
-  color: #a9c47f;
-}
 
 .footer_container .footer_items {
   display: flex;
@@ -218,14 +189,4 @@ button {
   margin-right: 50px;
   margin-top: 20px;
   text-decoration: none;
-}
-.footer_container .footer_items i {
-  margin-top: 10px;
-  padding-right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  color: white;
-}
-.footer_container .footer_items i:hover {
-  color: #a9c47f;
 }
