@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins&family=Sarabun:wght@400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+.body_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(/client/images/gas_station.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px 100px;
+    background: #074647;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
