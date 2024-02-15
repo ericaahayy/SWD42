@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(/client/images/gas_station.jpg) no-repeat;
+    background: url(/client/images/gas.jpg) no-repeat;
     background-size: cover;
     background-position: center;
 }
