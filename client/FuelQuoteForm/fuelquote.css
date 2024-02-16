@@ -84,13 +84,34 @@ header {
   }
 
   .form_container {
-    max-width: 700px;
-    margin-top: 50px;
+    width: 700px;
+    max-width: 1000px;
+    position: relative;
+    margin-top: 80px;
     padding: 25px 30px;
     border-radius: 5px;
     background-color: white;
+    justify-content: center;
+    margin-bottom: 10px;
   }
   
+  .input_container {
+    margin-bottom: 20px;
+  }
+  
+  .input_container label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .input_container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
   .form_container .title {
     font-size: 25px;
     font-weight: 500;
@@ -125,6 +146,3 @@ header {
   margin-top: 20px;
   text-decoration: none;
 }
-
-
-  
