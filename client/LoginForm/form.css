@@ -33,33 +33,6 @@ header {
   color: #1ea9ab;
 }
 
-.navigation {
-  position: relative;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
-
-.navigation a {
-  position: relative;
-  font-size: 1.1em;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  margin-left: 30px;
-}
-
-.nav_user {
-  width: 2.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
 .flex {
   display: flex;
 }
