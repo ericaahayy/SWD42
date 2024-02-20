@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins&family=Sarabun:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 8px 100px;
+  background: #074647;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  border-bottom: 1px solid gray;
+}
+
+.logo {
+  font-size: 2em;
+  font-weight: 600;
+  color: #fff;
+  user-select: none;
+  text-decoration: none;
+  border: none;
+}
+.logo:hover {
+  color: #1ea9ab;
+}
+
+.navigation {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navigation a {
+  position: relative;
+  font-size: 1.1em;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 30px;
+}
+
+.nav_user {
+  width: 2.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex_space {
+  display: flex;
+  justify-content: space-between;
+}
+
+  body {
+    background-color: #e0e0e0;
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    margin: 20px;
+    text-align: center;
+  }
+
+  .form_container {
+    width: 700px;
+    max-width: 1000px;
+    position: relative;
+    margin-top: 80px;
+    padding: 25px 30px;
+    border-radius: 5px;
+    background-color: white;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .input_container {
+    margin-bottom: 20px;
+  }
+  
+  .input_container label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .input_container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+ 
+  .form_container input[type='submit'] {
+    display: block;
+    margin: 0 auto; /* Center-align the submit button horizontally */
+  }
+
+  .form_container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+  }
+
+.footer_container {
+  display: flex;
+  justify-content: center;
+  background-color: #074647;;
+  position: relative;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 25vh;
+}
+.footer_container .footer_items h2 {
+  color: #1ea9ab;
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+.footer_container .footer_items p {
+  font-size: 14px;
+  color: white;
+  margin-top: 0;
+}
+
+.footer_container .footer_items {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  margin-top: 20px;
+  text-decoration: none;
+}
