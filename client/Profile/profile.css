@@ -179,7 +179,7 @@ footer {
 /* Left Section Styles */
 .left {
     width: 30%;
-    padding: 100px 10px;
+    padding: 90px 10px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     text-align: center;
@@ -257,7 +257,7 @@ footer {
 
 .button-container {
     position: absolute;
-    bottom: 150px;
+    bottom: 130px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
