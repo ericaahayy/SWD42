@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins&family=Sarabun:wght@400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px 100px;
+    background: #074647;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: 600;
+    color: #fff;
+    user-select: none;
+    text-decoration: none;
+}
+
+.logo:hover {
+    cursor: pointer;
+    color: #1ea9ab;
+}
+
+.navigation a {
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 30px;
+}
+
+.navigation a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.5s;
+}
+
+.navigation a:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* Footer Styles */
+.footer_container {
+    display: flex;
+    justify-content: center;
+    background-color: #074647;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 20vh;
+}
+
+.footer_container .footer_items {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+    margin-top: 20px;
+}
+
+.footer_container .footer_items h2 {
+    color: #1ea9ab;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.footer_container .footer_items p {
+    font-size: 14px;
+    color: white;
+    margin-top: 0;
+}
+
+.footer_container .footer_items a {
+    color: #1ea9ab;
+    text-decoration: none;
+}
+
+.footer_container .footer_items .about-us {
+    text-decoration: none;
+}
+
+.footer_container .footer_items .about-us:hover {
+    text-decoration: underline;
+}
+
+.footer_container .footer_items i {
+    margin-top: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.footer_container .footer_items i:hover {
+    color: #1ea9ab;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #074647;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.footer_items {
+    text-align: left;
+}
+
+.footer_items h2 {
+    color: #1ea9ab;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.footer_items p {
+    font-size: 14px;
+    color: white;
+    margin: 0;
+}
+
+.footer_items a {
+    color: #1ea9ab;
+    text-decoration: none;
+}
+
+.footer_items a:hover {
+    text-decoration: underline;
+}
+
+
+.header {
+    min-height: 700px;
+    background-image: url(../images/gas.jpg);
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+    overflow: hidden; /* Ensure that child elements don't overflow */
+}
+.color-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Lighter color overlay with white background */
+}
+/* Left Section Styles */
+.left {
+    width: 30%;
+    padding: 100px 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background-size: cover;
+    background-position: center top;
+}
+.row {
+    position: relative;
+    z-index: 2;
+    color: black; /* Set text color to white */
+}
+.col-lg-7,
+.col-md-10 {
+    padding-left: 400px;
+    padding-top: 80px;
+}
+
+.left::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.client-info {
+    margin-bottom: 10px;
+}
+.client-info h4{
+    text-decoration: underline;
+
+}
+
+.btn {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    display: inline-block;
+    padding: .625rem 1.25rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-radius: .375rem;
+}
+
+.btn-info {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #1ea9ab;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-info:hover {
+    background-color: #107d7f;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.wrapper {
+    position: absolute;
+    transform: translate(-50%, -55%);
+    top: 50%;
+    left: 50%;
+    width: 650px;
+    height: 500px;
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+
+}
+
+
+
+
+.wrapper .right {
+    width: 80%;
+    padding: 25px 20px;
+}
+
+.wrapper .right h3 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    font-size: 24px;
+}
+
+.wrapper .left p,
+.wrapper .right p {
+    color: grey;
+    padding-bottom: 10px;
+}
+.wrapper .info {
+    display: flex;
+}
+
+.wrapper .info .data {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.wrapper .info .data h4,
+.wrapper .info .data p {
+    margin-bottom: 5px;
+}
+.wrapper .addresses
+ {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.wrapper .addresses .data {
+    width: 48%;
+    margin-bottom: -10px;
+    margin-right: 10px;
+}
+
+.wrapper .info .data h4,
+.wrapper .addresses .data h4 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.wrapper .info .data p,
+.wrapper .addresses .data p
+{
+    color: gray;
+    padding-bottom: 5px;
+}
+
+.wrapper .addresses .data .address-box,
+.wrapper .right p {
+
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.wrapper .addresses .data .address-box p,
+.wrapper .right p {
+    color: gray;
+    margin: 0;
+    padding-bottom: 5px;
+}
