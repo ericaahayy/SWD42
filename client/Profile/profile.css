@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins";
+    font-family: Poppins, sans-serif;
 }
 
 body {
@@ -198,7 +198,7 @@ footer {
 .col-lg-7,
 .col-md-10 {
     padding-left: 300px;
-    padding-top: 80px;
+    padding-top: 70px;
 }
 .col-lg-7 h1,
 .col-md-10 h1 {
@@ -269,7 +269,7 @@ footer {
     left: 50%;
     width: 60%;
     max-width: 800px; 
-    height: 470px; 
+    height: 450px; 
     display: flex;
     background-color: white;
     border-radius: 15px;
