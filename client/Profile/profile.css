@@ -202,7 +202,7 @@ footer {
 }
 .col-lg-7 h1,
 .col-md-10 h1 {
-    font-size: 42px; 
+    font-size: 40px; 
 }
 
 .left::before {
@@ -269,7 +269,7 @@ footer {
     left: 50%;
     width: 60%;
     max-width: 800px; 
-    height: 480px; 
+    height: 470px; 
     display: flex;
     background-color: white;
     border-radius: 15px;
@@ -279,7 +279,7 @@ footer {
 
 .wrapper .right {
     width: 80%;
-    padding: 18px 20px;
+    padding: 10px 20px;
 }
 
 .wrapper .right h3 {
