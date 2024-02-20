@@ -24,14 +24,13 @@
 <body>
 
   <header>
-    <a href="/client/Main/main.html" class="logo">Web Name</a>
+    <span class="logo">ReFUEL</span>
     <nav class="navigation">
       <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
       <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
       <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
     </nav>
-  </header>
-
+    </header>
   <main>
     <section class="form_sec" id="input_form">
         <div class="form_container">
@@ -41,7 +40,8 @@
                 <div class="form_info">
                   <div class="input_container">
                     <label for="gallons_requested">Gallons Requested:</label>
-                    <input type="text" name="gallons" id="gallons_requested" required>
+                    <input type="number" name="gallons" id="gallons_requested" required>
+                    <span id="gallons_error" style="color: red; display: none;">Please enter a numeric value.</span>
                   </div>
                   <div class="input_container">
                     <label for="delivery_address">Delivery Address:</label>
@@ -52,19 +52,20 @@
                     <input type="date" name="delivery_date" id="delivery_date" required>
                   </div>
                   <div class="input_container">
-                    <label for="suggested_price">Suggested Price / gallon:</label>
+                    <label for="suggested_price">Suggested Price / Gallon:</label>
                     <input type="number" name="suggested_price" id="suggested_price" readonly>
                   </div>
                   <div class="input_container">
                     <label for="total_amount_due">Total Amount Due:</label>
                     <input type="number" name="total_amount_due" id="total_amount_due" readonly>
                   </div>
+                  <input type="submit" value="Submit">
             </form>
         </div>
     </section>
     </main>
 
-  <script src="main.js"></script>
+  <script src="fuelquote.js"></script>
 </body>
 <footer>
   <div class="footer_container">

@@ -111,6 +111,11 @@ header {
     border-radius: 4px;
     box-sizing: border-box;
   }
+ 
+  .form_container input[type='submit'] {
+    display: block;
+    margin: 0 auto; /* Center-align the submit button horizontally */
+  }
 
   .form_container .title {
     font-size: 25px;
