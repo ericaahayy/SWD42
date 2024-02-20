@@ -76,6 +76,8 @@ header {
   main {
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 80vh;
   }
 
   .container {
@@ -127,11 +129,11 @@ header {
   display: flex;
   justify-content: center;
   background-color: #074647;;
-  position: relative;
+  position: fixed;
   right: 0;
   left: 0;
   bottom: 0;
-  height: 25vh;
+  height: 20vh;
 }
 .footer_container .footer_items h2 {
   color: #1ea9ab;
