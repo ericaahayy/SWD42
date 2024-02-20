@@ -76,7 +76,7 @@ header {
     right: 0;
     left: 0;
     bottom: 0;
-    height: 20vh;
+    height: 18vh;
 }
 
 .footer_container .footer_items {
@@ -141,7 +141,7 @@ footer {
 .footer_items h2 {
     color: #1ea9ab;
     font-size: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .footer_items p {
@@ -264,7 +264,7 @@ footer {
 }
 .wrapper {
     position: absolute;
-    transform: translate(-50%, -52%);
+    transform: translate(-50%, -53%);
     top: 50%;
     left: 50%;
     width: 60%;
