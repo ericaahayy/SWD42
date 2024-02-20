@@ -35,20 +35,20 @@
                 <div class="form_info">
                   <div class="input_container">
                     <label for="name">Full Name:</label>
-                    <input type="text" name="name" id="name" required>
+                    <input type="text" name="name" id="name" maxlength="50" required>
                     <span id="name" style="color: red; display: none;">Please enter a name.</span>
                   </div>
                   <div class="input_container">
                     <label for="address1">Address 1:</label>
-                    <input type="text" name="address1" id="address1" required>
+                    <input type="text" name="address1" id="address1" maxlength="100" required>
                   </div>
                   <div class="input_container">
                     <label for="address2">Address 2:</label>
-                    <input type="text" name="address2" id="address2">
+                    <input type="text" name="address2" id="address2" maxlength="100">
                   </div>
                   <div class="input_container">
                     <label for="city">City:</label>
-                    <input type="text" name="city" id="city" required>
+                    <input type="text" name="city" id="city" maxlength="100" required>
                   </div>
                   <div class="input_container">
                     <label for="state">State:</label>
@@ -108,8 +108,8 @@
                     </select>
                   </div>
                   <div class="input_container">
-                    <label for="zipcode">Zipcode:</label>
-                    <input type="text" name="zipcode" id="zipcode" required>
+                    <label for="zipcode">ZIP Code:</label>
+                    <input type="text" name="zipcode" id="zipcode" minlength="5" maxlength="9" required>
                   </div>
                   <input type="submit" value="Submit">
             </form>
