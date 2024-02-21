@@ -114,7 +114,7 @@ header {
  
   .form_container input[type='submit'] {
     display: block;
-    margin: 0 auto; /* Center-align the submit button horizontally */
+    margin: 0 auto;
   }
 
   .form_container .title {
