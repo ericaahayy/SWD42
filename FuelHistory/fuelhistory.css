@@ -7,8 +7,13 @@
   font-family: "Poppins";
 }
 
+.container {
+  margin: 20px;
+  text-align: center;
+}
+
 header {
-  position: fixed;
+  position: flex;
   top: 0;
   left: 0;
   width: 100%;
@@ -73,6 +78,28 @@ header {
 .home {
   height: 100vh;
   color: #f1efc8;
+}
+body {
+  background-color: #e0e0e0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.form_container {
+  max-width: 700px;
+  margin-top: 50px;
+  padding: 25px 30px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.form_container .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
 }
 
 .footer_container {
