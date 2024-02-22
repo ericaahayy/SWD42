@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuel Quote Form</title>
+  <title>Product Sale History </title>
   <link rel="stylesheet" href="fuelhistory.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
     integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
@@ -23,100 +23,81 @@
 
 <body>
   
-  <header>
-    <span class="logo">ReFUEL</span>
+    <header>
+    <a href="/Main/main.html" class="logo">Web Name</a>
     <nav class="navigation">
-      <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
-      <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
-      <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
+      <a href="/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
+      <a href="/FuelHistory/fuelhistory.html" class="b">Quote History</a>
+      <a href="/Profile/profile.html" class="b" id="myacct">My Account</a>
     </nav>
-    </header>
-  
+  </header>
 
-  <div class="row">
-    <div class="col-12 col-lg-3 mt-3 mb-3">
-      <label class="form-label fs-5">Search by invoice ID: </label> <input type="text" class="form-control fs-5" />
-    </div>
-    <div class="col-12 col-lg-2 mt-3 mb-3"></div>
-    <div class="col-12 col-lg-3 mt-3 mb-3">
-      <label class="form-label fs-5">From date: </label> <input type="text" class-" form-control fs-5" /> </div>
-    <div class="col-12 col-lg-3 mt-3 mb-3">
-      <label class=" form-label fs-5">To date: </label>
-    <input type="text" class="form-control fs-5" />
-    </div>
-    <div class="col-12 col-lg-1 d-grid my-5">
-    <button class="btn btn-primary fs-5 fw-bold">Find</button>
-    </div>
-    
-  
-  <div class="container-fluid" style="padding-top: 50px;">
-    <div class="row">
-        <div class="col-12 text-center mb-3">
-          <span class="fs-1 text-primary fw-bold"> purchasing history </span>
+  <main>
+    <section class="form_sec" id="input_form">
+        <div class="form_container">
+            <div class="title" id="form-title">Product Sale History</div>
+            <div class="row">
+                <div class="col-12 col-lg-3 mt-3 mb-3">
+                    <label class="form-label fs-5">Search by invoice ID:</label> 
+                    <input type="text" class="form-control fs-5" />
+                </div>
+                <div class="col-12 col-lg-3 mt-3 mb-3">
+                    <label class="form-label fs-5">From date:</label> 
+                    <input type="text" class="form-control fs-5" />
+                </div>
+                <div class="col-12 col-lg-3 mt-3 mb-3">
+                    <label class="form-label fs-5">To date:</label>
+                    <input type="text" class="form-control fs-5" />
+                </div>
+                <div class="col-12 col-lg-3 mt-3 mb-3 d-grid">
+                    <button class="btn btn-primary fs-5 fw-bold">Find</button>
+                </div>
+            </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Fuel quoteID#</th>
-              <th>Gallons Requested </th>
-              <th>Delivery Address</th>
-              <th>Delivery Date</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <!-- Add more rows as needed -->
-          </tbody>
-        </table>
-        <!--
-        <div class="col-12">
-          <div class="row">
-            
-            <div class="col-12 d-none d-lg-block">
-              <div class="row">
+    </section>
 
-                <div class="col-1 bg-light">
-                  <label class="form-label fw-bold">#</label>
+    <section class="form_sec" id="input_form2">
+        <div class="form_container">
+            <div class="title" id="form-title2">Product Sale History</div>
+            <div class="container-fluid" style="padding-top: 50px;">
+                <div class="row">
+                    <div class="col-12 text-center mb-3">
+                        <span class="fs-1 text-primary fw-bold">Purchasing History</span>
+                    </div>
                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fuel quoteID#</th>
+                            <th>Gallons Requested</th>
+                            <th>Delivery Address</th>
+                            <th>Delivery Date</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td> 
+                            <td>10</td>
+                            <td>123 Main St, Houston, TX</td>
+                            <td>2023-11-16</td>
+                            <td>$50</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>15</td>
+                            <td>456 Elm St, Dallas, TX</td>
+                            <td>2023-11-15</td>
+                            <td>$75</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
 
-                
-                <div class="col-3 bg-light">
-                  <label class="form-label fw-bold">Order Details</label>
-                </div>
-
-                
-                <div class="col-2 bg-light">
-                  <label class="form-label fw-bold">Quantity</label>
-                </div>
-
-                
-                <div class="col-2 bg-light text-end">
-                  <label class="form-label fw-bold">Amount</label>
-                </div>
-
-                
-                <div class="col-3 bg-light">
-                  <label class="form-label fw-bold">Purchased Date & Time</label>
-                </div>
-    </div>
-  </div>
-  
--->
-  <scipt src="bootstrap.bundle.js">
+<scipt src="bootstrap.bundle.js">
   <scipt src="script.js">  
   <script src="main.js">
     // Sample data
@@ -125,29 +106,9 @@
     { id: 2, orderDetails: "Product B", quantity: 1, amount: "$15", dateTime: "2023-11-15 2:30 PM" }
     // Add more sample data as needed
   ];
-
-  // Function to generate the rows for the purchase history table
-  const generatePurchaseHistoryRows = () => {
-    const tbody = document.getElementById("purchase-history-body");
-    purchaseHistoryData.forEach((item, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${item.id}</td>
-        <td>${item.orderDetails}</td>
-        <td>${item.quantity}</td>
-        <td>${item.amount}</td>
-        <td>${item.dateTime}</td>
-      `;
-      tbody.appendChild(row);
-    });
-  };
-
   // Generate purchase history rows when the page loads
-  window.onload = generatePurchaseHistoryRows;
+  //window.onload = generatePurchaseHistoryRows;
   </script>
-</body>
-
-
 
 
 
