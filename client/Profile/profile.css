@@ -168,6 +168,7 @@ footer {
     position: relative;
     overflow: hidden; 
 }
+
 .color-overlay {
     position: absolute;
     top: 0;
@@ -176,6 +177,7 @@ footer {
     height: 100%;
     background-color: rgba(255, 255, 255, 0.7); 
 }
+
 /* Left Section Styles */
 .left {
     width: 30%;
