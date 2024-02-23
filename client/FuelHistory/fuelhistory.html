@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Sale History </title>
+  <title>Fuel Quote History </title>
   <link rel="stylesheet" href="fuelhistory.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
     integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
@@ -33,67 +33,64 @@
 </header>
 
   <main>
-    <section class="form_sec" id="input_form">
+    <div class="color-overlay"></div>
+    <section class="form_sec" id="form_input">
         <div class="form_container">
-            <div class="title" id="form-title">Product Sale History</div>
-            <div class="row">
+          <div class="title" id="form-title">Fuel Quote History
+          </div>
+            <div class="filter">
                 <div class="col-12 col-lg-3 mt-3 mb-3">
-                    <label class="form-label fs-5">Search by invoice ID:</label> 
+                    <label class="form-label fs-5">Search by QuoteID:</label> 
                     <input type="text" class="form-control fs-5" />
                 </div>
-                <div class="col-12 col-lg-3 mt-3 mb-3">
-                    <label class="form-label fs-5">From date:</label> 
-                    <input type="text" class="form-control fs-5" />
+                <div class="col-12 mt-3 mb-3">
+                  <span class="fs-5">or Filter by Date:</span>
                 </div>
                 <div class="col-12 col-lg-3 mt-3 mb-3">
-                    <label class="form-label fs-5">To date:</label>
-                    <input type="text" class="form-control fs-5" />
+                    <label class="form-label fs-5">Start:</label> 
+                    <input type="date" class="form-control fs-5" />
+                    <label class="form-label fs-5">End:</label>
+                    <input type="date" class="form-control fs-5" />
                 </div>
                 <div class="col-12 col-lg-3 mt-3 mb-3 d-grid">
-                    <button class="btn btn-primary fs-5 fw-bold">Find</button>
+                  <button class="btn btn-primary fs-5 fw-bold" onclick="applyFilters()">Filter</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    
-    <section class="form_sec" id="input_form2">
-        <div class="form_container">
-            <div class="title" id="form-title2">Product Sale History</div>
             <div class="container-fluid" style="padding-top: 50px;">
-                <div class="row">
-                    <div class="col-12 text-center mb-3">
-                        <span class="fs-1 text-primary fw-bold">Purchasing History</span>
-                    </div>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Fuel quoteID#</th>
-                            <th>Gallons Requested</th>
-                            <th>Delivery Address</th>
-                            <th>Delivery Date</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td> 
-                            <td>10</td>
-                            <td>123 Main St, Houston, TX</td>
-                            <td>2023-11-16</td>
-                            <td>$50</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>15</td>
-                            <td>456 Elm St, Dallas, TX</td>
-                            <td>2023-11-15</td>
-                            <td>$75</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+              <div class="row">
+                  <div class="col-12 text-center mb-3">
+                      <span class="fs-1 text-primary fw-bold"></span>
+                  </div>
+              </div>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>QuoteID</th>
+                          <th>Gallons Requested</th>
+                          <th>Delivery Address</th>
+                          <th>Delivery Date</th>
+                          <th>Suggested Price</th>
+                          <th>Total Price</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>1</td> 
+                          <td>10</td>
+                          <td>123 Main St, Houston, TX</td>
+                          <td>2023-11-16</td>
+                          <td>$50</td>
+                      </tr>
+                      <tr>
+                          <td>2</td>
+                          <td>15</td>
+                          <td>456 Elm St, Dallas, TX</td>
+                          <td>2023-11-15</td>
+                          <td>$75</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
         </div>
     </section>
 </main>
