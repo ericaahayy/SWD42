@@ -1,0 +1,143 @@
+$ git remote add origin https://github.com/LazyKoalaMan/Testing.git
+
+
+
+<!-- 
+    <div className="min-h-[80hv]">
+      <div className="flex justify-center align-middle">
+        <div className="container mx-40 mt-10">
+          <h1 className="text-4xl font-bold text-center">Work Log</h1>
+          <div className="flex flex-col justify-center ">
+            <div className="flex flex-row gap-4 mt-10 bg-[#3a3a38]/50 p-12 rounded-md border-2 border-[#41413E] shadow-2xl max-w-4xl justify-center">
+              <form onSubmit={onSubmit}>
+                {errors && (
+                  <p className="font-bold text-sm text-red-500">
+                    {errors.hours?.message}
+                  </p>
+                )}
+                <div className="flex flex-row gap-2">
+                  <h1 className="block uppercase tracking-wide text-gray-50 text-base font-bold mb-2">
+                    Name:
+                  </h1>
+                  <p>{data.employeeInfo?.firstname}</p>
+                  <p>{data.employeeInfo?.lastname}</p>
+                </div>
+                <div className="flex flex-row gap-2">
+                  <h1 className="block uppercase tracking-wide text-gray-50 text-base font-bold mb-2">
+                    {" "}
+                    Role:{" "}
+                  </h1>
+                  <p>{getRole(user.authenticated?.user?.role!)}</p>
+                </div>
+                <div className="flex flex-row gap-2">
+                  <h1 className="block uppercase tracking-wide text-gray-50 text-base font-bold mb-2">
+                    {" "}
+                    Date:
+                  </h1>
+                  <p>{date}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label className="block uppercase tracking-wide text-gray-50 text-base font-bold mb-2">
+                    Input Hours
+                  </label>
+                  <input
+                    {...register("hours", {
+                      required: "Hours is required",
+                      valueAsNumber: true,
+                      validate: {
+                        positive: (value) =>
+                          value > 0 || "Hours must be greater than 0",
+                        lessThan: (value) =>
+                          value <= 12 || "Hours must be less than 12",
+                      },
+                    })}
+                    type="number"
+                    className="block w-full bg-transparent border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none"
+                  />
+                </div>
+                {workLogReq.isLoading ? (
+                  <div className="flex justify-center">
+                    <Spinner />
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <button className="formButton">Submit</button>
+                  </div>
+                )}
+              </form>
+            </div>
+            <div>
+              <div className="flex flex-row gap-4 mt-10 bg-[#3a3a38]/50 p-12 rounded-md border-2 border-[#41413E] shadow-2xl max-w-4xl justify-center">
+                <table className="table-auto w-3/4 bg-[#1D1D1C] shadow-md overflow-hidden text-[#e5e5e5] border border-[#41413E]">
+                  <thead className="text-lg">
+                    <tr className="">
+                      <th
+                        className="px-6 py-4 border-r  border-b border-[#41413E] font-bold uppercase cursor-pointer"
+                        onClick={() => handleSortColumn("week_start_date")}
+                      >
+                        Week Of
+                        {sort.column === "week_start_date" && (
+                          <span
+                            className={`ml-2 fas ${
+                              sort.direction === "asc"
+                                ? "fa-sort-up"
+                                : "fa-sort-down"
+                            }`}
+                          >
+                            {sort.direction === "asc" || null ? "↑" : "↓"}
+                          </span>
+                        )}
+                      </th>
+                      <th
+                        className="px-6 py-4 border-b border-r border-[#41413E] font-bold  uppercase"
+                        onClick={() => handleSortColumn("total_hours")}
+                      >
+                        Week Total hours
+                        {sort.column === "total_hours" && (
+                          <span
+                            className={`ml-2 fas ${
+                              sort.direction === "asc"
+                                ? "fa-sort-up"
+                                : "fa-sort-down"
+                            }`}
+                          >
+                            {sort.direction === "asc" || null ? "↑" : "↓"}
+                          </span>
+                        )}
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody className="text-gray-100 text-center text-[1.2rem]">
+                    {data?.weekLog?.map((pkg, index) => {
+                      const newDate = new Date(
+                        pkg.week_start_date
+                      ).toLocaleDateString();
+                      return (
+                        <tr
+                          key={newDate}
+                          className={`${
+                            index % 2 === 0 ? "bg-[#3A3A38]" : "bg-[#2F2F2E]"
+                          }  hover:bg-[#c0bcbc] hover:text-[#1D1D1C]`}
+                        >
+                          <td className="px-6 py-4 border-r  border-b border-[#41413E]">
+                            {newDate}
+                          </td>
+                          <td className="px-6 py-4 border-b border-r border-[#41413E]">
+                            {pkg.total_hours}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+-->
