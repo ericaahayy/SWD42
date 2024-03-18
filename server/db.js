@@ -13,6 +13,14 @@ connection.connect((err) => {
     console.log("Connected to database.");
 });
 
+// class containing all functions
+class dbService {
+    static getDbServiceInstance() {
+        return instance ? instance : new dbService();
+    }
+}
+
+
 // start fuel quote tbh idk if this works bc nothings set up but praying and slaying
 
 app.use(bodyParser.urlencoded({ extended: false }));
