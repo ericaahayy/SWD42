@@ -1,4 +1,5 @@
-  // Sample data (you would replace this with actual data retrieved from the database)
+
+// Sample data (you would replace this with actual data retrieved from the database)
   function sayHello(name){
     console.log('name'+name);
   }
