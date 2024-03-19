@@ -28,7 +28,7 @@ class dbService {
     //end fuel quote
 
     //start login
-    
+
     //user authentication
     async authenticateUser (username, password) {
         try {
@@ -63,7 +63,7 @@ class dbService {
     }
 
     //user registration
-    async user_register(username, password, first_login) {
+    async userRegister(username, password, first_login) {
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "INSERT INTO login (username, password, first_login) VALUES (?,?,?);";
@@ -83,10 +83,12 @@ class dbService {
         }
     }
 
-
     //end login
 
     //start loginform
+
+    //inital profile management
+    
 
     //end loginform
 
