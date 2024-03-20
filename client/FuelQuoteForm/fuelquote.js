@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const gallonsInput = document.getElementById('gallons_requested');
+    const gallonsInput = document.getElementById('galreq');
     const fuelQuoteForm = document.getElementById('fuel_quote_form');
-    const suggestedPriceInput = document.getElementById('suggested_price');
-    const totalAmountDueInput = document.getElementById('total_amount_due');
+    const suggestedPriceInput = document.getElementById('suggestedprice');
+    const totalAmountDueInput = document.getElementById('totaldue');
 
     fuelQuoteForm.addEventListener('submit', function(event) {
         event.preventDefault(); 

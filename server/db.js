@@ -34,12 +34,12 @@ class dbService {
     //end fuel history
 
     //start fuel quote
-    async submitFuelQuote(gallons_requested, delivery_address, delivery_date, total_due, clientID, suggested_price) {
+    async submitFuelQuote(galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) {
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 const quoteID = clientID + '_' + uuidv4();
-                connection.query(query, [quoteID, gallons_requested, delivery_address, delivery_date, total_due, clientID, suggested_price], (err, result) => {
+                connection.query(query, [quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice], (err, result) => {
                     if (err) {
                         console.error("Error inserting fuel quote into database:", err);
                         reject(new Error("Fuel quote submission failed"));

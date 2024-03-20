@@ -17,12 +17,12 @@ app.use(express.urlencoded({ extended: false }));
 
 //start fuel quote
 app.post("/fuelquote/submit_quote", async (req, res) => {
-    const { gallons_requested, delivery_address, delivery_date, total_due, suggested_price } = req.body;
+    const { galreq, deliveryaddress, deliverydate, totaldue, suggestedprice } = req.body;
     const db = dbService.getDbServiceInstance();
 
     try {
         const clientID = req.body.clientID;
-        const response = await db.submitFuelQuote(gallons_requested, delivery_address, delivery_date, total_due, clientID, suggested_price);
+        const response = await db.submitFuelQuote(galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice);
 
         if (response) {
             return res.status(200).json({ message: "Quote submitted successfully" });
