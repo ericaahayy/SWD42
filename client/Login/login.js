@@ -36,10 +36,10 @@ document
             })
             .then((data) => {
                 log_error.innerText = "";
-                let { username, first_login, client_id } = data.data[0];
+                let { username, first_login, clientID } = data.data[0];
                 window.localStorage.setItem("username", username);
                 window.localStorage.setItem("first_login", first_login);
-                window.localStorage.setItem("client_id", client_id);
+                window.localStorage.setItem("clientID", clientID);
                 if(first_login === 1){
                     window.location.replace(front_end_url + "/client/LoginForm/form.html");
                 }else{

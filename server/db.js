@@ -1,21 +1,21 @@
 const mysql = require("mysql2");
 let instance = null;
 
-/*connecting locally
+//connecting locally
 const connection = mysql.createConnection({
     host: "localhost",
     database: "swd42group",
     user: "root",
     password: "root123"
-  });
-*/
+});
+
 //this will actually make edits to the database.
-const connection = mysql.createConnection({
-    host: "34.171.92.157",
-    database: "swd42group",
-    user: "root",
-    password: "root123"
-  });
+// const connection = mysql.createConnection({
+//     host: "34.171.92.157",
+//     database: "swd42group",
+//     user: "root",
+//     password: "root123"
+//   });
 
 
 connection.connect((err) => {
@@ -119,7 +119,42 @@ class dbService {
     //start loginform
 
     //inital profile management
+    async addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "INSERT INTO profile (username, fname, lname, address1, address2, city, state, zipcode, clientID) VALUES (?,?,?,?,?,?,?,?,?)";
+                connection.query(query, [username, fname, lname, address1, address2, city, state, zipcode, clientID], (err, result) => {
+                    if (err) {
+                        console.error("Error executing SQL query:", err);
+                        reject(err);
+                        return;
+                    }
+                    resolve(result && result.affectedRows > 0);
+                });
+            });
+            return response;
+        } catch (error) {
+            console.error("Error adding profile:", error);
+            return false;
+        }
+    }
     
+    //update first_login attribute
+    async updateFirstLogin(username) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "UPDATE login SET first_login = 0 WHERE username = ?";
+                connection.query(query, [username], (err, result) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(result.affectedRows > 0);
+                });
+            });
+            return response; 
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 
     //end loginform
 

@@ -81,6 +81,29 @@ app.post("/user/register", async (req, res) => {
 
 //start loginform
 
+//add profile api
+app.post("/api/add_profile", async (req, res) => {
+    const { username, fname, lname, address1, address2, city, state, zipcode, clientID } = req.body;
+    const db = dbService.getDbServiceInstance();
+
+    try {
+        const profileAdded = await db.addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID);
+        if (profileAdded) {
+            const firstLoginUpdated = await db.updateFirstLogin(username);
+            if (firstLoginUpdated) {
+                return res.status(200).json({ message: "Profile added successfully and first login updated" });
+            } else {
+                return res.status(500).json({ message: "Failed to update first login" });
+            }
+        } else {
+            return res.status(500).json({ message: "Failed to add profile" });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
 //end loginform
 
 //start profile
