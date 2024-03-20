@@ -38,7 +38,7 @@ class dbService {
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                const quoteID = clientID + '_' + uuidv4(); // Generating unique quoteID
+                const quoteID = clientID + '_' + uuidv4(); // generating unique quoteID
                 connection.query(query, [quoteID, gallonsRequested, deliveryAddress, deliveryDate, totalDue, clientID, suggestedPrice], (err, result) => {
                     if (err) {
                         console.error("Error inserting fuel quote into database:", err);
@@ -59,7 +59,7 @@ class dbService {
 
     //start login
 
-    //user authentication ERICA CHANGE BACK TO client_id to match khuongs later!
+    //user authentication ERICA CHANGE BACK TO client_id to match khuongs later
     async authenticateUser (username, password) {
         try {
             const response = await new Promise((resolve, reject) => {

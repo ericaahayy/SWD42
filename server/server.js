@@ -16,14 +16,14 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
-app.post('/submit_quote', (req, res) => {
+app.post('fuelquote/submit_quote', (req, res) => {
     const { galreq, deliveryaddress, deliverydate, totaldue, suggestedprice } = req.body;
 
     const username = req.user.username; 
 
-    const getClientIDQuery = `SELECT clientID FROM login WHERE username = ?`;
+    const getClientIDQuery = `SELECT clientID FROM login WHERE clientID = ?`;
 
-    connection.query(getClientIDQuery, [username], (err, results) => {
+    connection.query(getClientIDQuery, [clientID], (err, results) => {
         if (err) {
             console.error("Error fetching clientID:", err);
             res.status(500).json({ error: 'Internal server error' });
