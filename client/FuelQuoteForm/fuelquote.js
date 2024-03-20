@@ -13,3 +13,18 @@ gallonsInput.addEventListener('input', function() {
 function isNumeric(value) {
     return /^\d+$/.test(value);
 }
+
+$(document).ready(function() {
+    $('#fuel_quote_form').submit(function(event) {
+        event.preventDefault();
+
+        // Gather form data
+        const formData = $(this).serialize();
+
+        // Send form data to backend
+        $.post('/submit-fuel-quote', formData, function(response) {
+            console.log(response); // Log the response from the server
+            // You can handle the response here (e.g., show a success message to the user)
+        });
+    });
+});

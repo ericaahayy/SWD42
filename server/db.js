@@ -1,8 +1,19 @@
 const mysql = require("mysql2");
 let instance = null;
 
+//connecting locally
+/* 
 const connection = mysql.createConnection({
     host: "localhost",
+    database: "swd42group",
+    user: "root",
+    password: "root123"
+  });
+*/
+
+//this will actually make edits to the database.
+const connection = mysql.createConnection({
+    host: "34.171.92.157",
     database: "swd42group",
     user: "root",
     password: "root123"
