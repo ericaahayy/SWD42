@@ -16,40 +16,23 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
-app.post('fuelquote/submit_quote', (req, res) => {
-    const { galreq, deliveryaddress, deliverydate, totaldue, suggestedprice } = req.body;
+app.post("/fuelquote/submit_quote", async (req, res) => {
+    const { gallons_requested, delivery_address, delivery_date, total_due, suggested_price } = req.body;
+    const db = dbService.getDbServiceInstance();
 
-    const username = req.user.username; 
+    try {
+        const clientID = req.body.clientID;
+        const response = await db.submitFuelQuote(gallons_requested, delivery_address, delivery_date, total_due, clientID, suggested_price);
 
-    const getClientIDQuery = `SELECT clientID FROM login WHERE clientID = ?`;
-
-    connection.query(getClientIDQuery, [clientID], (err, results) => {
-        if (err) {
-            console.error("Error fetching clientID:", err);
-            res.status(500).json({ error: 'Internal server error' });
-            return;
+        if (response) {
+            return res.status(200).json({ message: "Quote submitted successfully" });
+        } else {
+            return res.status(500).json({ message: "An error occurred while submitting the quote" });
         }
-        if (results.length === 0) {
-            res.status(404).json({ error: 'User profile not found' });
-            return;
-        }
-        const clientID = results[0].clientID;
-
-        //gen unique quoteids
-        const quoteID = clientID + '_' + uuidv4();
-
-        //insert to db
-        const insertQuery = `INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        connection.query(insertQuery, [quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice], (err, results) => {
-            if (err) {
-                console.error("Error inserting data into database:", err);
-                res.status(500).json({ error: 'Internal server error' });
-                return;
-            }
-            console.log("Fuel quote submitted successfully");
-            res.status(201).json({ message: 'Fuel quote submitted successfully' });
-        });
-    });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
 });
 //end fuel quote
 
