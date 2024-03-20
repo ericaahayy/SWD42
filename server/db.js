@@ -1,8 +1,7 @@
 const mysql = require("mysql2");
 let instance = null;
 
-//connecting locally
-/* 
+/*connecting locally
 const connection = mysql.createConnection({
     host: "localhost",
     database: "swd42group",
@@ -10,7 +9,6 @@ const connection = mysql.createConnection({
     password: "root123"
   });
 */
-
 //this will actually make edits to the database.
 const connection = mysql.createConnection({
     host: "34.171.92.157",
@@ -18,6 +16,7 @@ const connection = mysql.createConnection({
     user: "root",
     password: "root123"
   });
+
 
 connection.connect((err) => {
     if (err) throw err;
@@ -35,16 +34,36 @@ class dbService {
     //end fuel history
 
     //start fuel quote
-
+    async submitFuelQuote(gallonsRequested, deliveryAddress, deliveryDate, totalDue, clientID, suggestedPrice) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                const quoteID = clientID + '_' + uuidv4(); // Generating unique quoteID
+                connection.query(query, [quoteID, gallonsRequested, deliveryAddress, deliveryDate, totalDue, clientID, suggestedPrice], (err, result) => {
+                    if (err) {
+                        console.error("Error inserting fuel quote into database:", err);
+                        reject(new Error("Fuel quote submission failed"));
+                        return;
+                    }
+                    resolve(result);
+                });
+            });
+            return response;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
+    
     //end fuel quote
 
     //start login
 
-    //user authentication
+    //user authentication ERICA CHANGE BACK TO client_id to match khuongs later!
     async authenticateUser (username, password) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT username, first_login, client_id FROM login WHERE username = ? AND password = ?;";
+                const query = "SELECT username, first_login, clientID FROM login WHERE username = ? AND password = ?;";
                 connection.query(query, [username, password], (err, result) => {
                     if (err) reject(new Error(err.message));
                     resolve(result);

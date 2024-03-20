@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const port = 500;
 const dbService = require("./db");
+const { v4: uuidv4 } = require('uuid');
 
 app.use(cors());
 app.use(express());
@@ -20,7 +21,7 @@ app.post('/submit_quote', (req, res) => {
 
     const username = req.user.username; 
 
-    const getClientIDQuery = `SELECT clientID FROM profile WHERE username = ?`;
+    const getClientIDQuery = `SELECT clientID FROM login WHERE username = ?`;
 
     connection.query(getClientIDQuery, [username], (err, results) => {
         if (err) {
