@@ -163,8 +163,7 @@ class dbService {
             });
             return response;
         } catch (error) {
-            console.error("Error adding profile:", error);
-            return false;
+            throw error;
         }
     }
     
@@ -175,11 +174,17 @@ class dbService {
             if (!username) {
                 throw new Error("Username is required.");
             }
+
+            const query = "UPDATE login SET first_login = 0 WHERE username = ?";
+            const connection = this.getConnection();
     
             const response = await new Promise((resolve, reject) => {
-                const query = "UPDATE login SET first_login = 0 WHERE username = ?";
                 connection.query(query, [username], (err, result) => {
-                    if (err) reject(new Error(err.message));
+                    if (err) {
+                        console.error("Error updating first_login attribute:")
+                        resolve(false);
+                        return;
+                    }
                     resolve(result.affectedRows > 0);
                 });
             });

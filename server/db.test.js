@@ -150,6 +150,71 @@ describe('dbService', () => {
     });
 
     //Test for addProfile function
+    describe('addProfile', () => {
+        test('should throw an error if any required field is missing', async () => {
+            // Mock data with missing required fields
+            const username = 'user@example.com';
+            const fname = 'John';
+            const lname = '';
+            const address1 = '123 Main St';
+            const address2 = '';
+            const city = 'New York';
+            const state = 'NY';
+            const zipcode = '10001';
+            const clientID = '12345';
+
+            // Call the function and expect it to throw an error
+            await expect(db.addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID)).rejects.toThrow('All fields are required.');
+        });
+
+        test('should return true if profile is added successfully', async () => {
+            // Mock valid data
+            const username = 'user@example.com';
+            const fname = 'John';
+            const lname = 'Doe';
+            const address1 = '123 Main St';
+            const address2 = '';
+            const city = 'Houston';
+            const state = 'TX';
+            const zipcode = '12345';
+            const clientID = '12345';
+
+            // Mock successful database insertion
+            jest.spyOn(db, 'getConnection').mockReturnValue({
+                query: jest.fn().mockImplementation((query, params, callback) => {
+                    // Simulate a successful insertion
+                    callback(null, { affectedRows: 1 }); // Mock affectedRows
+                })
+            });
+
+            // Call the function and expect it to resolve with true
+            await expect(db.addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID)).resolves.toBe(true);
+        });
+
+        test('should return false if database insertion fails', async () => {
+            // Mock data
+            const username = 'user@example.com';
+            const fname = 'John';
+            const lname = 'Doe';
+            const address1 = '123 Main St';
+            const address2 = '';
+            const city = 'Houston';
+            const state = 'TX';
+            const zipcode = '10001';
+            const clientID = '12345';
+            const mockError = new Error('Error adding profile');
+
+            // Mock error during database insertion
+            jest.spyOn(db, 'getConnection').mockReturnValue({
+                query: jest.fn().mockImplementation((query, params, callback) => {
+                    callback(mockError, null); // Simulate an error with null result
+                })
+            });
+
+            // Call the function and expect it to reject with an error
+            await expect(db.addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID)).rejects.toThrow(mockError.message);
+        });
+    });
     
     //Test for updateFirstLogin function
     describe('updateFirstLogin', () => {
