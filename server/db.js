@@ -159,6 +159,25 @@ class dbService {
     //end loginform
 
     //start profile
+    async getProfileData(clientID){
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT * FROM profile WHERE clientID = ?";
+                connection.query(query, [clientID], (err, result) => {
+                    if (err) {
+                        console.error("Error fetching profile data from database:", err);
+                        reject(err);
+                        return;
+                    }
+                    resolve(result[0]); //One row since clientID is primary key, shold be unique
+                });
+            });
+            return response;
+        } catch (error) {
+            console.error("Error fetching profile data:", error);
+            return null;
+        }
+    }
 
     //end profile
 }

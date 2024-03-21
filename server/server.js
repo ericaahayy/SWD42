@@ -107,8 +107,31 @@ app.post("/api/add_profile", async (req, res) => {
 //end loginform
 
 //start profile
+app.post("/api/profile", async (req, res) => {
+    // Assuming we know the currently logged-in user
+    const clientID = req.user.clientID; // Access clientID from the authenticated user object, might change to username
 
+    const db = dbService.getDbServiceInstance();
+
+    try {
+        // Fetch profile data from the database based on the clientID
+        const profileData = await db.getProfileData(clientID);
+
+        if (profileData) {
+            // If profile data is found, send it back to the client
+            return res.status(200).json(profileData);
+        } else {
+            // If no profile data is found, return a 404 status with a message
+            return res.status(404).json({ message: "Profile data not found" });
+        }
+    } catch (error) {
+        console.error(error);
+        // If an error occurs during fetching, return a 500 status with an error message
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
 //end profile
+
 
 
 app.listen(port, () => {
