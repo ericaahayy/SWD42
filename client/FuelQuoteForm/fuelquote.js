@@ -1,48 +1,53 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const gallonsInput = document.getElementById('galreq');
-  const fuelQuoteForm = document.getElementById('fuel_quote_form');
-  const suggestedPriceInput = document.getElementById('suggestedprice');
-  const totalAmountDueInput = document.getElementById('totaldue');
+    const clientIDInput = document.getElementById('clientID');
+    const deliveryAddressSelect = document.getElementById('deliveryaddress');
 
-  fuelQuoteForm.addEventListener('submit', function(event) {
-      event.preventDefault(); 
+    fetchClientID();
 
-      const formData = new FormData(fuelQuoteForm); 
+    fetchProfileData();
 
-      fetch('/fuelquote/submit_quote', {
-          method: 'POST',
-          body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-          console.log(data); 
-      })
-      .catch(error => {
-          console.error('Error:', error); 
-      });
-  });
+    function fetchClientID() {
+        fetch('/api/profile', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            clientIDInput.value = data.clientID;
+        })
+        .catch(error => {
+            console.error('Error fetching client ID:', error);
+        });
+    }
 
-  gallonsInput.addEventListener('input', function() {
-      calculateTotalAmountDue();
-  });
-
-  suggestedPriceInput.addEventListener('input', function() {
-      calculateTotalAmountDue();
-  });
-
-  function isNumeric(value) {
-      return /^\d+$/.test(value);
-  }
-
-  function calculateTotalAmountDue() {
-      const gallonsRequested = parseFloat(gallonsInput.value);
-      const suggestedPricePerGallon = parseFloat(suggestedPriceInput.value);
-
-      if (!isNaN(gallonsRequested) && !isNaN(suggestedPricePerGallon)) {
-          const totalAmountDue = gallonsRequested * suggestedPricePerGallon;
-          totalAmountDueInput.value = totalAmountDue.toFixed(2);
-      }
-  }
-
-  suggestedPriceInput.value = '2.57'; // hardcoding for now
+    function fetchProfileData() {
+        fetch('/api/profile', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.address1) {
+                const addressOption1 = document.createElement('option');
+                addressOption1.value = data.address1;
+                addressOption1.textContent = data.address1;
+                deliveryAddressSelect.appendChild(addressOption1);
+            }
+            if (data.address2) {
+                const addressOption2 = document.createElement('option');
+                addressOption2.value = data.address2;
+                addressOption2.textContent = data.address2;
+                deliveryAddressSelect.appendChild(addressOption2);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching profile data:', error);
+        });
+    }
 });

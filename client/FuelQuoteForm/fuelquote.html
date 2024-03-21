@@ -40,13 +40,20 @@
             <form id="fuel_quote_form" action="/fuelquote/submit_quote" method="POST">
                 <div class="form_info">
                   <div class="input_container">
+                    <label for="clientID">Client ID:</label>
+                    <input type="number" name="clientID" id="clientID" required readonly>
+                  </div>
+                  <div class="input_container">
                     <label for="galreq">Gallons Requested:</label>
                     <input type="number" name="gallons" id="galreq" required>
                   </div>
                   <div class="input_container">
                     <label for="deliveryaddress">Delivery Address:</label>
-                    <input type="text" name="deliveryaddress" id="deliveryaddress" required>
-                  </div>
+                    <select name="deliveryaddress" id="deliveryaddress" required>
+                        <option value="">Select Address</option>
+                    </select>
+                </div>
+                
                   <div class="input_container">
                     <label for="deliverydate">Delivery Date:</label>
                     <input type="date" name="deliverydate" id="deliverydate" required>

@@ -16,24 +16,20 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
-app.post("/fuelquote/submit_quote", async (req, res) => {
-    const { galreq, deliveryaddress, deliverydate, totaldue, suggestedprice } = req.body;
-    const db = dbService.getDbServiceInstance();
-
-    try {
-        const clientID = req.body.clientID;
-        const response = await db.submitFuelQuote(galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice);
-
-        if (response) {
-            return res.status(200).json({ message: "Quote submitted successfully" });
-        } else {
-            return res.status(500).json({ message: "An error occurred while submitting the quote" });
-        }
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Internal Server Error" });
-    }
-});
+app.post('/fuelquote/submit_quote', (req, res) => {
+    const { galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID } = req.body;
+  
+    const sql = `INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (UUID(), ?, ?, ?, ?, ?, ?)`;
+    db.query(sql, [galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error saving data to the database');
+      } else {
+        res.status(200).send('Quote submitted successfully');
+      }
+    });
+  });
+  
 //end fuel quote
 
 //start login

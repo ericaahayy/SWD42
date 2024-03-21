@@ -34,28 +34,31 @@ class dbService {
     //end fuel history
 
     //start fuel quote
-    async submitFuelQuote(galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) {
+        async submitFuelQuote(gallons, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) {
         try {
+            // validate required fields
+            if (!gallons || !deliveryaddress || !deliverydate || !suggestedprice || !totaldue || !clientID) {
+                throw new Error("All fields are required.");
+            }
+
+            const query = "INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (UUID(), ?, ?, ?, ?, ?, ?)";
+            const connection = this.getConnection();
+
             const response = await new Promise((resolve, reject) => {
-                const query = "INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                const quoteID = clientID + '_' + uuidv4();
-                connection.query(query, [quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice], (err, result) => {
+                connection.query(query, [gallons, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], (err, result) => {
                     if (err) {
-                        console.error("Error inserting fuel quote into database:", err);
-                        reject(new Error("Fuel quote submission failed"));
+                        console.error("Error executing SQL query:", err);
+                        reject(err);
                         return;
                     }
-                    resolve(result);
+                    resolve(result && result.affectedRows > 0);
                 });
             });
             return response;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw error;
         }
     }
-    
-    
     //end fuel quote
 
     //start login
