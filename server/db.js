@@ -61,43 +61,65 @@ class dbService {
     //start login
 
     //user authentication ERICA CHANGE BACK TO client_id to match khuongs later
-    async authenticateUser (username, password) {
+    async authenticateUser(username, password) {
         try {
+            // Validate required fields
+            if (!username || !password) {
+                throw new Error("Username and password are required.");
+            }
+
+            const query = "SELECT username, first_login, clientID FROM login WHERE username = ? AND password = ?;";
+            const connection = this.getConnection();
+    
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT username, first_login, clientID FROM login WHERE username = ? AND password = ?;";
                 connection.query(query, [username, password], (err, result) => {
-                    if (err) reject(new Error(err.message));
+                    if (err) {
+                        console.error("Error executing database query:", err);
+                        reject(new Error(err.message));
+                        return;
+                    }
                     resolve(result);
                 });
             });
             return response;
         } catch (error) {
-            console.log(error);
+            throw error; // Re-throw the error to propagate it to the caller
         }
-    }
+    }    
 
     //check if email already exists
     async checkUsernameExists(username) {
         try {
-          const response = await new Promise((resolve, reject) => {
-            const query = "SELECT COUNT(*) as count FROM login WHERE username = ?;";
-            connection.query(query, [username], (err, result) => {
-              if (err) reject(new Error(err.message));
-              resolve(result[0].count > 0);
+            // Validate required field
+            if (!username) {
+                throw new Error("Username is required.");
+            }
+    
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT COUNT(*) as count FROM login WHERE username = ?;";
+                connection.query(query, [username], (err, result) => {
+                    if (err) reject(new Error(err.message));
+                    resolve(result[0].count > 0);
+                });
             });
-          });
-          return response;
+            return response;
         } catch (error) {
-          console.log(error);
-          return false;
+            throw error;
         }
     }
 
     //user registration
     async userRegister(username, password, first_login) {
         try {
+            // Validate required fields
+            if (!username || !password || first_login === undefined) {
+                throw new Error("Username, password, and first_login are required.");
+            }
+    
+            const query = "INSERT INTO login (username, password, first_login) VALUES (?,?,?);";
+            const connection = this.getConnection();
+    
             const response = await new Promise((resolve, reject) => {
-                const query = "INSERT INTO login (username, password, first_login) VALUES (?,?,?);";
                 connection.query(query, [username, password, first_login], (err, result) => {
                     if (err) {
                         console.error("Error inserting data into database:", err);
@@ -109,8 +131,7 @@ class dbService {
             });
             return response === 0 ? false : true;
         } catch (error) {
-            console.error(error);
-            return false;
+            throw error;
         }
     }
 
@@ -121,13 +142,18 @@ class dbService {
     //inital profile management
     async addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID) {
         try {
+            // Validate required fields
+            if (!username || !fname || !lname || !address1 || !city || !state || !zipcode || !clientID) {
+                throw new Error("All fields are required.");
+            }
+    
             const response = await new Promise((resolve, reject) => {
                 const query = "INSERT INTO profile (username, fname, lname, address1, address2, city, state, zipcode, clientID) VALUES (?,?,?,?,?,?,?,?,?)";
                 connection.query(query, [username, fname, lname, address1, address2, city, state, zipcode, clientID], (err, result) => {
                     if (err) {
                         console.error("Error executing SQL query:", err);
                         reject(err);
-                        return;
+                        return;    
                     }
                     resolve(result && result.affectedRows > 0);
                 });
@@ -142,6 +168,11 @@ class dbService {
     //update first_login attribute
     async updateFirstLogin(username) {
         try {
+            // Validate required field
+            if (!username) {
+                throw new Error("Username is required.");
+            }
+    
             const response = await new Promise((resolve, reject) => {
                 const query = "UPDATE login SET first_login = 0 WHERE username = ?";
                 connection.query(query, [username], (err, result) => {
@@ -180,6 +211,19 @@ class dbService {
     }
 
     //end profile
+
+    getConnection() {
+        return connection;
+    }
+    
+    async closeConnection() {
+        try {
+            await connection.end();
+            console.log("Database connection closed");
+        } catch (error) {
+            console.error("Error closing database conncection:", error);
+        }
+    }
 }
 
 module.exports = dbService;

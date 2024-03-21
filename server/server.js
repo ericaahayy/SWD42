@@ -39,8 +39,14 @@ app.post("/fuelquote/submit_quote", async (req, res) => {
 //start login
 
 // login api
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
     const { username, password } = req.body;
+    
+    // Validate required fields
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required." });
+    }
+
     const db = dbService.getDbServiceInstance();
     const results = db.authenticateUser(username, password);
 
@@ -58,6 +64,12 @@ app.post("/api/login", (req, res) => {
 //register api
 app.post("/user/register", async (req, res) => {
     const { username, password, first_login } = req.body;
+    
+    // Validate required fields
+    if (!username || !password || first_login === undefined) {
+        return res.status(400).json({ message: "Username, password, and first_login are required." });
+    }
+
     const db = dbService.getDbServiceInstance();
   
     try {
@@ -84,6 +96,12 @@ app.post("/user/register", async (req, res) => {
 //add profile api
 app.post("/api/add_profile", async (req, res) => {
     const { username, fname, lname, address1, address2, city, state, zipcode, clientID } = req.body;
+    
+    // Validate required fields
+    if (!username || !fname || !lname || !address1 || !city || !state || !zipcode || !clientID) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+
     const db = dbService.getDbServiceInstance();
 
     try {
