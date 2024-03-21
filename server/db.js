@@ -185,8 +185,7 @@ class dbService {
             });
             return response; 
         } catch (error) {
-            console.error(error);
-            return false;
+            throw error;
         }
     }
 
