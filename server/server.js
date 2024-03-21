@@ -77,7 +77,7 @@ app.post("/user/register", async (req, res) => {
         if (usernameExists) {
             return res.status(400).json({ message: "Email already exists" });
         }
-        const registrationResult = await db.userRegister(username, password, first_login);
+        const registrationResult = await db.userRegister(username, password, first_login, clientID);
         if (registrationResult) {
             return res.status(200).json({ message: "User registered successfully" });
         } else {

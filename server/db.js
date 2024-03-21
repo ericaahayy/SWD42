@@ -1,21 +1,22 @@
 const mysql = require("mysql2");
+const { v4: uuidv4 } = require('uuid');
 let instance = null;
 
 //connecting locally
-const connection = mysql.createConnection({
+/*const connection = mysql.createConnection({
     host: "localhost",
     database: "swd42group",
     user: "root",
     password: "root123"
-});
+});*/
 
 //this will actually make edits to the database.
-// const connection = mysql.createConnection({
-//     host: "34.171.92.157",
-//     database: "swd42group",
-//     user: "root",
-//     password: "root123"
-//   });
+const connection = mysql.createConnection({
+     host: "34.171.92.157",
+     database: "swd42group",
+     user: "root",
+     password: "root123"
+   });
 
 
 connection.connect((err) => {
@@ -115,12 +116,12 @@ class dbService {
             if (!username || !password || first_login === undefined) {
                 throw new Error("Username, password, and first_login are required.");
             }
-    
-            const query = "INSERT INTO login (username, password, first_login) VALUES (?,?,?);";
+            const clientID = uuidv4();
+            const query = "INSERT INTO login (username, password, first_login, clientID) VALUES (?,?,?,?);";
             const connection = this.getConnection();
     
             const response = await new Promise((resolve, reject) => {
-                connection.query(query, [username, password, first_login], (err, result) => {
+                connection.query(query, [username, password, first_login, clientID], (err, result) => {
                     if (err) {
                         console.error("Error inserting data into database:", err);
                         reject(new Error("User registration failed"));
