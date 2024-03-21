@@ -148,4 +148,53 @@ describe('dbService', () => {
             await expect(db.userRegister(username, password, first_login)).rejects.toThrow(mockError.message);
         });
     });
+
+    //Test for addProfile function
+    
+    //Test for updateFirstLogin function
+    describe('updateFirstLogin', () => {
+        // Test for missing username
+        test('should throw an error if username is missing', async () => {
+            // Mock data with missing username
+            const username = '';
+    
+            // Call the function and expect it to throw an error
+            await expect(db.updateFirstLogin(username)).rejects.toThrow('Username is required.');
+        });
+    
+        // Test for database update failure
+        test('should return false if database update fails', async () => {
+            // Mock data
+            const username = 'user@example.com';
+    
+            // Mock error during database update
+            const mockError = new Error('Database update failed');
+            jest.spyOn(db, 'getConnection').mockReturnValue({
+                query: jest.fn().mockImplementation((query, params, callback) => {
+                    callback(mockError); // Simulate an error
+                })
+            });
+    
+            // Call the function and expect it to return false
+            const result = await db.updateFirstLogin(username);
+            expect(result).toBe(false);
+        });
+    
+        // Test for successful database update
+        test('should return true if database update succeeds', async () => {
+            // Mock data
+            const username = 'user@example.com';
+    
+            // Mock successful database update
+            jest.spyOn(db, 'getConnection').mockReturnValue({
+                query: jest.fn().mockImplementation((query, params, callback) => {
+                    callback(null, { affectedRows: 1 }); // Simulate successful update
+                })
+            });
+    
+            // Call the function and expect it to return true
+            const result = await db.updateFirstLogin(username);
+            expect(result).toBe(true);
+        });
+    });
 });
