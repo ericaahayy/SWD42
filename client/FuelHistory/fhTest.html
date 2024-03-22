@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuel Quote History</title>
-  <!-- Include any necessary CSS files -->
+  <title>Fuel Quote History </title>
   <link rel="stylesheet" href="fuelhistory.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+    integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet"
+    href="https://cdnjcloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+    integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 </head>
+
 <body>
   
   <header>
@@ -17,7 +30,7 @@
         <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
         <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
     </nav>
-  </header>
+</header>
 
   <main>
     <div class="color-overlay"></div>
@@ -25,9 +38,32 @@
         <div class="form_container">
           <div class="title" id="form-title">Fuel Quote History
           </div>
-            <!-- Your table structure -->
-            <table class="table">
-                <thead>
+            <div class="filter">
+                <div class="col-12 col-lg-3 mt-3 mb-3">
+                    <label class="form-label fs-5">Search by QuoteID:</label> 
+                    <input type="text" class="form-control fs-5" />
+                </div>
+                <div class="col-12 mt-3 mb-3">
+                  <span class="fs-5">or Filter by Date:</span>
+                </div>
+                <div class="col-12 col-lg-3 mt-3 mb-3">
+                    <label class="form-label fs-5">Start:</label> 
+                    <input type="date" class="form-control fs-5" />
+                    <label class="form-label fs-5">End:</label>
+                    <input type="date" class="form-control fs-5" />
+                </div>
+                <div class="col-12 col-lg-3 mt-3 mb-3 d-grid">
+                  <button class="btn btn-primary fs-5 fw-bold" onclick="applyFilters()">Filter</button>
+                </div>
+            </div>
+            <div class="container-fluid" style="padding-top: 50px;">
+              <div class="row">
+                  <div class="col-12 text-center mb-3">
+                      <span class="fs-1 text-primary fw-bold"></span>
+                  </div>
+              </div>
+              <table class="table">
+                 <thead>
                     <tr>
                         <th>QuoteID</th>
                         <th>Gallons Requested</th>
@@ -41,18 +77,39 @@
                     <!-- Table body will be populated by JavaScript -->
                     <tbody id="quoteTableBody">
                 </tbody>
-                
+                <div class="col-12 col-lg-3 mt-3 mb-3">
+                  <label class="form-label fs-5">Search by QuoteID:</label> 
+                  <input type="text" class="form-control fs-5" id="searchInput">
+                  <button id="searchButton">Search</button>
+                </div>
+              
                 <button id="generateButton">Generate Fake Data</button>
-            </table>
+              </table>
+          </div>
         </div>
     </section>
-  </main>
+</main>
 
-  <!-- Include jQuery library 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/faker"></script>
-  -->
-  <script src="fhTest.js" charset="UTF-8"></script>
-  <!-- Include your JavaScript file -->
-</body>
+ <!-- Include any necessary JavaScript files -->
+ <script src="fuelhistory.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+
+
+<footer>
+  <div class="footer_container">
+    <div class="footer_items">
+      <h2>University of Houston</h2>
+      <p>Software Design, S24</p>
+    </div>
+    <div class="footer_items">
+      <h2>Group 42</h2>
+      <p>Kenia Benitez</p>
+      <p>Erica Hay</p>
+      <p>Khuong Ngo</p>
+      <p>Thien Ngo</p>
+    </div>
+  </div>
+</footer>
+
 </html>
