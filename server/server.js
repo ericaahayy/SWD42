@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 500;
+const port = 5000;
 const dbService = require("./db");
 
 app.use(cors());
@@ -15,9 +15,8 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
-app.post("/fuelquote/submit", async (req, res) => {
+app.post("/fuelquote/submit_quote", async (req, res) => {
     const db = dbService.getDbServiceInstance();
-    const clientID = req.session.clientID;
     const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = req.body;
 
     //validatio n

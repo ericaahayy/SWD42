@@ -1,41 +1,54 @@
 document.addEventListener('DOMContentLoaded', function() {
     const gallonsInput = document.getElementById('galreq');
-    const fuelQuoteForm = document.getElementById('fuel_quote_form');
-    const deliveryAddressInput = document.getElementById('deliveryaddress');
-    const deliveryDateInput = document.getElementById('deliverydate');
     const suggestedPriceInput = document.getElementById('suggestedprice');
-    const totalAmountDueInput = document.getElementById('totaldue');
+    const totaldueInput = document.getElementById('totaldue');
 
-    fuelQuoteForm.addEventListener('submit', function(event) {
-        event.preventDefault(); 
+    gallonsInput.addEventListener('input', calculatetotaldue);
+    suggestedPriceInput.addEventListener('input', calculatetotaldue);
 
-        const formData = new FormData(fuelQuoteForm); 
+    function calculatetotaldue() {
+        const galreq = parseFloat(gallonsInput.value);
+        const suggestedprice = parseFloat(suggestedPriceInput.value);
 
-        fetch('/fuelquote/submit', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); 
-        })
-        .catch(error => {
-            console.error('Error:', error); 
-        });
-    });
-
-    gallonsInput.addEventListener('input', calculateTotalAmountDue);
-    suggestedPriceInput.addEventListener('input', calculateTotalAmountDue);
-
-    function calculateTotalAmountDue() {
-        const gallonsRequested = parseFloat(gallonsInput.value);
-        const suggestedPricePerGallon = parseFloat(suggestedPriceInput.value);
-
-        if (!isNaN(gallonsRequested) && !isNaN(suggestedPricePerGallon)) {
-            const totalAmountDue = gallonsRequested * suggestedPricePerGallon;
-            totalAmountDueInput.value = totalAmountDue.toFixed(2);
+        if (!isNaN(galreq) && !isNaN(suggestedprice)) {
+            const totaldue = galreq * suggestedprice;
+            totaldueInput.value = totaldue.toFixed(2);
         }
     }
 
     suggestedPriceInput.value = '2.57'; // hardcoding for now
+});
+
+const fuelQuoteForm = document.getElementById('fuel_quote_form');
+fuelQuoteForm.addEventListener('submit', function(event) {
+    event.preventDefault(); 
+
+    const galreq = document.getElementById('galreq').value;
+    const deliveryAddress = document.getElementById('deliveryaddress').value;
+    const deliveryDate = document.getElementById('deliverydate').value;
+    const suggestedprice = document.getElementById('suggestedprice').value;
+    const totaldue = document.getElementById('totaldue').value;
+
+    fetch('/fuelquote/submit_quote', {
+        method: 'POST',
+        body: JSON.stringify({ 
+            galreq, 
+            deliveryAddress, 
+            deliveryDate, 
+            suggestedprice,
+            totaldue
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error submitting fuel quote');
+        }
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 });

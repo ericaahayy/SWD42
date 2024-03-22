@@ -13,7 +13,7 @@ let instance = null;
  const connection = mysql.createConnection({
     host: "34.171.92.157",
     database: "swd42group",
-    user: "root",
+    user: "swd42",
     password: "root123"
   });
 
