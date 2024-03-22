@@ -84,6 +84,7 @@ function generateFakeFuelQuotes(numQuotes) {
                 }
             }
         }
+      }
     document.getElementById("searchButton").addEventListener("click", function() {
         searchTable();
     });
