@@ -20,7 +20,7 @@ app.post("/fuelquote/submit", async (req, res) => {
     const clientID = req.session.clientID;
     const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = req.body;
 
-    //validation
+    //validatio n
     if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {
         return res.status(400).json({ message: "Please fill in required information." });
     }
@@ -142,6 +142,18 @@ app.post("/api/profile", async (req, res) => {
 });
 //end profile
 
+//History Getter
+app.get("/api/fuelhistory", async (req, res) => {
+    try {
+        const db = dbService.getDbServiceInstance();
+        const fuelHistoryData = await db.getFuelHistoryData(); // Replace with the appropriate method from dbService
+        res.status(200).json(fuelHistoryData);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+//End History Getter
 
 
 const server = app.listen(port, () => {
