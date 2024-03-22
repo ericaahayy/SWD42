@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711087964827" clover="3.2.0">
-  <project timestamp="1711087964827" name="All files">
+<coverage generated="1711146745015" clover="3.2.0">
+  <project timestamp="1711146745015" name="All files">
     <metrics statements="206" coveredstatements="149" conditionals="98" coveredconditionals="69" methods="40" coveredmethods="29" elements="344" coveredelements="247" complexity="0" loc="206" ncloc="206" packages="1" files="2" classes="2"/>
-    <file name="db.js" path="C:\Users\khuong\OneDrive - University Of Houston\Documents\COSC4353\SWD42\server\db.js">
+    <file name="db.js" path="C:\Users\erica\SWD42REPO\SWD42\server\db.js">
       <metrics statements="132" coveredstatements="95" conditionals="60" coveredconditionals="43" methods="30" coveredmethods="22"/>
       <line num="1" count="2" type="stmt"/>
       <line num="2" count="2" type="stmt"/>
-      <line num="5" count="2" type="stmt"/>
+      <line num="13" count="2" type="stmt"/>
       <line num="21" count="2" type="stmt"/>
       <line num="22" count="2" type="cond" truecount="1" falsecount="1"/>
       <line num="23" count="2" type="stmt"/>
@@ -137,7 +137,7 @@
       <line num="285" count="0" type="stmt"/>
       <line num="290" count="2" type="stmt"/>
     </file>
-    <file name="server.js" path="C:\Users\khuong\OneDrive - University Of Houston\Documents\COSC4353\SWD42\server\server.js">
+    <file name="server.js" path="C:\Users\erica\SWD42REPO\SWD42\server\server.js">
       <metrics statements="74" coveredstatements="54" conditionals="38" coveredconditionals="26" methods="10" coveredmethods="7"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>

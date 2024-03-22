@@ -5,25 +5,40 @@ document.addEventListener('DOMContentLoaded', function() {
     const deliveryDateInput = document.getElementById('deliverydate');
     const suggestedPriceInput = document.getElementById('suggestedprice');
     const totalAmountDueInput = document.getElementById('totaldue');
+    const fuelQuoteError = document.getElementById('fuel_quote_error');
 
     fuelQuoteForm.addEventListener('submit', function(event) {
         event.preventDefault(); 
 
-        const formData = new FormData(fuelQuoteForm); 
+        const gallonsRequested = gallonsInput.value;
+        const deliveryAddress = deliveryAddressInput.value;
+        const deliveryDate = deliveryDateInput.value;
+        const suggestedPricePerGallon = suggestedPriceInput.value;
 
         fetch('/fuelquote/submit', {
             method: 'POST',
-            body: formData
+            body: JSON.stringify({ gallonsRequested, deliveryAddress, deliveryDate, suggestedPricePerGallon }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                fuelQuoteError.innerHTML = 'Error submitting fuel quote';
+                throw new Error('Error submitting fuel quote');
+            }
+            return response.json();
+        })
         .then(data => {
             console.log(data); 
+            fuelQuoteError.innerText = '';
+            totalAmountDueInput.value = data.totalAmountDue.toFixed(2);
         })
         .catch(error => {
+            fuelQuoteError.innerHTML = 'Error submitting fuel quote';
             console.error('Error:', error); 
         });
     });
-
     gallonsInput.addEventListener('input', calculateTotalAmountDue);
     suggestedPriceInput.addEventListener('input', calculateTotalAmountDue);
 
