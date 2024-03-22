@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Quote History</title>
+  <!-- Include any necessary CSS files -->
+  <link rel="stylesheet" href="fuelhistory.css">
+</head>
+<body>
+  
+  <header>
+    <span class="logo">ReFUEL</span>
+    <nav class="navigation">
+        <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
+        <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
+        <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="color-overlay"></div>
+    <section class="form_sec" id="form_input">
+        <div class="form_container">
+          <div class="title" id="form-title">Fuel Quote History
+          </div>
+            <!-- Your table structure -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>QuoteID</th>
+                        <th>Gallons Requested</th>
+                        <th>Delivery Address</th>
+                        <th>Delivery Date</th>
+                        <th>Suggested Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table body will be populated by JavaScript -->
+                    <tbody id="quoteTableBody">
+                </tbody>
+                
+                <button id="generateButton">Generate Fake Data</button>
+            </table>
+        </div>
+    </section>
+  </main>
+
+  <!-- Include jQuery library 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/faker"></script>
+  -->
+  <script src="fhTest.js" charset="UTF-8"></script>
+  <!-- Include your JavaScript file -->
+</body>
+</html>
