@@ -3,7 +3,6 @@ const app = express();
 const cors = require("cors");
 const port = 500;
 const dbService = require("./db");
-const { v4: uuidv4 } = require('uuid');
 
 app.use(cors());
 app.use(express());
@@ -16,20 +15,23 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
-app.post('/fuelquote/submit_quote', (req, res) => {
-    const { galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID } = req.body;
-  
-    const sql = `INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (UUID(), ?, ?, ?, ?, ?, ?)`;
-    db.query(sql, [galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Error saving data to the database');
-      } else {
-        res.status(200).send('Quote submitted successfully');
-      }
-    });
-  });
-  
+app.post("/fuelquote/submit", async (req, res) => {
+    const db = dbService.getDbServiceInstance();
+    const clientID = req.session.clientID;
+    const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = req.body;
+
+    //validation
+    if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {
+        return res.status(400).json({ message: "Please fill in required information." });
+    }
+    try {
+        const results = await db.submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID);
+        res.json({ success: results });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
 //end fuel quote
 
 //start login

@@ -30,31 +30,28 @@ class dbService {
     }
 
     //start fuel history
-
     //end fuel history
 
     //start fuel quote
-        async submitFuelQuote(gallons, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) {
-        try {
-            // validate required fields
-            if (!gallons || !deliveryaddress || !deliverydate || !suggestedprice || !totaldue || !clientID) {
-                throw new Error("All fields are required.");
-            }
-
-            const query = "INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (UUID(), ?, ?, ?, ?, ?, ?)";
+    async submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
+        try{
+                if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {
+                    throw new Error("All fields are required.");
+        }
+        const query = "INSERT INTO fuelquote (galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (?,?,?, ?, ?, ?);";
             const connection = this.getConnection();
-
+    
             const response = await new Promise((resolve, reject) => {
-                connection.query(query, [gallons, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], (err, result) => {
+                connection.query(query, [galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], (err, result) => {
                     if (err) {
-                        console.error("Error executing SQL query:", err);
-                        reject(err);
+                        console.error("Error inserting data into database:", err);
+                        reject(new Error("form submission failed"));
                         return;
                     }
-                    resolve(result && result.affectedRows > 0);
+                    resolve(result.insertId);
                 });
             });
-            return response;
+            return response === 0 ? false : true;
         } catch (error) {
             throw error;
         }

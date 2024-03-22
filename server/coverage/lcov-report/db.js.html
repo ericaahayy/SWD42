@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.83% </span>
+                <span class="strong">73.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>79/107</span>
+                <span class='fraction'>79/108</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.22% </span>
+                <span class="strong">68.51% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>37/45</span>
+                <span class='fraction'>37/54</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75.23% </span>
+                <span class="strong">74.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>79/105</span>
+                <span class='fraction'>79/106</span>
             </div>
         
             
@@ -334,6 +334,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -341,9 +347,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -351,9 +354,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -565,32 +565,32 @@ class dbService {
     }
 &nbsp;
     //start fuel history
-&nbsp;
     //end fuel history
 &nbsp;
     //start fuel quote
-<span class="fstat-no" title="function not covered" >    as</span>ync submitFuelQuote(galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) {
-<span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="fstat-no" title="function not covered" >    as</span>ync submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
+<span class="cstat-no" title="statement not covered" >        try{</span>
+<span class="cstat-no" title="statement not covered" >                if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {</span>
+<span class="cstat-no" title="statement not covered" >                    throw new Error("All fields are required.");</span>
+        }
+        const query = <span class="cstat-no" title="statement not covered" >"INSERT INTO fuelquote (galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (?,?,?, ?, ?, ?);";</span>
+            const connection = <span class="cstat-no" title="statement not covered" >this.getConnection();</span>
+    
             const response = <span class="cstat-no" title="statement not covered" >await new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
-                const query = <span class="cstat-no" title="statement not covered" >"INSERT INTO fuelquote (quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice) VALUES (?, ?, ?, ?, ?, ?, ?)";</span>
-                const quoteID = <span class="cstat-no" title="statement not covered" >clientID + '_' + uuidv4();</span>
-<span class="cstat-no" title="statement not covered" >                connection.query(query, [quoteID, galreq, deliveryaddress, deliverydate, totaldue, clientID, suggestedprice], <span class="fstat-no" title="function not covered" >(e</span>rr, result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                connection.query(query, [galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], <span class="fstat-no" title="function not covered" >(e</span>rr, result) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                    if (err) {</span>
-<span class="cstat-no" title="statement not covered" >                        console.error("Error inserting fuel quote into database:", err);</span>
-<span class="cstat-no" title="statement not covered" >                        reject(new Error("Fuel quote submission failed"));</span>
+<span class="cstat-no" title="statement not covered" >                        console.error("Error inserting data into database:", err);</span>
+<span class="cstat-no" title="statement not covered" >                        reject(new Error("form submission failed"));</span>
 <span class="cstat-no" title="statement not covered" >                        return;</span>
                     }
-<span class="cstat-no" title="statement not covered" >                    resolve(result);</span>
+<span class="cstat-no" title="statement not covered" >                    resolve(result.insertId);</span>
                 });
             });
-<span class="cstat-no" title="statement not covered" >            return response;</span>
+<span class="cstat-no" title="statement not covered" >            return response === 0 ? false : true;</span>
         } catch (error) {
-<span class="cstat-no" title="statement not covered" >            console.error(error);</span>
-<span class="cstat-no" title="statement not covered" >            return false;</span>
+<span class="cstat-no" title="statement not covered" >            throw error;</span>
         }
     }
-    
-    
     //end fuel quote
 &nbsp;
     //start login
@@ -775,7 +775,7 @@ module.exports = dbService;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-21T21:59:58.627Z
+                at 2024-03-22T05:40:38.759Z
             </div>
         <script src="prettify.js"></script>
         <script>
