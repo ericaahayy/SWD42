@@ -52,7 +52,7 @@ app.post("/api/login", async (req, res) => {
         .then((data) => {
             if (data.length === 0)
                 throw new Error("Username and password do not match");
-            return res.json({ data });
+            return res.status(200).json({ message: "Login successful", data: data });
         })
         .catch((err) => {
             return res.status(401).json({ message: err.message });
@@ -75,11 +75,9 @@ app.post("/user/register", async (req, res) => {
         if (usernameExists) {
             return res.status(400).json({ message: "Email already exists" });
         }
-        const registrationResult = await db.userRegister(username, password, first_login, clientID);
+        const registrationResult = await db.userRegister(username, password, first_login);
         if (registrationResult) {
             return res.status(200).json({ message: "User registered successfully" });
-        } else {
-            return res.status(500).json({ message: "User registration failed" });
         }
     } catch (error) {
         console.error(error);
@@ -108,11 +106,7 @@ app.post("/api/add_profile", async (req, res) => {
             const firstLoginUpdated = await db.updateFirstLogin(username);
             if (firstLoginUpdated) {
                 return res.status(200).json({ message: "Profile added successfully and first login updated" });
-            } else {
-                return res.status(500).json({ message: "Failed to update first login" });
             }
-        } else {
-            return res.status(500).json({ message: "Failed to add profile" });
         }
     } catch (error) {
         console.error(error);
@@ -150,6 +144,14 @@ app.post("/api/profile", async (req, res) => {
 
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+const closeServer = () => {
+    server.close(() => {
+        console.log('Server closed');
+    });
+};
+
+module.exports = { app, closeServer };

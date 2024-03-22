@@ -2,20 +2,20 @@ const mysql = require("mysql2");
 let instance = null;
 
 //connecting locally
-/*const connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: "localhost",
     database: "swd42group",
     user: "root",
     password: "root123"
-});*/
+});
 
 //this will actually make edits to the database.
- const connection = mysql.createConnection({
-    host: "34.171.92.157",
-    database: "swd42group",
-    user: "root",
-    password: "root123"
-  });
+//  const connection = mysql.createConnection({
+//     host: "34.171.92.157",
+//     database: "swd42group",
+//     user: "root",
+//     password: "root123"
+//   });
 
 
 connection.connect((err) => {
@@ -218,6 +218,37 @@ class dbService {
     }
 
     //end profile
+
+    async deleteEntry(username, isProfile) {
+        try {
+            if (!username) {
+                throw new Error("Username is required");
+            }
+    
+            let query;
+            if (isProfile) {
+                query = "DELETE FROM profile WHERE username = ?";
+            } else {
+                query = "DELETE FROM login WHERE username = ?";
+            }
+    
+            const connection = this.getConnection();
+    
+            await new Promise((resolve, reject) => {
+                connection.query(query, [username], (err, result) => {
+                    if (err) {
+                        console.error("Error deleting profile entry:", err);
+                        reject(err);
+                        return;
+                    }
+                    resolve(result);
+                });
+            });
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    }
 
     //start fuel history
     //Place holder code FINALIZE FILTER IN FUEL HISTORY JS

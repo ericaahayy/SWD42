@@ -191,7 +191,7 @@ describe('dbService', () => {
             await expect(db.addProfile(username, fname, lname, address1, address2, city, state, zipcode, clientID)).resolves.toBe(true);
         });
 
-        test('should return false if database insertion fails', async () => {
+        test('should return error if database insertion fails', async () => {
             // Mock data
             const username = 'user@example.com';
             const fname = 'John';
@@ -260,6 +260,48 @@ describe('dbService', () => {
             // Call the function and expect it to return true
             const result = await db.updateFirstLogin(username);
             expect(result).toBe(true);
+        });
+    });
+
+    describe('deleteEntry', () => {
+        test('should throw an error if username is missing', async () => {
+            // Mock data with missing username
+            const username = '';
+    
+            // Call the function and expect it to throw an error
+            await expect(db.deleteEntry(username)).rejects.toThrow('Username is required');
+        });
+    
+        test('should return true if entry is deleted successfully', async () => {
+            // Mock valid clientID
+            const username = 'testuser@example.com'; // Example username used in test
+    
+            // Mock successful database deletion
+            jest.spyOn(db, 'getConnection').mockReturnValue({
+                query: jest.fn().mockImplementation((query, params, callback) => {
+                    // Simulate a successful deletion
+                    callback(null, { affectedRows: 1 }); // Mock affectedRows
+                })
+            });
+    
+            // Call the function and expect it to resolve with true
+            await expect(db.deleteEntry(username)).resolves.toBe(true);
+        });
+    
+        test('should return false if database deletion fails', async () => {
+            // Mock data
+            const username = 'testuser@example.com'; // Example clientID used in your test
+            const mockError = new Error('Error deleting entry');
+    
+            // Mock error during database deletion
+            jest.spyOn(db, 'getConnection').mockReturnValue({
+                query: jest.fn().mockImplementation((query, params, callback) => {
+                    callback(mockError, null); // Simulate an error with null result
+                })
+            });
+    
+            // Call the function and expect it to reject with an error
+            await expect(db.deleteEntry(username)).rejects.toThrow(mockError.message);
         });
     });
 });
