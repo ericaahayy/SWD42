@@ -143,16 +143,21 @@ app.post("/api/profile", async (req, res) => {
 //end profile
 
 //History Getter
-app.get("/api/fuelhistory", async (req, res) => {
+
+// API endpoint to retrieve fuel history based on clientID
+app.get("/api/history/:clientID", async (req, res) => {
+    const { clientID } = req.params;
+    const db = dbService.getDbServiceInstance();
+  
     try {
-        const db = dbService.getDbServiceInstance();
-        const fuelHistoryData = await db.getFuelHistoryData(); // Replace with the appropriate method from dbService
-        res.status(200).json(fuelHistoryData);
+      // Fetch fuel history data from the database based on clientID
+      const fuelHistory = await db.getFuelHistory(clientID);
+      res.json(fuelHistory);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal Server Error" });
+      console.error("Error fetching fuel history:", error);
+      res.status(500).json({ message: "Internal Server Error" });
     }
-});
+  });
 //End History Getter
 
 

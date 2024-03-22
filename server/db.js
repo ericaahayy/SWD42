@@ -217,26 +217,24 @@ class dbService {
     //end profile
 
     //start fuel history
-    //Place holder code FINALIZE FILTER IN FUEL HISTORY JS
-    async searchFuelQuotesByDate(startDate, endDate) {
-        try {
-            const query = "SELECT * FROM quotehistory WHERE deliverydate BETWEEN ? AND ?";
-            const [rows, fields] = await this.connection.promise().query(query, [startDate, endDate]);
-            return rows;
-        } catch (error) {
-            throw error;
-        }
-    }
+   
 
-    // Add your SQL query here to fetch historical data from the database
-    //Temporary code
-    async getFuelHistoryData() {
+    async getFuelHistory(clientID) {
         try {
-            const query = "SELECT * FROM quotehistory";
-            const [rows, fields] = await this.connection.promise().query(query);
-            return rows;
+        const response = await new Promise((resolve, reject) => {
+            const query = "SELECT * FROM fuelquote WHERE clientID = ?";
+            connection.query(query, [clientID], (err, result) => {
+            if (err) {
+                console.error("Error fetching fuel history:", err);
+                reject(err);
+                return;
+            }
+            resolve(result);
+            });
+        });
+        return response;
         } catch (error) {
-            throw error;
+        throw error;
         }
     }
     //end fuel history
