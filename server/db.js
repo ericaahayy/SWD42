@@ -220,7 +220,7 @@ class dbService {
     //Place holder code FINALIZE FILTER IN FUEL HISTORY JS
     async searchFuelQuotesByDate(startDate, endDate) {
         try {
-            const query = "SELECT * FROM fuelquote WHERE deliverydate BETWEEN ? AND ?";
+            const query = "SELECT * FROM quotehistory WHERE deliverydate BETWEEN ? AND ?";
             const [rows, fields] = await this.connection.promise().query(query, [startDate, endDate]);
             return rows;
         } catch (error) {
@@ -230,9 +230,9 @@ class dbService {
 
     // Add your SQL query here to fetch historical data from the database
     //Temporary code
-    async getDataHistory() {
+    async getFuelHistoryData() {
         try {
-            const query = "SELECT * FROM fuelquote_history";
+            const query = "SELECT * FROM quotehistory";
             const [rows, fields] = await this.connection.promise().query(query);
             return rows;
         } catch (error) {
