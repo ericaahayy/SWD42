@@ -10,86 +10,51 @@ function generateFakeFuelQuotes(numQuotes) {
       }
       return fuelQuotes;
     }
-    
-    // Function to populate fuel quote data into the table
-    function populateFuelQuoteTable(quotes) {
-      const tableBody = document.querySelector('table tbody');
-      quotes.forEach(quote => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${quote.quoteID}</td>
-          <td>${quote.gallonsRequested}</td>
-          <td>${quote.deliveryAddress}</td>
-          <td>${quote.deliveryDate}</td>
-          <td>${quote.suggestedPrice}</td>
-          <td>${quote.totalPrice}</td>
-        `;
-        tableBody.appendChild(row);
-      });
+    // fuelhistory.js
+
+document.addEventListener("DOMContentLoaded", async () => {
+  // Retrieve clientID from localStorage
+  const clientID = localStorage.getItem("clientID");
+
+  try {
+    // Send a request to the server to fetch fuel history data
+    const response = await fetch(`/api/profile/${clientID}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch fuel history");
     }
+    const fuelHistory = await response.json();
 
-    function applyFilters() {
-    // Get the start and end date values from the input fields
-    const startDate = document.querySelector('input[type="date"][name="start"]').value;
-    const endDate = document.querySelector('input[type="date"][name="end"]').value;
-
-    // Convert the dates to Date objects
-    const startDateObj = new Date(startDate);
-    const endDateObj = new Date(endDate);
-
-    // Get all rows in the table body
-    const rows = document.querySelectorAll('table tbody tr');
-
-    // Loop through each row and check if the delivery date falls within the specified range
-    rows.forEach(row => {
-        // Get the delivery date cell value from the row
-        const deliveryDate = row.querySelector('td:nth-child(4)').textContent;
-        
-        // Convert the delivery date to a Date object
-        const deliveryDateObj = new Date(deliveryDate);
-
-        // Check if the delivery date is within the specified range
-        if (deliveryDateObj >= startDateObj && deliveryDateObj <= endDateObj) {
-            // Show the row if it falls within the range
-            row.style.display = '';
-        } else {
-            // Hide the row if it falls outside the range
-            row.style.display = 'none';
-        }
+    // Populate the table with fuel history data
+    const quoteTableBody = document.getElementById("quoteTableBody");
+    quoteTableBody.innerHTML = ""; // Clear existing table body content
+    fuelHistory.forEach((quote) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${quote.quoteID}</td>
+        <td>${quote.galreq}</td>
+        <td>${quote.deliveryaddress}</td>
+        <td>${quote.deliverydate}</td>
+        <td>${quote.suggestedprice}</td>
+        <td>${quote.totaldue}</td>
+      `;
+      quoteTableBody.appendChild(row);
     });
+  } catch (error) {
+    console.error("Error fetching fuel history:", error);
+  }
+});
+
+
+
+// Optional: Implement applyFilters() function for filtering fuel history based on user input
+function applyFilters() {
+  // Implement filtering logic here if needed
 }
-  function searchTable() {
-        var input, filter, table, tbody, tr, td, i, txtValue;
-        input = document.getElementById("searchInput");
-        filter = input.value.toUpperCase();
-        table = document.querySelector(".table");
-        tbody = document.getElementById("quoteTableBody");
-        tr = tbody.getElementsByTagName("tr");
-      
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td");
-            for (var j = 0; j < td.length; j++) {
-                if (td[j]) {
-                    txtValue = td[j].textContent || td[j].innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                        break;
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-      }
-    document.getElementById("searchButton").addEventListener("click", function() {
-        searchTable();
-    });
    
-    document.getElementById('generateButton').addEventListener('click', function() { 
+  document.getElementById('generateButton').addEventListener('click', function() { 
     // Generate fake fuel quote data and populate the table
     const numQuotes = 10; // Number of fake quotes
     const fakeQuotes = generateFakeFuelQuotes(numQuotes);
-    populateFuelQuoteTable(fakeQuotes);
+    //populateFuelQuoteTable(fakeQuotes);
   });
   

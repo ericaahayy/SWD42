@@ -13,24 +13,6 @@ function generateFakeFuelQuotes(numQuotes) {
   return fuelQuotes;
 }
 
-// Function to populate fuel quote data into the table
-function populateFuelQuoteTable(quotes) {
-  const tableBody = document.querySelector('table tbody');
-  quotes.forEach(quote => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${quote.quoteID}</td>
-      <td>${quote.gallonsRequested}</td>
-      <td>${quote.deliveryAddress}</td>
-      <td>${quote.deliveryDate}</td>
-      <td>${quote.suggestedPrice}</td>
-      <td>${quote.totalPrice}</td>
-    `;
-    tableBody.appendChild(row);
-  });
-}
-
-
 // Function to handle form submission for user login
 document.getElementById("GoToNewPage").addEventListener("submit", function (event) {
   // Prevent the default form submission behavior
@@ -98,8 +80,45 @@ document.getElementById("searchButton").addEventListener("click", function(){
 // Event listener for generate fake data button
 document.getElementById('generateButton').addEventListener('click', function() { 
     // Generate fake fuel quote data and populate the table
-    const numQuotes = 10; // Number of fake quotes
-    //alert("Button Fake")
+    const numQuotes = 10; 
     const fakeQuotes = generateFakeFuelQuotes(numQuotes);
     populateFuelQuoteTable(fakeQuotes);
 });
+
+function fetchHistoryData() {
+  //fetch user data (server.js)
+  const clientID = localStorage.getItem("clientID");
+
+
+  fetch(back_end_url +'/api/fuelhistory')
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      return response.json();
+  })
+  .then(data => {
+      // Update the content of the <p> elements with fetched data
+      updateTable(data);
+  })
+  .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+      // If there's an error fetching data, replace content with "Error"
+      displayError();
+  });
+}
+
+
+// function updateTable(data) {
+//   // Update the content of the <p> elements with fetched data
+//   document.getElementById('clientID').textContent = data.clientID || "Not Available";
+//   document.getElementById('fname').textContent = data.firstName || "Not Available";
+//   document.getElementById('lname').textContent = data.lastName || "Not Available";
+//   document.getElementById('email').textContent = data.email || "Not Available";
+//   document.getElementById('add1').textContent = data.address1 || "Not Available";
+//   document.getElementById('add2').textContent = data.address2 || "Not Available";
+//   document.getElementById('city').textContent = data.city || "Not Available";
+//   document.getElementById('state').textContent = data.state || "Not Available";
+//   document.getElementById('zip').textContent = data.zipCode || "Not Available";
+
+// }
