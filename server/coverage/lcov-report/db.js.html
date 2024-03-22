@@ -352,9 +352,7 @@
 <a name='L287'></a><a href='#L287'>287</a>
 <a name='L288'></a><a href='#L288'>288</a>
 <a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a>
-<a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L290'></a><a href='#L290'>290</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -387,9 +385,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -569,6 +564,32 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -603,31 +624,6 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -676,9 +672,6 @@ class dbService {
         return instance ? <span class="branch-0 cbranch-no" title="branch not covered" >instance </span>: new dbService();
     }
 &nbsp;
-    //start fuel history
-    //end fuel history
-&nbsp;
     //start fuel quote
 <span class="fstat-no" title="function not covered" >    as</span>ync submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
 <span class="cstat-no" title="statement not covered" >        try{</span>
@@ -707,7 +700,7 @@ class dbService {
 &nbsp;
     //start login
 &nbsp;
-    //user authentication ERICA CHANGE BACK TO client_id to match khuongs later
+    //user authentication
     async authenticateUser(username, password) {
         try {
             // Validate required fields
@@ -866,6 +859,32 @@ class dbService {
 &nbsp;
     //end profile
 &nbsp;
+    //start fuel history
+    //Place holder code FINALIZE FILTER IN FUEL HISTORY JS
+<span class="fstat-no" title="function not covered" >    as</span>ync searchFuelQuotesByDate(startDate, endDate) {
+<span class="cstat-no" title="statement not covered" >        try {</span>
+            const query = <span class="cstat-no" title="statement not covered" >"SELECT * FROM fuelquote WHERE deliverydate BETWEEN ? AND ?";</span>
+            const [rows, fields] = <span class="cstat-no" title="statement not covered" >await this.connection.promise().query(query, [startDate, endDate]);</span>
+<span class="cstat-no" title="statement not covered" >            return rows;</span>
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >            throw error;</span>
+        }
+    }
+&nbsp;
+    // Add your SQL query here to fetch historical data from the database
+    //Temporary code
+<span class="fstat-no" title="function not covered" >    as</span>ync getDataHistory() {
+<span class="cstat-no" title="statement not covered" >        try {</span>
+            const query = <span class="cstat-no" title="statement not covered" >"SELECT * FROM fuelquote_history";</span>
+            const [rows, fields] = <span class="cstat-no" title="statement not covered" >await this.connection.promise().query(query);</span>
+<span class="cstat-no" title="statement not covered" >            return rows;</span>
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >            throw error;</span>
+        }
+    }
+    //end fuel history
+&nbsp;
+    //help functions for unit testing
     async deleteEntry(username, isProfile) {
         try {
             if (!username) {
@@ -897,31 +916,6 @@ class dbService {
         }
     }
 &nbsp;
-    //start fuel history
-    //Place holder code FINALIZE FILTER IN FUEL HISTORY JS
-<span class="fstat-no" title="function not covered" >    as</span>ync searchFuelQuotesByDate(startDate, endDate) {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const query = <span class="cstat-no" title="statement not covered" >"SELECT * FROM fuelquote WHERE deliverydate BETWEEN ? AND ?";</span>
-            const [rows, fields] = <span class="cstat-no" title="statement not covered" >await this.connection.promise().query(query, [startDate, endDate]);</span>
-<span class="cstat-no" title="statement not covered" >            return rows;</span>
-        } catch (error) {
-<span class="cstat-no" title="statement not covered" >            throw error;</span>
-        }
-    }
-&nbsp;
-    // Add your SQL query here to fetch historical data from the database
-    //Temporary code
-<span class="fstat-no" title="function not covered" >    as</span>ync getDataHistory() {
-<span class="cstat-no" title="statement not covered" >        try {</span>
-            const query = <span class="cstat-no" title="statement not covered" >"SELECT * FROM fuelquote_history";</span>
-            const [rows, fields] = <span class="cstat-no" title="statement not covered" >await this.connection.promise().query(query);</span>
-<span class="cstat-no" title="statement not covered" >            return rows;</span>
-        } catch (error) {
-<span class="cstat-no" title="statement not covered" >            throw error;</span>
-        }
-    }
-    //end fuel history
-&nbsp;
     getConnection() {
         return connection;
     }
@@ -943,7 +937,7 @@ module.exports = dbService;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-22T06:08:06.792Z
+                at 2024-03-22T06:12:44.796Z
             </div>
         <script src="prettify.js"></script>
         <script>

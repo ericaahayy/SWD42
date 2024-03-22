@@ -2,20 +2,20 @@ const mysql = require("mysql2");
 let instance = null;
 
 //connecting locally
-const connection = mysql.createConnection({
-    host: "localhost",
-    database: "swd42group",
-    user: "root",
-    password: "root123"
-});
-
-//this will actually make edits to the database.
-//  const connection = mysql.createConnection({
-//     host: "34.171.92.157",
+// const connection = mysql.createConnection({
+//     host: "localhost",
 //     database: "swd42group",
 //     user: "root",
 //     password: "root123"
-//   });
+// });
+
+//this will actually make edits to the database.
+ const connection = mysql.createConnection({
+    host: "34.171.92.157",
+    database: "swd42group",
+    user: "root",
+    password: "root123"
+  });
 
 
 connection.connect((err) => {
@@ -28,9 +28,6 @@ class dbService {
     static getDbServiceInstance() {
         return instance ? instance : new dbService();
     }
-
-    //start fuel history
-    //end fuel history
 
     //start fuel quote
     async submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
@@ -60,7 +57,7 @@ class dbService {
 
     //start login
 
-    //user authentication ERICA CHANGE BACK TO client_id to match khuongs later
+    //user authentication
     async authenticateUser(username, password) {
         try {
             // Validate required fields
@@ -219,6 +216,32 @@ class dbService {
 
     //end profile
 
+    //start fuel history
+    //Place holder code FINALIZE FILTER IN FUEL HISTORY JS
+    async searchFuelQuotesByDate(startDate, endDate) {
+        try {
+            const query = "SELECT * FROM fuelquote WHERE deliverydate BETWEEN ? AND ?";
+            const [rows, fields] = await this.connection.promise().query(query, [startDate, endDate]);
+            return rows;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    // Add your SQL query here to fetch historical data from the database
+    //Temporary code
+    async getDataHistory() {
+        try {
+            const query = "SELECT * FROM fuelquote_history";
+            const [rows, fields] = await this.connection.promise().query(query);
+            return rows;
+        } catch (error) {
+            throw error;
+        }
+    }
+    //end fuel history
+
+    //help functions for unit testing
     async deleteEntry(username, isProfile) {
         try {
             if (!username) {
@@ -249,31 +272,6 @@ class dbService {
             throw error;
         }
     }
-
-    //start fuel history
-    //Place holder code FINALIZE FILTER IN FUEL HISTORY JS
-    async searchFuelQuotesByDate(startDate, endDate) {
-        try {
-            const query = "SELECT * FROM fuelquote WHERE deliverydate BETWEEN ? AND ?";
-            const [rows, fields] = await this.connection.promise().query(query, [startDate, endDate]);
-            return rows;
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    // Add your SQL query here to fetch historical data from the database
-    //Temporary code
-    async getDataHistory() {
-        try {
-            const query = "SELECT * FROM fuelquote_history";
-            const [rows, fields] = await this.connection.promise().query(query);
-            return rows;
-        } catch (error) {
-            throw error;
-        }
-    }
-    //end fuel history
 
     getConnection() {
         return connection;
