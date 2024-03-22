@@ -63,34 +63,22 @@
                   </div>
               </div>
               <table class="table">
-                  <thead>
-                      <tr>
-                          <th>QuoteID</th>
-                          <th>Gallons Requested</th>
-                          <th>Delivery Address</th>
-                          <th>Delivery Date</th>
-                          <th>Suggested Price</th>
-                          <th>Total Price</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td>1</td> 
-                          <td>10</td>
-                          <td>123 Main St, Houston, TX</td>
-                          <td>2023-11-16</td>
-                          <td>$5/gal</td>
-                          <td>$50</td>
-                      </tr>
-                      <tr>
-                          <td>2</td>
-                          <td>15</td>
-                          <td>456 Elm St, Dallas, TX</td>
-                          <td>2023-11-15</td>
-                          <td>$6/gal</td>
-                          <td>$90</td>
-                      </tr>
-                  </tbody>
+                 <thead>
+                    <tr>
+                        <th>QuoteID</th>
+                        <th>Gallons Requested</th>
+                        <th>Delivery Address</th>
+                        <th>Delivery Date</th>
+                        <th>Suggested Price</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table body will be populated by JavaScript -->
+                    <tbody id="quoteTableBody">
+                </tbody>
+                <button id="searchButton">Search</button>
+                <button id="generateButton">Generate Fake Data</button>
               </table>
           </div>
         </div>
