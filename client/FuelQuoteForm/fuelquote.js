@@ -1,5 +1,6 @@
 const back_end_url = "http://localhost:500"
 document.addEventListener('DOMContentLoaded', function() {
+    const clientID = localStorage.getItem("clientID");
     const gallonsInput = document.getElementById('galreq');
     const suggestedPriceInput = document.getElementById('suggestedprice');
     const totaldueInput = document.getElementById('totaldue');
@@ -25,21 +26,22 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         const galreq = document.getElementById('galreq').value;
-        const deliveryAddress = document.getElementById('deliveryaddress').value;
-        const deliveryDate = formatDate(document.getElementById('deliverydate').value);
+        const deliveryaddress = document.getElementById('deliveryaddress').value;
+        const deliverydate = formatDate(document.getElementById('deliverydate').value);
         const suggestedprice = document.getElementById('suggestedprice').value;
         const totaldue = document.getElementById('totaldue').value;
 
-        console.log("Form data:", galreq, deliveryAddress, deliveryDate, suggestedprice, totaldue);
+        console.log("Form data:", galreq, deliveryaddress, deliverydate, suggestedprice, totaldue);
 
         const response = fetch(back_end_url + "/fuelquote/submit_quote", {
             method: 'POST',
             body: JSON.stringify({ 
                 galreq,
-                deliveryAddress, 
-                deliveryDate, 
+                deliveryaddress, 
+                deliverydate, 
                 suggestedprice,
-                totaldue
+                totaldue, 
+                clientID
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error:', error);
         });
-    });
+    })
+        
 
     function formatDate(dateString) {
         const date = new Date(dateString);

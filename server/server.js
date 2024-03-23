@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 //start fuel quote
 app.post("/fuelquote/submit_quote", async (req, res) => {
     const db = dbService.getDbServiceInstance();
-    const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = req.body;
+    const { galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID } = req.body;
 
     // Validation
     if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {

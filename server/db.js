@@ -32,14 +32,14 @@ class dbService {
     //start fuel quote
     async submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
         try {
-            if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {
+            if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue || !clientID) {
                 throw new Error("All fields are required.");
             }
-            const query = "INSERT INTO fuelquote (galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID) VALUES (?,?,?, ?, ?, ?);";
+            const query = "INSERT INTO fuelquote (clientID, galreq, deliveryaddress, deliverydate, totaldue, suggestedprice) VALUES (?,?,?, ?, ?, ?);";
             const connection = this.getConnection();
     
             const response = await new Promise((resolve, reject) => {
-                connection.query(query, [galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID], (err, result) => {
+                connection.query(query, [clientID, galreq, deliveryaddress, deliverydate,totaldue, suggestedprice], (err, result) => {
                     if (err) {
                         console.error("Error inserting data into database:", err);
                         reject(new Error("Form submission failed"));
