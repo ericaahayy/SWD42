@@ -10,19 +10,39 @@ function generateFakeFuelQuotes(numQuotes) {
       }
       return fuelQuotes;
     }
+
+
+    function populateFuelQuoteTable(quotes) {
+      const tableBody = document.querySelector('table tbody');
+      quotes.forEach(quote => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${quote.quoteID}</td>
+          <td>${quote.gallonsRequested}</td>
+          <td>${quote.deliveryAddress}</td>
+          <td>${quote.deliveryDate}</td>
+          <td>${quote.suggestedPrice}</td>
+          <td>${quote.totalPrice}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
     // fuelhistory.js
 
 document.addEventListener("DOMContentLoaded", async () => {
   // Retrieve clientID from localStorage
   const clientID = localStorage.getItem("clientID");
-
+  //console.log(clientID)
   try {
-    // Send a request to the server to fetch fuel history data
-    const response = await fetch(`/api/profile/${clientID}`);
+    // Send a request to the server to fetch fuel history data 
+    const response = await fetch(`/api/history/${clientID}`);
     if (!response.ok) {
       throw new Error("Failed to fetch fuel history");
     }
     const fuelHistory = await response.json();
+
+    console.log("Populating data")
 
     // Populate the table with fuel history data
     const quoteTableBody = document.getElementById("quoteTableBody");
@@ -55,6 +75,6 @@ function applyFilters() {
     // Generate fake fuel quote data and populate the table
     const numQuotes = 10; // Number of fake quotes
     const fakeQuotes = generateFakeFuelQuotes(numQuotes);
-    //populateFuelQuoteTable(fakeQuotes);
+    populateFuelQuoteTable(fakeQuotes);
   });
   

@@ -13,6 +13,23 @@ function generateFakeFuelQuotes(numQuotes) {
   return fuelQuotes;
 }
 
+function populateFuelQuoteTable(quotes) {
+    const tableBody = document.querySelector('table tbody');
+    quotes.forEach(quote => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${quote.quoteID}</td>
+        <td>${quote.gallonsRequested}</td>
+        <td>${quote.deliveryAddress}</td>
+        <td>${quote.deliveryDate}</td>
+        <td>${quote.suggestedPrice}</td>
+        <td>${quote.totalPrice}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+
 // Function to handle form submission for user login
 document.getElementById("GoToNewPage").addEventListener("submit", function (event) {
   // Prevent the default form submission behavior
