@@ -55,6 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             console.log("Server response:", data);
+            alert("Fuel quote submitted");
+            gallonsInput.value = '';
+            deliveryaddress.value = '';
+            deliverydate.value = '';
+            suggestedPriceInput.value = '';
+            totaldueInput.value = '';
         })
         .catch(error => {
             console.error('Error:', error);

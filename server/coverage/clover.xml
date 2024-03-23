@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711165994998" clover="3.2.0">
-  <project timestamp="1711165994998" name="All files">
+<coverage generated="1711166365465" clover="3.2.0">
+  <project timestamp="1711166365466" name="All files">
     <metrics statements="215" coveredstatements="150" conditionals="101" coveredconditionals="69" methods="42" coveredmethods="29" elements="358" coveredelements="248" complexity="0" loc="215" ncloc="215" packages="1" files="2" classes="2"/>
     <file name="db.js" path="C:\Users\erica\SWD42REPO\SWD42\server\db.js">
       <metrics statements="134" coveredstatements="95" conditionals="63" coveredconditionals="43" methods="31" coveredmethods="22"/>
