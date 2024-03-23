@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.75% </span>
+                <span class="strong">67.9% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>55/80</span>
+                <span class='fraction'>55/81</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.75% </span>
+                <span class="strong">67.9% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>55/80</span>
+                <span class='fraction'>55/81</span>
             </div>
         
             
@@ -230,7 +230,13 @@
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
 <a name='L167'></a><a href='#L167'>167</a>
-<a name='L168'></a><a href='#L168'>168</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -261,6 +267,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,9 +381,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -400,7 +412,7 @@
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 5000;
+const port = 500;
 const dbService = require("./db");
 &nbsp;
 app.use(cors());
@@ -418,7 +430,7 @@ app.post("/fuelquote/submit_quote", <span class="fstat-no" title="function not c
     const db = <span class="cstat-no" title="statement not covered" >dbService.getDbServiceInstance();</span>
     const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = <span class="cstat-no" title="statement not covered" >req.body;</span>
 &nbsp;
-    //validatio n
+    // Validation
 <span class="cstat-no" title="statement not covered" >    if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(400).json({ message: "Please fill in required information." });</span>
     }
@@ -426,10 +438,11 @@ app.post("/fuelquote/submit_quote", <span class="fstat-no" title="function not c
         const results = <span class="cstat-no" title="statement not covered" >await db.submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID);</span>
 <span class="cstat-no" title="statement not covered" >        res.json({ success: results });</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error(error);</span>
+<span class="cstat-no" title="statement not covered" >        console.error('Error submitting fuel quote:', error); </span>// Log the error to the console
 <span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: "Internal Server Error" });</span>
     }
 });
+&nbsp;
 //end fuel quote
 &nbsp;
 //start login
@@ -541,16 +554,21 @@ app.post("/api/profile", <span class="fstat-no" title="function not covered" >as
 //end profile
 &nbsp;
 //History Getter
-app.get("/api/fuelhistory", <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+&nbsp;
+// API endpoint to retrieve fuel history based on clientID
+app.get("/api/history/:clientID", <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+    const { clientID } = <span class="cstat-no" title="statement not covered" >req.params;</span>
+    const db = <span class="cstat-no" title="statement not covered" >dbService.getDbServiceInstance();</span>
+  
 <span class="cstat-no" title="statement not covered" >    try {</span>
-        const db = <span class="cstat-no" title="statement not covered" >dbService.getDbServiceInstance();</span>
-        const fuelHistoryData = <span class="cstat-no" title="statement not covered" >await db.getFuelHistoryData();</span> // Replace with the appropriate method from dbService
-<span class="cstat-no" title="statement not covered" >        res.status(200).json(fuelHistoryData);</span>
+      // Fetch fuel history data from the database based on clientID
+      const fuelHistory = <span class="cstat-no" title="statement not covered" >await db.getFuelHistory(clientID);</span>
+<span class="cstat-no" title="statement not covered" >      res.json(fuelHistory);</span>
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >        console.error(error);</span>
-<span class="cstat-no" title="statement not covered" >        res.status(500).json({ message: "Internal Server Error" });</span>
+<span class="cstat-no" title="statement not covered" >      console.error("Error fetching fuel history:", error);</span>
+<span class="cstat-no" title="statement not covered" >      res.status(500).json({ message: "Internal Server Error" });</span>
     }
-});
+  });
 //End History Getter
 &nbsp;
 &nbsp;
@@ -571,7 +589,7 @@ module.exports = { app, closeServer };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-23T00:34:55.298Z
+                at 2024-03-23T01:59:32.706Z
             </div>
         <script src="prettify.js"></script>
         <script>

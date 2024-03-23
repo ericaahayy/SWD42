@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const totaldue = galreq * suggestedprice;
             totaldueInput.value = totaldue.toFixed(2);
         }
+        console.log("Total due calculated:", totaldueInput.value);
     }
 
     suggestedPriceInput.value = '2.57'; // hardcoding for now
@@ -28,10 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const suggestedprice = document.getElementById('suggestedprice').value;
         const totaldue = document.getElementById('totaldue').value;
 
+        console.log("Form data:", galreq, deliveryAddress, deliveryDate, suggestedprice, totaldue);
+
         fetch('/fuelquote/submit_quote', {
             method: 'POST',
             body: JSON.stringify({ 
-                galreq, 
+                galreq,
                 deliveryAddress, 
                 deliveryDate, 
                 suggestedprice,
@@ -46,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Error submitting fuel quote');
             }
             return response.json();
+        })
+        .then(data => {
+            console.log("Server response:", data);
         })
         .catch(error => {
             console.error('Error:', error);

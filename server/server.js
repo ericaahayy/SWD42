@@ -19,7 +19,7 @@ app.post("/fuelquote/submit_quote", async (req, res) => {
     const db = dbService.getDbServiceInstance();
     const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = req.body;
 
-    //validatio n
+    // Validation
     if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {
         return res.status(400).json({ message: "Please fill in required information." });
     }
@@ -27,10 +27,11 @@ app.post("/fuelquote/submit_quote", async (req, res) => {
         const results = await db.submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID);
         res.json({ success: results });
     } catch (error) {
-        console.error(error);
+        console.error('Error submitting fuel quote:', error); // Log the error to the console
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 //end fuel quote
 
 //start login
