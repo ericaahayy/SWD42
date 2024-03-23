@@ -1,3 +1,4 @@
+const back_end_url = "http://localhost:500"
 document.addEventListener('DOMContentLoaded', function() {
     const gallonsInput = document.getElementById('galreq');
     const suggestedPriceInput = document.getElementById('suggestedprice');
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     suggestedPriceInput.value = '2.57'; // hardcoding for now
 
-    const fuelQuoteForm = document.getElementById('fuel_quote_form');
+    const fuelQuoteForm = document.getElementById('submit_quote');
     fuelQuoteForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log("Form data:", galreq, deliveryAddress, deliveryDate, suggestedprice, totaldue);
 
-        fetch('/fuelquote/submit_quote', {
+        const response = fetch(back_end_url + "/fuelquote/submit_quote", {
             method: 'POST',
             body: JSON.stringify({ 
                 galreq,
