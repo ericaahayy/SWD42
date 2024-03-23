@@ -17,38 +17,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     suggestedPriceInput.value = '2.57'; // hardcoding for now
-});
 
-const fuelQuoteForm = document.getElementById('fuel_quote_form');
-fuelQuoteForm.addEventListener('submit', function(event) {
-    event.preventDefault(); 
+    const fuelQuoteForm = document.getElementById('fuel_quote_form');
+    fuelQuoteForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    const galreq = document.getElementById('galreq').value;
-    const deliveryAddress = document.getElementById('deliveryaddress').value;
-    const deliveryDate = document.getElementById('deliverydate').value;
-    const suggestedprice = document.getElementById('suggestedprice').value;
-    const totaldue = document.getElementById('totaldue').value;
+        const galreq = document.getElementById('galreq').value;
+        const deliveryAddress = document.getElementById('deliveryaddress').value;
+        const deliveryDate = formatDate(document.getElementById('deliverydate').value);
+        const suggestedprice = document.getElementById('suggestedprice').value;
+        const totaldue = document.getElementById('totaldue').value;
 
-    fetch('/fuelquote/submit_quote', {
-        method: 'POST',
-        body: JSON.stringify({ 
-            galreq, 
-            deliveryAddress, 
-            deliveryDate, 
-            suggestedprice,
-            totaldue
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error submitting fuel quote');
-        }
-        return response.json();
-    })
-    .catch(error => {
-        console.error('Error:', error);
+        fetch('/fuelquote/submit_quote', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                galreq, 
+                deliveryAddress, 
+                deliveryDate, 
+                suggestedprice,
+                totaldue
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error submitting fuel quote');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        if (month < 10) {
+            month = '0' + month;
+        }
+        if (day < 10) {
+            day = '0' + day;
+        }
+
+        return `${year}-${month}-${day}`;
+    }
 });
