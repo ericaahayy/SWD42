@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             gallonsInput.value = '';
             deliveryaddress.value = '';
             deliverydate.value = '';
-            suggestedPriceInput.value = '';
             totaldueInput.value = '';
         })
         .catch(error => {
@@ -70,9 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatDate(dateString) {
         const date = new Date(dateString);
-        const year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
+        const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+        const year = utcDate.getFullYear();
+        let month = utcDate.getMonth() + 1;
+        let day = utcDate.getDate();
         if (month < 10) {
             month = '0' + month;
         }
