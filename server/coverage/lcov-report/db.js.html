@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.85% </span>
+                <span class="strong">63.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>95/136</span>
+                <span class='fraction'>95/150</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.25% </span>
+                <span class="strong">62.31% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>43/63</span>
+                <span class='fraction'>43/69</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.96% </span>
+                <span class="strong">64.7% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>22/31</span>
+                <span class='fraction'>22/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.89% </span>
+                <span class="strong">64.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>95/134</span>
+                <span class='fraction'>95/148</span>
             </div>
         
             
@@ -352,7 +352,33 @@
 <a name='L287'></a><a href='#L287'>287</a>
 <a name='L288'></a><a href='#L288'>288</a>
 <a name='L289'></a><a href='#L289'>289</a>
-<a name='L290'></a><a href='#L290'>290</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L290'></a><a href='#L290'>290</a>
+<a name='L291'></a><a href='#L291'>291</a>
+<a name='L292'></a><a href='#L292'>292</a>
+<a name='L293'></a><a href='#L293'>293</a>
+<a name='L294'></a><a href='#L294'>294</a>
+<a name='L295'></a><a href='#L295'>295</a>
+<a name='L296'></a><a href='#L296'>296</a>
+<a name='L297'></a><a href='#L297'>297</a>
+<a name='L298'></a><a href='#L298'>298</a>
+<a name='L299'></a><a href='#L299'>299</a>
+<a name='L300'></a><a href='#L300'>300</a>
+<a name='L301'></a><a href='#L301'>301</a>
+<a name='L302'></a><a href='#L302'>302</a>
+<a name='L303'></a><a href='#L303'>303</a>
+<a name='L304'></a><a href='#L304'>304</a>
+<a name='L305'></a><a href='#L305'>305</a>
+<a name='L306'></a><a href='#L306'>306</a>
+<a name='L307'></a><a href='#L307'>307</a>
+<a name='L308'></a><a href='#L308'>308</a>
+<a name='L309'></a><a href='#L309'>309</a>
+<a name='L310'></a><a href='#L310'>310</a>
+<a name='L311'></a><a href='#L311'>311</a>
+<a name='L312'></a><a href='#L312'>312</a>
+<a name='L313'></a><a href='#L313'>313</a>
+<a name='L314'></a><a href='#L314'>314</a>
+<a name='L315'></a><a href='#L315'>315</a>
+<a name='L316'></a><a href='#L316'>316</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -381,6 +407,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -673,6 +725,32 @@ class dbService {
     }
 &nbsp;
     //start fuel quote
+<span class="fstat-no" title="function not covered" >    as</span>ync getAddresses(clientID) {
+<span class="cstat-no" title="statement not covered" >        try {</span>
+            const response = <span class="cstat-no" title="statement not covered" >await new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+                const query = <span class="cstat-no" title="statement not covered" >"SELECT address1, address2, city, state, zipcode FROM profile WHERE clientID = ?";</span>
+<span class="cstat-no" title="statement not covered" >                connection.query(query, [clientID], <span class="fstat-no" title="function not covered" >(e</span>rr, result) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                        console.error("Error fetching profile data from database:", err);</span>
+<span class="cstat-no" title="statement not covered" >                        reject(err);</span>
+<span class="cstat-no" title="statement not covered" >                        return;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    if (result &amp;&amp; result.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        resolve(result[0]); </span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        resolve(null); </span>
+                    }
+                });
+            });
+<span class="cstat-no" title="statement not covered" >            return response;</span>
+        } catch (error) {
+<span class="cstat-no" title="statement not covered" >            console.error("Error fetching profile data:", error);</span>
+<span class="cstat-no" title="statement not covered" >            return null;</span>
+        }
+    }
+    
+    
+&nbsp;
 <span class="fstat-no" title="function not covered" >    as</span>ync submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
 <span class="cstat-no" title="statement not covered" >        try {</span>
 <span class="cstat-no" title="statement not covered" >            if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue || !clientID) {</span>
@@ -937,7 +1015,7 @@ module.exports = dbService;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-24T03:46:28.278Z
+                at 2024-03-24T23:44:30.225Z
             </div>
         <script src="prettify.js"></script>
         <script>
