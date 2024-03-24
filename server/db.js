@@ -30,6 +30,32 @@ class dbService {
     }
 
     //start fuel quote
+    async getAddresses(clientID) {
+        try {
+            const response = await new Promise((resolve, reject) => {
+                const query = "SELECT address1, address2, city, state, zipcode FROM profile WHERE clientID = ?";
+                connection.query(query, [clientID], (err, result) => {
+                    if (err) {
+                        console.error("Error fetching profile data from database:", err);
+                        reject(err);
+                        return;
+                    }
+                    if (result && result.length > 0) {
+                        resolve(result[0]); 
+                    } else {
+                        resolve(null); 
+                    }
+                });
+            });
+            return response;
+        } catch (error) {
+            console.error("Error fetching profile data:", error);
+            return null;
+        }
+    }
+    
+    
+
     async submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
         try {
             if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue || !clientID) {
