@@ -15,40 +15,40 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
-app.get("/profile/addresses", async (req, res) => {
-    const { clientID } = req.query;
+// app.get("/profile/addresses", async (req, res) => {
+//     const { clientID } = req.query;
 
-    try {
-        const addresses = await getAddresses(clientID);
+//     try {
+//         const addresses = await getAddresses(clientID);
 
-        if (addresses) {
-            // format the address line
-            let deliveryAddress1 = `${addresses.address1}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
+//         if (addresses) {
+//             // format the address line
+//             let deliveryAddress1 = `${addresses.address1}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
 
-            let response;
-            if (addresses.address2) {
-                let deliveryAddress2 = `${addresses.address2}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
+//             let response;
+//             if (addresses.address2) {
+//                 let deliveryAddress2 = `${addresses.address2}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
 
-                response = {
-                    address1: deliveryAddress1,
-                    address2: deliveryAddress2
-                };
-            } else {
-                // if address2 does not exist, only include address1 in the response
-                response = {
-                    address1: deliveryAddress1
-                };
-            }
+//                 response = {
+//                     address1: deliveryAddress1,
+//                     address2: deliveryAddress2
+//                 };
+//             } else {
+//                 // if address2 does not exist, only include address1 in the response
+//                 response = {
+//                     address1: deliveryAddress1
+//                 };
+//             }
 
-            res.status(200).json(response);
-        } else {
-            res.status(404).json({ error: "Address not found" });
-        }
-    } catch (error) {
-        console.error("Error fetching address:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-});
+//             res.status(200).json(response);
+//         } else {
+//             res.status(404).json({ error: "Address not found" });
+//         }
+//     } catch (error) {
+//         console.error("Error fetching address:", error);
+//         res.status(500).json({ error: "Internal Server Error" });
+//     }
+// });
 
 
 app.post("/fuelquote/submit_quote", async (req, res) => {
