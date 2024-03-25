@@ -37,7 +37,7 @@
         <div class="form_container">
             <div class="title" id="form-title">Fuel Quote Form
             </div>
-            <form id="fuel_quote_form" action="/fuelquote/submit_quote">
+            <form id="submit_quote" action="/fuelquote/submit_quote" method="POST">
               <div class="form_info">
                   <div class="input_container">
                       <label for="galreq">Gallons Requested:</label>
@@ -47,6 +47,11 @@
                       <label for="deliveryaddress">Delivery Address:</label>
                       <input type="text" name="deliveryaddress" id="deliveryaddress" required>
                   </div>
+                  <!-- <div class="input_container">
+                    <label for="deliveryaddress">Delivery Address:</label>
+                    <select id="deliveryaddress">
+                        <option value="" disabled selected>Select Delivery Address</option>
+                    </select> -->
                   <div class="input_container">
                       <label for="deliverydate">Delivery Date:</label>
                       <input type="date" name="deliverydate" id="deliverydate" required>

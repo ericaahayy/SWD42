@@ -15,11 +15,47 @@ app.use(express.urlencoded({ extended: false }));
 //end fuel history
 
 //start fuel quote
+// app.get("/profile/addresses", async (req, res) => {
+//     const { clientID } = req.query;
+
+//     try {
+//         const addresses = await getAddresses(clientID);
+
+//         if (addresses) {
+//             // format the address line
+//             let deliveryAddress1 = `${addresses.address1}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
+
+//             let response;
+//             if (addresses.address2) {
+//                 let deliveryAddress2 = `${addresses.address2}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
+
+//                 response = {
+//                     address1: deliveryAddress1,
+//                     address2: deliveryAddress2
+//                 };
+//             } else {
+//                 // if address2 does not exist, only include address1 in the response
+//                 response = {
+//                     address1: deliveryAddress1
+//                 };
+//             }
+
+//             res.status(200).json(response);
+//         } else {
+//             res.status(404).json({ error: "Address not found" });
+//         }
+//     } catch (error) {
+//         console.error("Error fetching address:", error);
+//         res.status(500).json({ error: "Internal Server Error" });
+//     }
+// });
+
+
 app.post("/fuelquote/submit_quote", async (req, res) => {
     const db = dbService.getDbServiceInstance();
-    const {galreq, deliveryaddress, deliverydate, suggestedprice, totaldue } = req.body;
+    const { galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID } = req.body;
 
-    //validatio n
+    // validate
     if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue) {
         return res.status(400).json({ message: "Please fill in required information." });
     }
@@ -27,10 +63,11 @@ app.post("/fuelquote/submit_quote", async (req, res) => {
         const results = await db.submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID);
         res.json({ success: results });
     } catch (error) {
-        console.error(error);
+        console.error('Error submitting fuel quote:', error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 //end fuel quote
 
 //start login
