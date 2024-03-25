@@ -1,32 +1,35 @@
-function generateFakeFuelQuotes(numQuotes) {
-      const fuelQuotes = [];
-      for (let i = 1; i <= numQuotes; i++) {
-        const gallonsRequested = Math.floor(Math.random() * 100) + 1; // Random gallons requested
-        const deliveryAddress = 'address, city, stateAbbr'; // Random delivery address
-        const deliveryDate ='2022-01-01';
-        const suggestedPrice = '$' + (Math.random() * 5 + 4).toFixed(2) + '/gal'; // Random suggested price between $4.00 and $8.00 per gallon
-        const totalPrice = '$' + (gallonsRequested * (Math.random() * 2 + 2)).toFixed(2); // Random total price
-        fuelQuotes.push({ quoteID: i, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice });
-      }
-      return fuelQuotes;
-    }
+import back_end_url from "../URL/link.js";
 
 
-    function populateFuelQuoteTable(quotes) {
-      const tableBody = document.querySelector('table tbody');
-      quotes.forEach(quote => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${quote.quoteID}</td>
-          <td>${quote.gallonsRequested}</td>
-          <td>${quote.deliveryAddress}</td>
-          <td>${quote.deliveryDate}</td>
-          <td>${quote.suggestedPrice}</td>
-          <td>${quote.totalPrice}</td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
+// function generateFakeFuelQuotes(numQuotes) {
+//       const fuelQuotes = [];
+//       for (let i = 1; i <= numQuotes; i++) {
+//         const gallonsRequested = Math.floor(Math.random() * 100) + 1; // Random gallons requested
+//         const deliveryAddress = 'address, city, stateAbbr'; // Random delivery address
+//         const deliveryDate ='2022-01-01';
+//         const suggestedPrice = '$' + (Math.random() * 5 + 4).toFixed(2) + '/gal'; // Random suggested price between $4.00 and $8.00 per gallon
+//         const totalPrice = '$' + (gallonsRequested * (Math.random() * 2 + 2)).toFixed(2); // Random total price
+//         fuelQuotes.push({ quoteID: i, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice });
+//       }
+//       return fuelQuotes;
+//     }
+
+
+//     function populateFuelQuoteTable(quotes) {
+//       const tableBody = document.querySelector('table tbody');
+//       quotes.forEach(quote => {
+//         const row = document.createElement('tr');
+//         row.innerHTML = `
+//           <td>${quote.quoteID}</td>
+//           <td>${quote.gallonsRequested}</td>
+//           <td>${quote.deliveryAddress}</td>
+//           <td>${quote.deliveryDate}</td>
+//           <td>${quote.suggestedPrice}</td>
+//           <td>${quote.totalPrice}</td>
+//         `;
+//         tableBody.appendChild(row);
+//       });
+//     }
 
     // fuelhistory.js
 
@@ -36,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   //console.log(clientID)
   try {
     // Send a request to the server to fetch fuel history data 
-    const response = await fetch(`/api/history/${clientID}`);
+    const response = await fetch(back_end_url +"/api/history");
     if (!response.ok) {
       throw new Error("Failed to fetch fuel history");
     }
@@ -60,21 +63,21 @@ document.addEventListener("DOMContentLoaded", async () => {
       quoteTableBody.appendChild(row);
     });
   } catch (error) {
-    console.error("Error fetching fuel history:", error);
+    console.error("Error fetching Fuel History:", error);
   }
 });
 
 
 
-// Optional: Implement applyFilters() function for filtering fuel history based on user input
-function applyFilters() {
-  // Implement filtering logic here if needed
-}
+// // Optional: Implement applyFilters() function for filtering fuel history based on user input
+// function applyFilters() {
+//   // Implement filtering logic here if needed
+// }
    
-  document.getElementById('generateButton').addEventListener('click', function() { 
-    // Generate fake fuel quote data and populate the table
-    const numQuotes = 10; // Number of fake quotes
-    const fakeQuotes = generateFakeFuelQuotes(numQuotes);
-    populateFuelQuoteTable(fakeQuotes);
-  });
+//   document.getElementById('generateButton').addEventListener('click', function() { 
+//     // Generate fake fuel quote data and populate the table
+//     const numQuotes = 10; // Number of fake quotes
+//     const fakeQuotes = generateFakeFuelQuotes(numQuotes);
+//     populateFuelQuoteTable(fakeQuotes);
+//   });
   
