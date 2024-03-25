@@ -144,7 +144,7 @@ app.post("/api/profile", async (req, res) => {
 //History Getter
 
 // API endpoint to retrieve fuel history based on clientID
-app.get("/api/history/:clientID", async (req, res) => {
+app.get("/api/history", async (req, res) => {
     const { clientID } = req.params;
     const db = dbService.getDbServiceInstance();
   
