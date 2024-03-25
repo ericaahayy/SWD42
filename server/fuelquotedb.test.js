@@ -11,7 +11,7 @@ describe('dbService', () => {
         test('should return true upon successful submission', async () => {
             // mock data with all required parameters
             const galreq = 10;
-            const deliveryaddress = '123 Test Lane';
+            const deliveryaddress = '123 TEST';
             const deliverydate = '03/30/2024';
             const suggestedprice = 2.57;
             const totaldue = 25.70;
@@ -24,7 +24,7 @@ describe('dbService', () => {
 
         test('should throw an error if galreq is missing', async () => {
             const galreq = '';
-            const deliveryaddress = '123 Test Lane';
+            const deliveryaddress = '123 TEST';
             const deliverydate = '03/30/2024';
             const suggestedprice = 2.57;
             const totaldue = '';
@@ -46,7 +46,7 @@ describe('dbService', () => {
 
         test('should throw an error if deliverydate is missing', async () => {
             const galreq = 10;
-            const deliveryaddress = '123 Test Lane';
+            const deliveryaddress = '123 TEST';
             const deliverydate = '';
             const suggestedprice = 2.57;
             const totaldue = 20.57;
@@ -57,7 +57,7 @@ describe('dbService', () => {
 
         test('should throw an error if suggestedprice is missing', async () => {
             const galreq = 10;
-            const deliveryaddress = '123 Test Lane';
+            const deliveryaddress = '123 TEST';
             const deliverydate = '03/30/2024';
             const suggestedprice = '';
             const totaldue = '';
@@ -69,7 +69,7 @@ describe('dbService', () => {
         // test for database query error
         test('should reject with an error if an error occurs during database query', async () => {
             const galreq = 10;
-            const deliveryaddress = '123 Test Lane';
+            const deliveryaddress = '123 TEST';
             const deliverydate = '03/30/2024';
             const suggestedprice = 2.57;
             const totaldue = 20.57;

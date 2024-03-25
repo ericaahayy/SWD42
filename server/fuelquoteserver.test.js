@@ -2,18 +2,22 @@ const request = require('supertest');
 const { app, closeServer } = require('./server');
 const dbService = require("./db");
 
-const db = dbService.getDbServiceInstance();
-afterAll(async () => {
-    await db.closeConnection();
-    closeServer();
-});
+let db;
+
+    beforeEach(() => {
+        db = dbService.getDbServiceInstance();
+    });
+
+    afterAll(async () => {
+        await db.closeConnection();
+    });
 
 describe('Fuel Quote Submission', () => {
     test('should respond with success message upon successful quote submission', async () => {
         // mock data for a fuel quote submission
         const requestBody = {
             galreq: 100,
-            deliveryaddress: '123 Main St',
+            deliveryaddress: '123 TEST',
             deliverydate: '2024-03-24',
             suggestedprice: 2.5,
             totaldue: 250,
@@ -48,7 +52,7 @@ describe('Fuel Quote Submission', () => {
             .post('/fuelquote/submit_quote')
             .send({
                 galreq: 100,
-                deliveryaddress: '123 Main St',
+                deliveryaddress: '123 TEST',
                 deliverydate: '2024-03-24',
                 suggestedprice: 2.5,
                 totaldue: 250,
