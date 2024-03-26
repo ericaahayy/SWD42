@@ -1,36 +1,6 @@
 import back_end_url from "../URL/link.js";
 
 
-// function generateFakeFuelQuotes(numQuotes) {
-//       const fuelQuotes = [];
-//       for (let i = 1; i <= numQuotes; i++) {
-//         const gallonsRequested = Math.floor(Math.random() * 100) + 1; // Random gallons requested
-//         const deliveryAddress = 'address, city, stateAbbr'; // Random delivery address
-//         const deliveryDate ='2022-01-01';
-//         const suggestedPrice = '$' + (Math.random() * 5 + 4).toFixed(2) + '/gal'; // Random suggested price between $4.00 and $8.00 per gallon
-//         const totalPrice = '$' + (gallonsRequested * (Math.random() * 2 + 2)).toFixed(2); // Random total price
-//         fuelQuotes.push({ quoteID: i, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice });
-//       }
-//       return fuelQuotes;
-//     }
-
-
-//     function populateFuelQuoteTable(quotes) {
-//       const tableBody = document.querySelector('table tbody');
-//       quotes.forEach(quote => {
-//         const row = document.createElement('tr');
-//         row.innerHTML = `
-//           <td>${quote.quoteID}</td>
-//           <td>${quote.gallonsRequested}</td>
-//           <td>${quote.deliveryAddress}</td>
-//           <td>${quote.deliveryDate}</td>
-//           <td>${quote.suggestedPrice}</td>
-//           <td>${quote.totalPrice}</td>
-//         `;
-//         tableBody.appendChild(row);
-//       });
-//     }
-
     // fuelhistory.js
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -66,6 +36,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error fetching Fuel History:", error);
   }
 });
+
+document.getElementById("searchButton").addEventListener("click", () => {
+  console.log("")
+  const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+  const rows = document.querySelectorAll("#quoteTableBody tr");
+  rows.forEach((row) => {
+      const quoteID = row.querySelector("td:first-child").textContent.trim().toLowerCase();
+      if (quoteID.includes(searchInput)) {
+          row.style.display = ""; // Show matching row
+      } else {
+          row.style.display = "none"; // Hide non-matching row
+      }
+  });
+
+
+  // function generateFakeFuelQuotes(numQuotes) {
+//       const fuelQuotes = [];
+//       for (let i = 1; i <= numQuotes; i++) {
+//         const gallonsRequested = Math.floor(Math.random() * 100) + 1; // Random gallons requested
+//         const deliveryAddress = 'address, city, stateAbbr'; // Random delivery address
+//         const deliveryDate ='2022-01-01';
+//         const suggestedPrice = '$' + (Math.random() * 5 + 4).toFixed(2) + '/gal'; // Random suggested price between $4.00 and $8.00 per gallon
+//         const totalPrice = '$' + (gallonsRequested * (Math.random() * 2 + 2)).toFixed(2); // Random total price
+//         fuelQuotes.push({ quoteID: i, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice });
+//       }
+//       return fuelQuotes;
+//     }
+
+
+//     function populateFuelQuoteTable(quotes) {
+//       const tableBody = document.querySelector('table tbody');
+//       quotes.forEach(quote => {
+//         const row = document.createElement('tr');
+//         row.innerHTML = `
+//           <td>${quote.quoteID}</td>
+//           <td>${quote.gallonsRequested}</td>
+//           <td>${quote.deliveryAddress}</td>
+//           <td>${quote.deliveryDate}</td>
+//           <td>${quote.suggestedPrice}</td>
+//           <td>${quote.totalPrice}</td>
+//         `;
+//         tableBody.appendChild(row);
+//       });
+//     }
 
 
 
