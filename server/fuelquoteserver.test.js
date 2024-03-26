@@ -10,6 +10,7 @@ let db;
 
     afterAll(async () => {
         await db.closeConnection();
+        closeServer();
     });
 
 describe('Fuel Quote Submission', () => {
