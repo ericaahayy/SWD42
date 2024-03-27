@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.27% </span>
+                <span class="strong">87.58% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>132/153</span>
+                <span class='fraction'>134/153</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.05% </span>
+                <span class="strong">86.95% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>58/69</span>
+                <span class='fraction'>60/69</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.41% </span>
+                <span class="strong">88.74% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>132/151</span>
+                <span class='fraction'>134/151</span>
             </div>
         
             
@@ -474,25 +474,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -750,7 +750,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -768,10 +768,10 @@ let instance = null;
 &nbsp;
 //connecting locally
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: "34.71.123.255",
     database: "swd42",
-    user: "root",
-    password: "root123"
+    user: "swd42",
+    password: "Swd2024.KbEhKnTn.2049545.1539"
 });
 &nbsp;
 //this will actually make edits to the database.
@@ -831,15 +831,15 @@ class dbService {
     
             const response = await new Promise((resolve, reject) =&gt; {
                 connection.query(query, [clientID, galreq, deliveryaddress, deliverydate,totaldue, suggestedprice], (err, result) =&gt; {
-                    <span class="missing-if-branch" title="else path not taken" >E</span>if (err) {
+                    if (err) {
                         console.error("Error inserting data into database:", err);
                         reject(new Error("Form submission failed"));
                         return;
                     }
-<span class="cstat-no" title="statement not covered" >                    resolve(result.insertId);</span>
+                    resolve(result.insertId);
                 });
             });
-<span class="cstat-no" title="statement not covered" >            return response === 0 ? false : true;</span>
+            return response === 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >false </span>: true;
         } catch (error) {
             console.error('Error:', error);
             throw error;
@@ -1120,7 +1120,7 @@ module.exports = dbService;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-27T19:21:00.883Z
+                at 2024-03-27T19:49:58.364Z
             </div>
         <script src="prettify.js"></script>
         <script>

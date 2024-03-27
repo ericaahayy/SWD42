@@ -57,7 +57,7 @@ describe('Fuel Quote Submission', () => {
                 deliverydate: '2024-03-24',
                 suggestedprice: 2.5,
                 totaldue: 250,
-                clientID: '12346' // assuming you have a clientID
+                clientID: '' // assuming you have a clientID
             });
 
         expect(response.status).toBe(500);

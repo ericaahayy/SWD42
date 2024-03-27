@@ -3,10 +3,10 @@ let instance = null;
 
 //connecting locally
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: "34.71.123.255",
     database: "swd42",
-    user: "root",
-    password: "root123"
+    user: "swd42",
+    password: "Swd2024.KbEhKnTn.2049545.1539"
 });
 
 //this will actually make edits to the database.
