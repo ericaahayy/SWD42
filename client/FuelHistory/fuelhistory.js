@@ -48,7 +48,7 @@ document.getElementById("searchButton").addEventListener("click", () => {
       } else {
           row.style.display = "none"; // Hide non-matching row
       }
-  });
+  })});
 
 
   // function generateFakeFuelQuotes(numQuotes) {
