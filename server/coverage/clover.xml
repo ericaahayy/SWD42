@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711494888137" clover="3.2.0">
-  <project timestamp="1711494888137" name="All files">
-    <metrics statements="215" coveredstatements="148" conditionals="101" coveredconditionals="75" methods="42" coveredmethods="30" elements="358" coveredelements="253" complexity="0" loc="215" ncloc="215" packages="1" files="2" classes="2"/>
+<coverage generated="1711410193206" clover="3.2.0">
+  <project timestamp="1711410193206" name="All files">
+    <metrics statements="215" coveredstatements="174" conditionals="101" coveredconditionals="87" methods="42" coveredmethods="33" elements="358" coveredelements="294" complexity="0" loc="215" ncloc="215" packages="1" files="2" classes="2"/>
     <file name="db.js" path="C:\Users\erica\SWD42REPO\SWD42\server\db.js">
-      <metrics statements="134" coveredstatements="101" conditionals="63" coveredconditionals="49" methods="31" coveredmethods="23"/>
+      <metrics statements="134" coveredstatements="110" conditionals="63" coveredconditionals="54" methods="31" coveredmethods="25"/>
       <line num="1" count="4" type="stmt"/>
       <line num="2" count="4" type="stmt"/>
       <line num="13" count="4" type="stmt"/>
@@ -140,7 +140,7 @@
       <line num="316" count="4" type="stmt"/>
     </file>
     <file name="server.js" path="C:\Users\erica\SWD42REPO\SWD42\server\server.js">
-      <metrics statements="81" coveredstatements="47" conditionals="38" coveredconditionals="26" methods="11" coveredmethods="7"/>
+      <metrics statements="81" coveredstatements="64" conditionals="38" coveredconditionals="33" methods="11" coveredmethods="8"/>
       <line num="1" count="2" type="stmt"/>
       <line num="2" count="2" type="stmt"/>
       <line num="3" count="2" type="stmt"/>
