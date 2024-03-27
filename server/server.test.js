@@ -3,15 +3,17 @@ const { app, closeServer } = require('./server');
 const dbService = require("./db");
 
 const db = dbService.getDbServiceInstance();
+
+afterEach(async () => {
+    await db.deleteEntry('testuser@gmail.com', "profile");
+    await db.deleteEntry('temp@gmail.com', "login");
+    await db.deleteEntry('99', "fuelquote");
+})
+
 afterAll(async () => {
     await db.closeConnection();
     closeServer();
 });
-
-afterEach(async () => {
-    await db.deleteEntry('testuser@gmail.com', true);
-    await db.deleteEntry('temp@gmail.com', false);
-})
 
 describe('Login API', () => {
     test('should respond with success message if login is successful', async () => {
@@ -182,6 +184,141 @@ describe('Add Profile API', () => {
         expect(response.status).toBe(500);
         expect(response.body.message).toBe('Internal Server Error');
     });
+});
 
-    
+describe('Fuel Quote Submission', () => {
+    test('should respond with success message upon successful quote submission', async () => {
+        // mock data for a fuel quote submission
+        const requestBody = {
+            galreq: 100,
+            deliveryaddress: '123 Fake Ln',
+            deliverydate: '2024-03-24',
+            suggestedprice: 2.5,
+            totaldue: 250,
+            clientID: '99'
+        };
+
+        // send request to submit fuel quote
+        const response = await request(app)
+            .post('/fuelquote/submit_quote')
+            .send(requestBody);
+
+        // assert response status code and message
+        expect(response.status).toBe(200);
+        expect(response.body.success).toBe(true); 
+    });
+
+    test('should respond with 400 status if any required field is missing', async () => {
+        // sending a request without some required fields
+        const response = await request(app)
+            .post('/fuelquote/submit_quote')
+            .send({
+                // missing some required fields
+            });
+
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe('Please fill in required information.');
+    });
+
+    test('should respond with 500 status if failed to submit fuel quote', async () => {
+        // assuming an error occurs during fuel quote submission
+        const response = await request(app)
+            .post('/fuelquote/submit_quote')
+            .send({
+                galreq: 100,
+                deliveryaddress: '123 TEST',
+                deliverydate: '2024-03-24',
+                suggestedprice: 2.5,
+                totaldue: 250,
+                clientID: '12346' // assuming you have a clientID
+            });
+
+        expect(response.status).toBe(500);
+        expect(response.body.message).toBe('Internal Server Error');
+    });
+});
+
+describe('Profile API', () => {
+    test('should respond with profile data if clientID is provided', async () => {
+        // Assuming a valid clientID
+        const clientID = '0'; // Use an existing clientID from your database
+
+        // Send request to fetch profile data
+        const response = await request(app)
+            .get(`/api/profile?clientID=${clientID}`);
+
+        // Assert response status code and data
+        expect(response.status).toBe(200);
+        expect(response.body).toBeDefined(); // Assuming your profile data structure
+    });
+
+    test('should respond with 401 status if clientID is missing', async () => {
+        // Send request without clientID
+        const response = await request(app)
+            .get('/api/profile');
+
+        // Assert response status code and message
+        expect(response.status).toBe(401);
+        expect(response.body.message).toBe('Unauthorized, clientID not provided');
+    });
+
+    test('should respond with 404 status if profile data not found', async () => {
+        // Assuming an invalid clientID
+        const clientID = '999999'; // Use a non-existent clientID
+
+        // Send request to fetch profile data
+        const response = await request(app)
+            .get(`/api/profile?clientID=${clientID}`);
+
+        // Assert response status code and message
+        expect(response.status).toBe(404);
+        expect(response.body.message).toBe('Profile data not found');
+    });
+});
+
+describe('Update Profile API', () => {
+    test('should respond with success message upon successful profile update', async () => {
+        // Mock data for updating profile
+        const requestBody = {
+            clientID: '99', // Assuming a valid clientID
+            address1: 'Updated Address 1',
+            address2: 'New Address 2',
+            city: 'Los Angeles',
+            state: 'CA',
+            zip: '99999'
+        };
+
+        // Send request to update profile
+        const response = await request(app)
+            .put('/api/update_profile')
+            .send(requestBody);
+
+        // Assert response status code and message
+        expect(response.status).toBe(200);
+        expect(response.body.message).toBe('Profile updated successfully');
+    });
+
+    test('should respond with 500 status if internal server error occurs', async () => {
+        // Mocking database error
+        jest.spyOn(db, 'updateProfile').mockRejectedValue(new Error('Database error'));
+
+        // Mock data for updating profile
+        const requestBody = {
+            clientID: '15', // Assuming a valid clientID
+            address1: 'Updated Address 1',
+            address2: 'Updated Address 2',
+            city: 'Los Angeles',
+            state: null,
+            zip: '99999'
+        };
+
+        // Send request to update profile
+        const response = await request(app)
+            .put('/api/update_profile')
+            .send(requestBody);
+
+        // Assert response status code and message
+        expect(response.status).toBe(500);
+        expect(response.body.message).toBe('Internal Server Error');
+    });
 });
