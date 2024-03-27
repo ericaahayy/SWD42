@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711568998407" clover="3.2.0">
-  <project timestamp="1711568998408" name="All files">
-    <metrics statements="245" coveredstatements="214" conditionals="111" coveredconditionals="97" methods="46" coveredmethods="41" elements="402" coveredelements="352" complexity="0" loc="245" ncloc="245" packages="1" files="2" classes="2"/>
+<coverage generated="1711571065618" clover="3.2.0">
+  <project timestamp="1711571065618" name="All files">
+    <metrics statements="245" coveredstatements="211" conditionals="111" coveredconditionals="96" methods="46" coveredmethods="41" elements="402" coveredelements="348" complexity="0" loc="245" ncloc="245" packages="1" files="2" classes="2"/>
     <file name="db.js" path="C:\Users\erica\SWD42REPO\SWD42\server\db.js">
-      <metrics statements="151" coveredstatements="134" conditionals="69" coveredconditionals="60" methods="34" coveredmethods="31"/>
+      <metrics statements="151" coveredstatements="131" conditionals="69" coveredconditionals="59" methods="34" coveredmethods="31"/>
       <line num="1" count="6" type="stmt"/>
       <line num="2" count="6" type="stmt"/>
       <line num="5" count="6" type="stmt"/>
@@ -18,14 +18,14 @@
       <line num="65" count="2" type="stmt"/>
       <line num="67" count="2" type="stmt"/>
       <line num="68" count="2" type="stmt"/>
-      <line num="69" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="70" count="1" type="stmt"/>
-      <line num="71" count="1" type="stmt"/>
-      <line num="72" count="1" type="stmt"/>
-      <line num="74" count="1" type="stmt"/>
-      <line num="77" count="1" type="cond" truecount="1" falsecount="1"/>
-      <line num="79" count="7" type="stmt"/>
-      <line num="80" count="7" type="stmt"/>
+      <line num="69" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="70" count="0" type="stmt"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="74" count="2" type="stmt"/>
+      <line num="77" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="79" count="6" type="stmt"/>
+      <line num="80" count="6" type="stmt"/>
       <line num="90" count="7" type="stmt"/>
       <line num="92" count="7" type="cond" truecount="4" falsecount="0"/>
       <line num="93" count="3" type="stmt"/>
