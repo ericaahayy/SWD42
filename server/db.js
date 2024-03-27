@@ -222,7 +222,7 @@ class dbService {
     //end loginform
 
     //start profile
-    async getProfileData(clientID){
+    async getProfileData(clientID) {
         try {
             const response = await new Promise((resolve, reject) => {
                 const query = "SELECT * FROM profile WHERE clientID = ?";
@@ -232,13 +232,48 @@ class dbService {
                         reject(err);
                         return;
                     }
-                    resolve(result[0]); //One row since clientID is primary key, shold be unique
-                });
+                    resolve(result.length > 0 ? result[0] : null); // Resolve with the profile data
+            
             });
+        });
+            console.log(response)
+            console.log("response gotten from db")
             return response;
         } catch (error) {
-            console.error("Error fetching profile data:", error);
-            return null;
+            throw error
+            console.log("DB having issues getting info")
+        }
+    }
+
+    // Add the updateProfile method to the dbService class
+    async updateProfile(clientID, address1, address2, city, state, zip) {
+        try {
+            // Validate required fields
+            if (!clientID) {
+                throw new Error("clientID is required.");
+            }
+
+            // Prepare the update query
+            const query = "UPDATE profile SET address1 = ?, address2 = ?, city = ?, state = ?, zipcode = ? WHERE clientID = ?";
+                
+            // Execute the update query
+            const connection = this.getConnection();
+            const result = await new Promise((resolve, reject) => {
+                connection.query(query, [address1, address2, city, state, zip, clientID], (err, result) => {
+                    if (err) {
+                        console.error("Error updating profile data:", err);
+                        reject(err);
+                        return;
+                    }
+                    console.log(result);
+                    resolve(result);
+        });
+        });
+            
+        // Check if any rows were affected
+            return result.affectedRows > 0;
+        } catch (error) {
+        throw error;
         }
     }
 

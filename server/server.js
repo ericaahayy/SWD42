@@ -153,28 +153,49 @@ app.post("/api/add_profile", async (req, res) => {
 //end loginform
 
 //start profile
-app.post("/api/profile", async (req, res) => {
-    // Assuming we know the currently logged-in user
-    const clientID = req.user.clientID; // Access clientID from the authenticated user object, might change to username
-
-    const db = dbService.getDbServiceInstance();
-
+app.get("/api/profile", async (req, res) => {
     try {
-        // Fetch profile data from the database based on the clientID
+        const clientID = req.query.clientID; // Retrieve clientID from query parameters
+        //console.log("Received clientID:", clientID); 
+
+        if (!clientID) {
+            return res.status(401).json({ message: "Unauthorized, clientID not provided" });
+        }
+
+        // Fetch the profile data
+        const db = dbService.getDbServiceInstance();
         const profileData = await db.getProfileData(clientID);
 
         if (profileData) {
-            // If profile data is found, send it back to the client
             return res.status(200).json(profileData);
         } else {
-            // If no profile data is found, return a 404 status with a message
             return res.status(404).json({ message: "Profile data not found" });
         }
     } catch (error) {
         console.error(error);
-        // If an error occurs during fetching, return a 500 status with an error message
         return res.status(500).json({ message: "Internal Server Error" });
     }
+});
+//For editing
+app.put("/api/update_profile", async (req, res) => {
+    try {
+        console.log('Received data:', req.body);
+        const { clientID, address1, address2, city, state, zip } = req.body;
+                // Update the user's profile data in the database
+                const db = dbService.getDbServiceInstance();
+                const updateResult = await db.updateProfile(clientID, address1, address2, city, state, zip);
+        
+                if (updateResult) {
+                    // Profile update successful
+                    return res.status(200).json({ message: "Profile updated successfully" });
+                } else {
+                    // Failed to update profile
+                    return res.status(500).json({ message: "Failed to update profile" });
+                }
+            } catch (error) {
+                console.error(error);
+                return res.status(500).json({ message: "Internal Server Error" });
+            }
 });
 //end profile
 
