@@ -1,9 +1,9 @@
-import { back_end_url } from "../URL/link.js";
+const back_end_url = "http://localhost:500";
+const clientID = window.localStorage.getItem("clientID");
 
 document.addEventListener('DOMContentLoaded', function(){
     // Retrieve clientID from local storage
     console.log("DOMContentLoaded event fired");
-    const clientID = window.localStorage.getItem("clientID");
     console.log("Retrieved client ID:", clientID);
 
     if (clientID) {
@@ -80,7 +80,7 @@ function fetchProfileData(clientID) {
 function fetchData(data){
     // Populate data into HTML elements
     const nonBreakingSpace = '\u00A0'; 
-    document.getElementById('clientID').textContent = data.clientID || "Not Available";
+    document.getElementById('clientID').textContent = clientID || "Not Available";
     document.getElementById('fname').textContent = data.fname || "Not Available";
     const welcomeMessage = `Welcome ${data.fname || "User"}!`;
     document.getElementById('welcomeMessage').textContent = welcomeMessage;

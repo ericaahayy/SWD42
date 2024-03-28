@@ -3,10 +3,10 @@ let instance = null;
 
 //connecting locally
 const connection = mysql.createConnection({
-    host: "34.71.123.255",
+    host: "localhost",
     database: "swd42",
-    user: "swd42",
-    password: "Swd2024.KbEhKnTn.2049545.1539"
+    user: "root",
+    password: "root123"
 });
 
 //this will actually make edits to the database.
@@ -30,38 +30,12 @@ class dbService {
     }
 
     //start fuel quote
-    // async getAddresses(clientID) {
-    //     try {
-    //         const response = await new Promise((resolve, reject) => {
-    //             const query = "SELECT address1, address2, city, state, zipcode FROM profile WHERE clientID = ?";
-    //             connection.query(query, [clientID], (err, result) => {
-    //                 if (err) {
-    //                     console.error("Error fetching profile data from database:", err);
-    //                     reject(err);
-    //                     return;
-    //                 }
-    //                 if (result && result.length > 0) {
-    //                     resolve(result[0]); 
-    //                 } else {
-    //                     resolve(null); 
-    //                 }
-    //             });
-    //         });
-    //         return response;
-    //     } catch (error) {
-    //         console.error("Error fetching profile data:", error);
-    //         return null;
-    //     }
-    // }
-    
-    
-
     async submitFuelQuote(galreq, deliveryaddress, deliverydate, suggestedprice, totaldue, clientID){
         try {
             if (!galreq || !deliverydate || !deliveryaddress || !suggestedprice || !totaldue || !clientID) {
                 throw new Error("All fields are required.");
             }
-            const query = "INSERT INTO fuelquote (clientID, galreq, deliveryaddress, deliverydate, totaldue, suggestedprice) VALUES (?,?,?, ?, ?, ?);";
+            const query = "INSERT INTO fuelquote (clientID, galreq, deliveryaddress, deliverydate, totaldue, suggestedprice) VALUES (?,?,?,?,?,?)";
             const connection = this.getConnection();
     
             const response = await new Promise((resolve, reject) => {
@@ -224,8 +198,11 @@ class dbService {
     //start profile
     async getProfileData(clientID) {
         try {
+
+            const query = "SELECT * FROM profile WHERE clientID = ?";
+            const connection = this.getConnection();
+
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM profile WHERE clientID = ?";
                 connection.query(query, [clientID], (err, result) => {
                     if (err) {
                         console.error("Error fetching profile data from database:", err);
@@ -240,8 +217,7 @@ class dbService {
             console.log("response gotten from db")
             return response;
         } catch (error) {
-            throw error
-            console.log("DB having issues getting info")
+            throw error;
         }
     }
 
@@ -252,68 +228,127 @@ class dbService {
             if (!clientID) {
                 throw new Error("clientID is required.");
             }
-
+    
             // Prepare the update query
             const query = "UPDATE profile SET address1 = ?, address2 = ?, city = ?, state = ?, zipcode = ? WHERE clientID = ?";
                 
             // Execute the update query
             const connection = this.getConnection();
-            const result = await new Promise((resolve, reject) => {
+            const response = await new Promise((resolve, reject) => {
                 connection.query(query, [address1, address2, city, state, zip, clientID], (err, result) => {
                     if (err) {
                         console.error("Error updating profile data:", err);
-                        reject(err);
+                        resolve(false);
                         return;
                     }
-                    console.log(result);
-                    resolve(result);
-        });
-        });
+                    resolve(result.affectedRows > 0);
+                });
+            });
             
-        // Check if any rows were affected
-            return result.affectedRows > 0;
+            return response;
         } catch (error) {
-        throw error;
+            throw error;
         }
     }
 
     //end profile
 
     //start fuel history
-   
 
     async getFuelHistory(clientID) {
-        try {
+    try {
+        // Validate required field
+        if (!clientID) {
+            throw new Error("clientID is required.");
+        }
+
+        const query = "SELECT * FROM fuelquote WHERE clientID = ?;";
+        const connection = this.getConnection();
+
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM fuelquote WHERE clientID = ?";
             connection.query(query, [clientID], (err, result) => {
-            if (err) {
-                console.error("Error fetching fuel history:", err);
-                reject(err);
-                return;
-            }
-            resolve(result);
+                if (err) {
+                    console.error("Error executing database query:", err);
+                    reject(new Error(err.message));
+                    return;
+                }
+                resolve(result);
             });
         });
         return response;
         } catch (error) {
-        throw error;
+            throw error;
         }
     }
+
+    async quoteFilter(clientID, quoteID) {
+    try {
+        // Validate required fields
+        if (!clientID || !quoteID) {
+            throw new Error("clientID and quoteID are required.");
+        }
+
+        const query = "SELECT * FROM fuelquote WHERE clientID = ? AND quoteID = ?;";
+        const connection = this.getConnection();
+
+        const response = await new Promise((resolve, reject) => {
+            connection.query(query, [clientID, quoteID], (err, result) => {
+                if (err) {
+                    console.error("Error executing database query:", err);
+                    reject(new Error(err.message));
+                    return;
+                }
+                resolve(result.length > 0 ? result : null);
+            });
+        });
+        return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async filterByDate(clientID, startDate, endDate) {
+        try {
+            // Validate required fields
+            if (!clientID || !startDate || !endDate) {
+                throw new Error("clientID, start date, and end date are required.");
+            }
+    
+            const query = "SELECT * FROM fuelquote WHERE clientID = ? AND deliverydate BETWEEN ? AND ?;";
+            const connection = this.getConnection();
+    
+            const response = await new Promise((resolve, reject) => {
+                connection.query(query, [clientID, startDate, endDate], (err, result) => {
+                    if (err) {
+                        console.error("Error executing database query:", err);
+                        reject(new Error(err.message));
+                        return;
+                    }
+                    resolve(result.length > 0 ? result : null);
+                });
+            });
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }    
+
     //end fuel history
 
     //help functions for unit testing
-    async deleteEntry(username, isProfile) {
+    async deleteEntry(username, tableName) {
         try {
             if (!username) {
                 throw new Error("Username is required");
             }
     
             let query;
-            if (isProfile) {
+            if (tableName === "profile") {
                 query = "DELETE FROM profile WHERE username = ?";
-            } else {
+            } else if (tableName === "login"){
                 query = "DELETE FROM login WHERE username = ?";
+            } else if (tableName === "fuelquote") {
+                query = "DELETE FROM fuelquote WHERE clientID = ?"
             }
     
             const connection = this.getConnection();
@@ -321,7 +356,7 @@ class dbService {
             await new Promise((resolve, reject) => {
                 connection.query(query, [username], (err, result) => {
                     if (err) {
-                        console.error("Error deleting profile entry:", err);
+                        console.error(`Error deleting ${tableName} entry:`, err);
                         reject(err);
                         return;
                     }

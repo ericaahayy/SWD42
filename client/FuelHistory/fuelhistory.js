@@ -1,97 +1,114 @@
-import back_end_url from "../URL/link.js";
+const back_end_url = "http://localhost:500";
+const clientID = localStorage.getItem("clientID");
 
-
-    // fuelhistory.js
-
-document.addEventListener("DOMContentLoaded", async () => {
-  // Retrieve clientID from localStorage
-  const clientID = localStorage.getItem("clientID");
-  //console.log(clientID)
+document.addEventListener("DOMContentLoaded", async function () {
   try {
-    // Send a request to the server to fetch fuel history data 
-    const response = await fetch(back_end_url +"/api/history");
-    if (!response.ok) {
-      throw new Error("Failed to fetch fuel history");
+    const response = await fetch(`${back_end_url}/api/history?clientID=${clientID}`);
+    const data = await response.json();
+
+    if (data.length === 0) {
+      console.log("No fuel history found for this clientID");
+      return;
     }
-    const fuelHistory = await response.json();
 
-    console.log("Populating data")
+    const tableBody = document.getElementById("quoteTableBody");
+    tableBody.innerHTML = "";
 
-    // Populate the table with fuel history data
-    const quoteTableBody = document.getElementById("quoteTableBody");
-    quoteTableBody.innerHTML = ""; // Clear existing table body content
-    fuelHistory.forEach((quote) => {
+    data.forEach((entry) => {
+      // Format delivery date to remove time part
+      const formattedDeliveryDate = new Date(entry.deliverydate).toLocaleDateString('en-US');
+      
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${quote.quoteID}</td>
-        <td>${quote.galreq}</td>
-        <td>${quote.deliveryaddress}</td>
-        <td>${quote.deliverydate}</td>
-        <td>${quote.suggestedprice}</td>
-        <td>${quote.totaldue}</td>
+        <td>${entry.quoteID}</td>
+        <td>${entry.galreq}</td>
+        <td>${entry.deliveryaddress}</td>
+        <td>${formattedDeliveryDate}</td>
+        <td>${entry.suggestedprice}</td>
+        <td>${entry.totaldue}</td>
       `;
-      quoteTableBody.appendChild(row);
+      tableBody.appendChild(row);
     });
   } catch (error) {
-    console.error("Error fetching Fuel History:", error);
+    console.error("Error fetching fuel history data:", error);
+  }
+
+  const filterButton = document.querySelector(".filter_button");
+  filterButton.addEventListener("click", async function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Get filter values
+    const quoteID = document.getElementById("searchID").value;
+
+    try {
+      const response = await fetch(`${back_end_url}/api/history?clientID=${clientID}&quoteID=${quoteID}`);
+      const data = await response.json();
+
+      if (data.length === 0) {
+        console.log("No fuel history found for this clientID and quoteID");
+        return;
+      }
+
+      const tableBody = document.getElementById("quoteTableBody");
+      tableBody.innerHTML = "";
+
+      data.forEach((entry) => {
+        const formattedDeliveryDate = new Date(entry.deliverydate).toLocaleDateString('en-US');
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td>${entry.quoteID}</td>
+        <td>${entry.galreq}</td>
+        <td>${entry.deliveryaddress}</td>
+        <td>${formattedDeliveryDate}</td>
+        <td>${entry.suggestedprice}</td>
+        <td>${entry.totaldue}</td>
+      `;
+        tableBody.appendChild(row);
+      });
+    } catch (error) {
+      console.error("Error fetching fuel history data:", error);
+    }
+  });
+  
+  const dateButton = document.querySelector(".date_button");
+  dateButton.addEventListener("click", async function (event) {
+  event.preventDefault(); // Prevent default form submission behavior
+
+  // Get filter values
+  const startDate = document.getElementById("start_date").value;
+  const endDate = document.getElementById("end_date").value;
+
+  try {
+    const response = await fetch(`${back_end_url}/api/history?clientID=${clientID}&startDate=${startDate}&endDate=${endDate}`);
+    const data = await response.json();
+
+    if (data.length === 0) {
+      console.log("No fuel history found for this date range");
+      return;
+    }
+
+    const tableBody = document.getElementById("quoteTableBody");
+    tableBody.innerHTML = "";
+
+    data.forEach((entry) => {
+      const formattedDeliveryDate = new Date(entry.deliverydate).toLocaleDateString('en-US');
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${entry.quoteID}</td>
+        <td>${entry.galreq}</td>
+        <td>${entry.deliveryaddress}</td>
+        <td>${formattedDeliveryDate}</td>
+        <td>${entry.suggestedprice}</td>
+        <td>${entry.totaldue}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  } catch (error) {
+    console.error("Error fetching fuel history data:", error);
   }
 });
-
-document.getElementById("searchButton").addEventListener("click", () => {
-  console.log("")
-  const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
-  const rows = document.querySelectorAll("#quoteTableBody tr");
-  rows.forEach((row) => {
-      const quoteID = row.querySelector("td:first-child").textContent.trim().toLowerCase();
-      if (quoteID.includes(searchInput)) {
-          row.style.display = ""; // Show matching row
-      } else {
-          row.style.display = "none"; // Hide non-matching row
-      }
-  })});
+});
 
 
-  // function generateFakeFuelQuotes(numQuotes) {
-//       const fuelQuotes = [];
-//       for (let i = 1; i <= numQuotes; i++) {
-//         const gallonsRequested = Math.floor(Math.random() * 100) + 1; // Random gallons requested
-//         const deliveryAddress = 'address, city, stateAbbr'; // Random delivery address
-//         const deliveryDate ='2022-01-01';
-//         const suggestedPrice = '$' + (Math.random() * 5 + 4).toFixed(2) + '/gal'; // Random suggested price between $4.00 and $8.00 per gallon
-//         const totalPrice = '$' + (gallonsRequested * (Math.random() * 2 + 2)).toFixed(2); // Random total price
-//         fuelQuotes.push({ quoteID: i, gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, totalPrice });
-//       }
-//       return fuelQuotes;
-//     }
-
-
-//     function populateFuelQuoteTable(quotes) {
-//       const tableBody = document.querySelector('table tbody');
-//       quotes.forEach(quote => {
-//         const row = document.createElement('tr');
-//         row.innerHTML = `
-//           <td>${quote.quoteID}</td>
-//           <td>${quote.gallonsRequested}</td>
-//           <td>${quote.deliveryAddress}</td>
-//           <td>${quote.deliveryDate}</td>
-//           <td>${quote.suggestedPrice}</td>
-//           <td>${quote.totalPrice}</td>
-//         `;
-//         tableBody.appendChild(row);
-//       });
-//     }
-
-
-
-// // Optional: Implement applyFilters() function for filtering fuel history based on user input
-// function applyFilters() {
-//   // Implement filtering logic here if needed
-// }
-   
-//   document.getElementById('generateButton').addEventListener('click', function() { 
-//     // Generate fake fuel quote data and populate the table
-//     const numQuotes = 10; // Number of fake quotes
-//     const fakeQuotes = generateFakeFuelQuotes(numQuotes);
-//     populateFuelQuoteTable(fakeQuotes);
-//   });
-  

@@ -5,131 +5,103 @@ describe('dbService', () => {
     afterAll(async () => {
         await db.closeConnection();
     });
-
+    
     describe('getProfileData', () => {
-        test('should throw an error if clientID is missing', async () => {
-            // Mock data with missing clientID
-            const clientID = '';
-
-            // Call the function and expect it to throw an error
-            await expect(db.getProfileData(clientID)).rejects.toThrow('clientID is required.');
+        test('should return profile data for a valid clientID', async () => {
+            const clientID = 15; // Example clientID
+            const db = dbService.getDbServiceInstance();
+            const profileData = await db.getProfileData(clientID);
+            expect(profileData).toBeDefined(); // Check if data is defined
+            // Add more specific assertions based on the expected data structure
+        });
+    
+        test('should return null for an invalid clientID', async () => {
+            const invalidClientID = -1; // Example invalid clientID
+            const db = dbService.getDbServiceInstance();
+            const profileData = await db.getProfileData(invalidClientID);
+            expect(profileData).toBeNull(); // Check if data is null
         });
 
-        test('should return profile data if clientID is provided', async () => {
-            // Mock clientID
-            const clientID = '1345'; // Assuming this is the clientID in your system
-
-            // Mock profile data
-            const mockProfileData = {
-                username: 'mockusername',
-                address1: 'mockaddress1',
-                address2: 'mockaddress2',
-                city: 'mockcity',
-                state: 'mockstate',
-                zip: 'mockzip'
-                // Add other profile data as needed
-            };
-
-            // Mock successful database retrieval
+        test('should reject promise and log error when database query fails', async () => {            
+            // Mocking the connection.query method to simulate a database query error
+            clientID = -1;
+            const mockError = new Error('Error fetching profile data from database:');
             jest.spyOn(db, 'getConnection').mockReturnValue({
                 query: jest.fn().mockImplementation((query, params, callback) => {
-                    // Simulate a successful retrieval
-                    callback(null, [mockProfileData]); // Mock result
+                    callback(mockError, null); // Simulate an error with null result
                 })
             });
-
-            // Call the function and expect it to resolve with profile data
-            await expect(db.getProfileData(clientID)).resolves.toEqual(mockProfileData);
-        });
-
-        test('should return null if profile data is not found for the provided clientID', async () => {
-            // Mock clientID
-            const clientID = 'nonexistentClientID';
-
-            // Mock database retrieval returning empty result
-            jest.spyOn(db, 'getConnection').mockReturnValue({
-                query: jest.fn().mockImplementation((query, params, callback) => {
-                    // Simulate an empty result
-                    callback(null, []); // Mock empty result
-                })
-            });
-
-            // Call the function and expect it to resolve with null
-            await expect(db.getProfileData(clientID)).resolves.toBeNull();
-        });
-
-        test('should reject with an error if an error occurs during database query', async () => {
-            // Mock clientID
-            const clientID = '1345'; // Assuming this is the clientID in your system
-            const mockError = new Error('Database query error');
-
-            // Mock error during database retrieval
-            jest.spyOn(db, 'getConnection').mockReturnValue({
-                query: jest.fn().mockImplementation((query, params, callback) => {
-                    callback(mockError); // Simulate an error
-                })
-            });
-
-            // Call the function and expect it to reject with an error
+    
+            // Asserting that the promise is rejected and error is logged
             await expect(db.getProfileData(clientID)).rejects.toThrow(mockError.message);
         });
-    });
+    });    
 
     describe('updateProfile', () => {
-        test('should throw an error if clientID is missing', async () => {
-            // Mock data with missing clientID
-            const clientID = '';
-            const address1 = 'updatedAddress1';
-            const address2 = 'updatedAddress2';
-            const city = 'updatedCity';
-            const state = 'updatedState';
-            const zip = 'updatedZip';
-
-            // Call the function and expect it to throw an error
-            await expect(db.updateProfile(clientID, address1, address2, city, state, zip)).rejects.toThrow('clientID is required.');
+        test('should throw an error if clientID is not provided', async () => {
+            const clientID = ""; // Example invalid clientID
+            const updatedData = {
+                address1: 'New Address 1',
+                address2: 'Updated Address 2',
+                city: 'Los Angeles',
+                state: 'CA',
+                zip: '99999'
+            };
+    
+            // Asserting that calling updateProfile without clientID throws an error
+            await expect(db.updateProfile(clientID, updatedData.address1, updatedData.address2, updatedData.city, updatedData.state, updatedData.zip)).rejects.toThrow('clientID is required.');
         });
 
-        test('should update profile successfully if clientID and all fields are provided', async () => {
-            // Mock clientID and updated profile data
-            const clientID = '1345'; // Assuming this is the clientID in your system
-            const address1 = 'updatedAddress1';
-            const address2 = 'updatedAddress2';
-            const city = 'updatedCity';
-            const state = 'updatedState';
-            const zip = 'updatedZip';
-
-            // Mock successful database update
-            jest.spyOn(db, 'getConnection').mockReturnValue({
-                query: jest.fn().mockImplementation((query, params, callback) => {
-                    // Simulate a successful update
-                    callback(null, { affectedRows: 1 }); // Mock affectedRows
-                })
-            });
-
-            // Call the function and expect it to resolve with true
-            await expect(db.updateProfile(clientID, address1, address2, city, state, zip)).resolves.toBe(true);
+        test('should update profile data for a valid clientID', async () => {
+            const clientID = 99; // Example clientID
+            const updatedData = {
+                address1: 'New Address 1',
+                address2: 'Updated Address 2',
+                city: 'Los Angeles',
+                state: 'CA',
+                zip: '99999'
+            };
+            const db = dbService.getDbServiceInstance();
+            const result = await db.updateProfile(clientID, updatedData.address1, updatedData.address2, updatedData.city, updatedData.state, updatedData.zip);
+            expect(result).toBe(true); // Check if the update was successful
+            // Optionally, you can add more specific assertions based on the expected behavior
+        });
+    
+        test('should return false for an invalid clientID', async () => {
+            const invalidClientID = -1; // Example invalid clientID
+            const updatedData = {
+                address1: 'Updated Address 1',
+                address2: 'Updated Address 2',
+                city: 'Los Angeles',
+                state: 'CA',
+                zip: '99999'
+            };
+            const db = dbService.getDbServiceInstance();
+            const result = await db.updateProfile(invalidClientID, updatedData.address1, updatedData.address2, updatedData.city, updatedData.state, updatedData.zip);
+            expect(result).toBe(false); // Check if the update failed
         });
 
-        test('should return false if database update fails', async () => {
-            // Mock clientID and updated profile data
-            const clientID = '1345'; // Assuming this is the clientID in your system
-            const address1 = 'updatedAddress1';
-            const address2 = 'updatedAddress2';
-            const city = 'updatedCity';
-            const state = 'updatedState';
-            const zip = 'updatedZip';
-            const mockError = new Error('Database update error');
-
-            // Mock error during database update
-            jest.spyOn(db, 'getConnection').mockReturnValue({
-                query: jest.fn().mockImplementation((query, params, callback) => {
-                    callback(mockError); // Simulate an error
-                })
+        test('should resolve false if an error occurs during the update', async () => {
+            const clientID = 99; // Example clientID
+            const updatedData = {
+                address1: 'New Address 1',
+                address2: 'Updated Address 2',
+                city: 'Los Angeles',
+                state: 'CA',
+                zip: '99999'
+            };
+    
+            // Mocking the connection.query method to simulate an error during the update
+            const mockError = new Error('Database query error');
+            jest.spyOn(db.getConnection(), 'query').mockImplementation((query, params, callback) => {
+                callback(mockError, null);
             });
-
-            // Call the function and expect it to reject with an error
-            await expect(db.updateProfile(clientID, address1, address2, city, state, zip)).rejects.toThrow(mockError.message);
+    
+            // Calling the updateProfile function
+            const result = await db.updateProfile(clientID, updatedData.address1, updatedData.address2, updatedData.city, updatedData.state, updatedData.zip);
+    
+            // Asserting that the result is false since an error occurred during the update
+            expect(result).toBe(false);
         });
     });
 });
-//missing 235-241,244

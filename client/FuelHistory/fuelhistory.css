@@ -189,7 +189,7 @@ th {
   display: flex;
   justify-content: center;
   background-color: #074647;;
-  position: relative;
+  position: fixed;
   right: 0;
   left: 0;
   bottom: 0;

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuel Quote History </title>
+  <title>Fuel Quote History</title>
   <link rel="stylesheet" href="fuelhistory.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -19,77 +19,74 @@
   <header>
     <span class="logo">ReFUEL</span>
     <nav class="navigation">
-        <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
-        <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
-        <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
+      <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
+      <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
+      <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
     </nav>
-</header>
+  </header>
 
   <main>
     <div class="color-overlay"></div>
     <section class="form_sec" id="form_input">
-        <div class="form_container">
-          <div class="title" id="form-title">Fuel Quote History
+      <div class="form_container">
+        <div class="title" id="form-title">Fuel Quote History</div>
+        <div class="filters">
+          <div class="input_box">
+            <label for="filter_label searchID">Search by QuoteID:</label> 
+            <input type="number" name="searchID" id="searchID" />
+            <button class="filter_button">Search</button>
           </div>
-            <div class="filters">
-                <div class="input_box">
-                    <label for="filter_label searchID">Search by QuoteID:</label> 
-                    <input type="number" name = "searchID" id = "searchID" />
-                </div>
 
-                <div class="input_box">
-                  <label for="filter_label date">Filter by date:</label> 
-                    <label class="filter_label start_date"></label> 
-                    <input type="date" name = "start_date" id = "start_date" />
-                    <label class="filter_label end_date">-</label>
-                    <input type="date" name = "end_date" id = "end_date" />
-                </div>
-                <div class="input_box">
-                  <button class="filter_button" onclick="applyFilters()">Filter</button>
-                </div>
-            </div>
-            <div class="history_table">
-              <table class="table">
-                 <thead>
-                    <tr>
-                        <th>QuoteID</th>
-                        <th>Gallons Requested</th>
-                        <th>Delivery Address</th>
-                        <th>Delivery Date</th>
-                        <th>Suggested Price</th>
-                        <th>Total Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Table body will be populated by JavaScript -->
-                    <tbody id="quoteTableBody">
-                </tbody>
-              </table>
+          <div class="input_box">
+            <label for="filter_label date">Filter by date:</label> 
+            <label class="filter_label start_date"></label> 
+            <input type="date" name="start_date" id="start_date" />
+            <label class="filter_label end_date">-</label>
+            <input type="date" name="end_date" id="end_date" />
+            <button class="date_button">Filter</button>
           </div>
         </div>
+        <div class="history_table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>QuoteID</th>
+                <th>Gallons Requested</th>
+                <th>Delivery Address</th>
+                <th>Delivery Date</th>
+                <th>Suggested Price</th>
+                <th>Total Price</th>
+              </tr>
+            </thead>
+            <tbody id="quoteTableBody">
+              <!-- Table body will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
-</main>
+  </main>
 
- <!-- Include any necessary JavaScript files -->
- <script src="fuelhistory.js"></script>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Include any necessary JavaScript files -->
+  <script src="fuelhistory.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
-
-
-<footer>
-  <div class="footer_container">
-    <div class="footer_items">
-      <h2>University of Houston</h2>
-      <p>Software Design, S24</p>
+  <footer>
+    <div class="footer_container">
+      <div class="footer_items">
+        <h2>University of Houston</h2>
+        <p>Software Design, S24</p>
+      </div>
+      <div class="footer_items">
+        <h2>Group 42</h2>
+        <p>Kenia Benitez</p>
+        <p>Erica Hay</p>
+        <p>Khuong Ngo</p>
+        <p>Thien Ngo</p>
+      </div>
     </div>
-    <div class="footer_items">
-      <h2>Group 42</h2>
-      <p>Kenia Benitez</p>
-      <p>Erica Hay</p>
-      <p>Khuong Ngo</p>
-      <p>Thien Ngo</p>
-    </div>
-  </div>
-</footer>
+  </footer>
+
+</body>
 
 </html>

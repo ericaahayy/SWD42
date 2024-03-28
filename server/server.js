@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 5001;
+const port = process.env.PORT || 500;
 const dbService = require("./db");
 
 app.use(cors());
@@ -9,47 +9,7 @@ app.use(express());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
-//start fuel history
-
-//end fuel history
-
 //start fuel quote
-// app.get("/profile/addresses", async (req, res) => {
-//     const { clientID } = req.query;
-
-//     try {
-//         const addresses = await getAddresses(clientID);
-
-//         if (addresses) {
-//             // format the address line
-//             let deliveryAddress1 = `${addresses.address1}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
-
-//             let response;
-//             if (addresses.address2) {
-//                 let deliveryAddress2 = `${addresses.address2}, ${addresses.city}, ${addresses.state} ${addresses.zipcode}`;
-
-//                 response = {
-//                     address1: deliveryAddress1,
-//                     address2: deliveryAddress2
-//                 };
-//             } else {
-//                 // if address2 does not exist, only include address1 in the response
-//                 response = {
-//                     address1: deliveryAddress1
-//                 };
-//             }
-
-//             res.status(200).json(response);
-//         } else {
-//             res.status(404).json({ error: "Address not found" });
-//         }
-//     } catch (error) {
-//         console.error("Error fetching address:", error);
-//         res.status(500).json({ error: "Internal Server Error" });
-//     }
-// });
-
 
 app.post("/fuelquote/submit_quote", async (req, res) => {
     const db = dbService.getDbServiceInstance();
@@ -156,7 +116,6 @@ app.post("/api/add_profile", async (req, res) => {
 app.get("/api/profile", async (req, res) => {
     try {
         const clientID = req.query.clientID; // Retrieve clientID from query parameters
-        //console.log("Received clientID:", clientID); 
 
         if (!clientID) {
             return res.status(401).json({ message: "Unauthorized, clientID not provided" });
@@ -166,56 +125,76 @@ app.get("/api/profile", async (req, res) => {
         const db = dbService.getDbServiceInstance();
         const profileData = await db.getProfileData(clientID);
 
-        if (profileData) {
-            return res.status(200).json(profileData);
-        } else {
+        // Check if profile data is available
+        if (!profileData) {
             return res.status(404).json({ message: "Profile data not found" });
         }
+
+        // Return profile data if available
+        return res.status(200).json(profileData);
+    } catch (error) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+//For updating profile
+app.put("/api/update_profile", async (req, res) => {
+    try {
+        console.log('Received data:', req.body);
+        const { clientID, address1, address2, city, state, zip } = req.body;
+        
+        // Update the user's profile data in the database
+        const db = dbService.getDbServiceInstance();
+        const updateResult = await db.updateProfile(clientID, address1, address2, city, state, zip);
+
+        // Check if the updateResult indicates success
+        if (updateResult) {
+            // Profile update successful
+            return res.status(200).json({ message: "Profile updated successfully" });
+        }
+        
+        // If updateResult is falsy, an error occurred during the update process
+        throw new Error("Failed to update profile");
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 });
-//For editing
-app.put("/api/update_profile", async (req, res) => {
-    try {
-        console.log('Received data:', req.body);
-        const { clientID, address1, address2, city, state, zip } = req.body;
-                // Update the user's profile data in the database
-                const db = dbService.getDbServiceInstance();
-                const updateResult = await db.updateProfile(clientID, address1, address2, city, state, zip);
-        
-                if (updateResult) {
-                    // Profile update successful
-                    return res.status(200).json({ message: "Profile updated successfully" });
-                } else {
-                    // Failed to update profile
-                    return res.status(500).json({ message: "Failed to update profile" });
-                }
-            } catch (error) {
-                console.error(error);
-                return res.status(500).json({ message: "Internal Server Error" });
-            }
-});
 //end profile
 
-//History Getter
+//start history
 
 // API endpoint to retrieve fuel history based on clientID
 app.get("/api/history", async (req, res) => {
-    const { clientID } = req.params;
-    const db = dbService.getDbServiceInstance();
-  
     try {
-      // Fetch fuel history data from the database based on clientID
-      const fuelHistory = await db.getFuelHistory(clientID);
-      res.json(fuelHistory);
+        const { clientID, startDate, endDate, quoteID } = req.query; // Retrieve clientID, startDate, endDate, and quoteID from query parameters
+        
+        // Validate required field
+        if (!clientID) {
+            return res.status(400).json({ message: "clientID is required." });
+        }
+
+        // Fetch fuel history data based on clientID, startDate, endDate, and quoteID
+        const db = dbService.getDbServiceInstance();
+        let fuelHistory;
+
+        if (quoteID) {
+            fuelHistory = await db.quoteFilter(clientID, quoteID);
+        } else if (startDate && endDate) {
+            fuelHistory = await db.filterByDate(clientID, startDate, endDate);
+        } else if (quoteID === "") {
+            fuelHistory = await db.getFuelHistory(clientID);
+        } else {
+            fuelHistory = await db.getFuelHistory(clientID);
+        }
+
+        // Return fuel history data if available
+        return res.status(200).json(fuelHistory);
     } catch (error) {
-      console.error("Error fetching fuel history:", error);
-      res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
-  });
-//End History Getter
+});
+
+//end history
 
 
 const server = app.listen(port, () => {
