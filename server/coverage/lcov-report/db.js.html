@@ -497,6 +497,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -838,10 +839,10 @@ let instance = null;
 &nbsp;
 //connecting locally
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: "34.71.123.255",
     database: "swd42",
-    user: "root",
-    password: "root123"
+    user: "swd42",
+    password: "Swd2024.KbEhKnTn.2049545.1539"
 });
 &nbsp;
 //this will actually make edits to the database.
@@ -883,6 +884,7 @@ class dbService {
                     resolve(result.insertId);
                 });
             });
+            return response === 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >false </span>: true;
             return response === 0 ? <span class="branch-0 cbranch-no" title="branch not covered" >false </span>: true;
         } catch (error) {
             console.error('Error:', error);
