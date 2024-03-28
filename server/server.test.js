@@ -322,3 +322,77 @@ describe('Update Profile API', () => {
         expect(response.body.message).toBe('Internal Server Error');
     });
 });
+
+describe('History API', () => {
+    test('should respond with fuel history data if clientID is provided', async () => {
+        // Assuming a valid clientID
+        const clientID = '0'; // Use an existing clientID from your database
+
+        // Send request to fetch fuel history data
+        const response = await request(app)
+            .get(`/api/history?clientID=${clientID}`);
+
+        // Assert response status code and data
+        expect(response.status).toBe(200);
+        expect(response.body).toBeDefined(); // Assuming your fuel history data structure
+    });
+
+    test('should respond with 400 status if clientID is missing', async () => {
+        // Send request without clientID
+        const response = await request(app)
+            .get('/api/history');
+
+        // Assert response status code and message
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe('clientID is required.');
+    });
+
+    test('should respond with 200 status if quoteID is provided', async () => {
+        // Assuming a valid clientID and quoteID
+        const clientID = '12345'; // Use an existing clientID from your database
+        const quoteID = '1'; // Use an existing quoteID from your database
+
+        // Send request to fetch fuel history data based on quoteID
+        const response = await request(app)
+            .get(`/api/history?clientID=${clientID}&quoteID=${quoteID}`);
+
+        // Assert response status code and data
+        expect(response.status).toBe(200);
+        expect(response.body).toBeDefined(); // Assuming your fuel history data structure
+    });
+
+    test('should respond with 200 status if startDate and endDate are provided', async () => {
+        // Assuming a valid clientID, startDate, and endDate
+        const clientID = '12345'; // Use an existing clientID from your database
+        const startDate = '2024-03-01';
+        const endDate = '2024-03-31';
+
+        // Send request to fetch fuel history data based on date range
+        const response = await request(app)
+            .get(`/api/history?clientID=${clientID}&startDate=${startDate}&endDate=${endDate}`);
+
+        // Assert response status code and data
+        expect(response.status).toBe(200);
+        expect(response.body).toBeDefined(); // Assuming your fuel history data structure
+    });
+
+    test('should return fuel history data for valid clientID when quoteID is empty', async () => {
+        // Mocked fuel history data
+        const clientID = '0'; // Assuming a valid clientID
+
+        // Mock the dbService to return fuel history data
+        const mockFuelHistory = [
+            { quoteID: 1, galreq: 100.00, suggestedprice: 2.50, totaldue: 250.00, deliveryaddress: '123 Address Ln', deliverydate: '2024-03-24' },
+            { quoteID: 2, galreq: 50.00, suggestedprice: 2.50, totaldue: 125.00, deliveryaddress: '123 Address Dr', deliverydate: '2024-03-22' }
+        ];
+        jest.spyOn(dbService.getDbServiceInstance(), 'getFuelHistory').mockResolvedValue(mockFuelHistory);
+
+        // Send request to fetch fuel history data with a valid clientID and empty quoteID
+        const response = await request(app)
+            .get(`/api/history?clientID=${clientID}&quoteID=`);
+
+        // Assert response status code and fuel history data
+        expect(response.status).toBe(200);
+        expect(response.body).toBeDefined();
+    });
+});

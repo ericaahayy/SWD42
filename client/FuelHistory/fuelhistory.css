@@ -127,15 +127,16 @@ header {
   
 }
 
-.filter{
+.filters{
   font-size: 15px;
   font-weight: 500;
   position: relative;
   text-align: center;
+  padding-top: 10px;
 }
 
-.filter > * {
-  margin-bottom: 8px;
+.filters > * {
+  margin-bottom: 9px;
 }
 
 .form_container {
@@ -165,6 +166,11 @@ header {
   box-sizing: border-box;
 }
 
+.history_table{
+  padding-top: 30px;
+
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -183,7 +189,7 @@ th {
   display: flex;
   justify-content: center;
   background-color: #074647;;
-  position: relative;
+  position: fixed;
   right: 0;
   left: 0;
   bottom: 0;

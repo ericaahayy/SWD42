@@ -201,7 +201,7 @@ class dbService {
 
             const query = "SELECT * FROM profile WHERE clientID = ?";
             const connection = this.getConnection();
-            
+
             const response = await new Promise((resolve, reject) => {
                 connection.query(query, [clientID], (err, result) => {
                     if (err) {
@@ -254,26 +254,85 @@ class dbService {
     //end profile
 
     //start fuel history
-   
 
     async getFuelHistory(clientID) {
-        try {
+    try {
+        // Validate required field
+        if (!clientID) {
+            throw new Error("clientID is required.");
+        }
+
+        const query = "SELECT * FROM fuelquote WHERE clientID = ?;";
+        const connection = this.getConnection();
+
         const response = await new Promise((resolve, reject) => {
-            const query = "SELECT * FROM fuelquote WHERE clientID = ?";
             connection.query(query, [clientID], (err, result) => {
-            if (err) {
-                console.error("Error fetching fuel history:", err);
-                reject(err);
-                return;
-            }
-            resolve(result);
+                if (err) {
+                    console.error("Error executing database query:", err);
+                    reject(new Error(err.message));
+                    return;
+                }
+                resolve(result);
             });
         });
         return response;
         } catch (error) {
-        throw error;
+            throw error;
         }
     }
+
+    async quoteFilter(clientID, quoteID) {
+    try {
+        // Validate required fields
+        if (!clientID || !quoteID) {
+            throw new Error("clientID and quoteID are required.");
+        }
+
+        const query = "SELECT * FROM fuelquote WHERE clientID = ? AND quoteID = ?;";
+        const connection = this.getConnection();
+
+        const response = await new Promise((resolve, reject) => {
+            connection.query(query, [clientID, quoteID], (err, result) => {
+                if (err) {
+                    console.error("Error executing database query:", err);
+                    reject(new Error(err.message));
+                    return;
+                }
+                resolve(result.length > 0 ? result : null);
+            });
+        });
+        return response;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async filterByDate(clientID, startDate, endDate) {
+        try {
+            // Validate required fields
+            if (!clientID || !startDate || !endDate) {
+                throw new Error("clientID, start date, and end date are required.");
+            }
+    
+            const query = "SELECT * FROM fuelquote WHERE clientID = ? AND deliverydate BETWEEN ? AND ?;";
+            const connection = this.getConnection();
+    
+            const response = await new Promise((resolve, reject) => {
+                connection.query(query, [clientID, startDate, endDate], (err, result) => {
+                    if (err) {
+                        console.error("Error executing database query:", err);
+                        reject(new Error(err.message));
+                        return;
+                    }
+                    resolve(result.length > 0 ? result : null);
+                });
+            });
+            return response;
+        } catch (error) {
+            throw error;
+        }
+    }    
+
     //end fuel history
 
     //help functions for unit testing

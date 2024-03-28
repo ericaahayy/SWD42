@@ -165,18 +165,35 @@ app.put("/api/update_profile", async (req, res) => {
 
 // API endpoint to retrieve fuel history based on clientID
 app.get("/api/history", async (req, res) => {
-    const { clientID } = req.params;
-    const db = dbService.getDbServiceInstance();
-  
     try {
-      // Fetch fuel history data from the database based on clientID
-      const fuelHistory = await db.getFuelHistory(clientID);
-      res.json(fuelHistory);
+        const { clientID, startDate, endDate, quoteID } = req.query; // Retrieve clientID, startDate, endDate, and quoteID from query parameters
+        
+        // Validate required field
+        if (!clientID) {
+            return res.status(400).json({ message: "clientID is required." });
+        }
+
+        // Fetch fuel history data based on clientID, startDate, endDate, and quoteID
+        const db = dbService.getDbServiceInstance();
+        let fuelHistory;
+
+        if (quoteID) {
+            fuelHistory = await db.quoteFilter(clientID, quoteID);
+        } else if (startDate && endDate) {
+            fuelHistory = await db.filterByDate(clientID, startDate, endDate);
+        } else if (quoteID === "") {
+            fuelHistory = await db.getFuelHistory(clientID);
+        } else {
+            fuelHistory = await db.getFuelHistory(clientID);
+        }
+
+        // Return fuel history data if available
+        return res.status(200).json(fuelHistory);
     } catch (error) {
-      console.error("Error fetching fuel history:", error);
-      res.status(500).json({ message: "Internal Server Error" });
+        return res.status(500).json({ message: "Internal Server Error" });
     }
-  });
+});
+
 //end history
 
 
