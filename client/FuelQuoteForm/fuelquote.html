@@ -50,7 +50,7 @@
                     </select>
                   <div class="input_container">
                       <label for="deliverydate">Delivery Date:</label>
-                      <input type="date" name="deliverydate" id="deliverydate" required>
+                      <input type="date" name="deliverydate" id="deliverydate" required  min="YYYY-MM-DD">
                   </div>
                   <div class="input_container">
                       <label for="suggestedprice">Suggested Price / Gallon:</label>
@@ -69,6 +69,10 @@
     </main>
 
   <script src="fuelquote.js"></script>
+  <script> //get current date and set it as the minimum on the calendar so clients cant select past dates!
+    const currentDate = new Date().toISOString().split('T')[0];
+    document.getElementById('deliverydate').min = currentDate;
+</script>
 </body>
 <footer>
   <div class="footer_container">

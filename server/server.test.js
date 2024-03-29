@@ -192,7 +192,7 @@ describe('Fuel Quote Submission', () => {
         const requestBody = {
             galreq: 100,
             deliveryaddress: '123 Fake Ln',
-            deliverydate: '2024-03-24',
+            deliverydate: '2024-07-30',
             suggestedprice: 2.5,
             totaldue: 250,
             clientID: '99'
@@ -227,7 +227,7 @@ describe('Fuel Quote Submission', () => {
             .send({
                 galreq: 100,
                 deliveryaddress: '123 TEST',
-                deliverydate: '2024-03-24',
+                deliverydate: '2024-07-30',
                 suggestedprice: 2.5,
                 totaldue: 250,
                 clientID: '12346' // assuming you have a clientID
@@ -382,7 +382,7 @@ describe('History API', () => {
 
         // Mock the dbService to return fuel history data
         const mockFuelHistory = [
-            { quoteID: 1, galreq: 100.00, suggestedprice: 2.50, totaldue: 250.00, deliveryaddress: '123 Address Ln', deliverydate: '2024-03-24' },
+            { quoteID: 1, galreq: 100.00, suggestedprice: 2.50, totaldue: 250.00, deliveryaddress: '123 Address Ln', deliverydate: '2024-07-30' },
             { quoteID: 2, galreq: 50.00, suggestedprice: 2.50, totaldue: 125.00, deliveryaddress: '123 Address Dr', deliverydate: '2024-03-22' }
         ];
         jest.spyOn(dbService.getDbServiceInstance(), 'getFuelHistory').mockResolvedValue(mockFuelHistory);
