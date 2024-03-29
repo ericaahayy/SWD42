@@ -21,7 +21,13 @@
     <nav class="navigation">
       <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
       <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
-      <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
+      <div class="dropdown">
+        <button class="dropbtn" id="myAcctBtn">My Account</button>
+        <div class="dropdown-content" id="myAcctDropdown">
+          <a href="/client/Profile/profile.html">Profile</a>
+          <a href="/client/Login/login.html" id="logoutBtn">Logout</a>
+        </div>
+      </div>
     </nav>
   </header>
 

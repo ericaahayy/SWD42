@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711660115944" clover="3.2.0">
-  <project timestamp="1711660115945" name="All files">
+<coverage generated="1711671207922" clover="3.2.0">
+  <project timestamp="1711671207922" name="All files">
     <metrics statements="284" coveredstatements="278" conditionals="146" coveredconditionals="136" methods="52" coveredmethods="51" elements="482" coveredelements="465" complexity="0" loc="284" ncloc="284" packages="1" files="2" classes="2"/>
     <file name="db.js" path="C:\Users\erica\SWD42REPO\SWD42\server\db.js">
       <metrics statements="184" coveredstatements="183" conditionals="92" coveredconditionals="85" methods="40" coveredmethods="40"/>
@@ -259,38 +259,38 @@
       <line num="130" count="1" type="stmt"/>
       <line num="134" count="1" type="stmt"/>
       <line num="136" count="0" type="stmt"/>
-      <line num="140" count="1" type="stmt"/>
-      <line num="141" count="2" type="stmt"/>
+      <line num="141" count="1" type="stmt"/>
       <line num="142" count="2" type="stmt"/>
       <line num="143" count="2" type="stmt"/>
-      <line num="146" count="2" type="stmt"/>
+      <line num="144" count="2" type="stmt"/>
       <line num="147" count="2" type="stmt"/>
-      <line num="150" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="152" count="1" type="stmt"/>
-      <line num="156" count="1" type="stmt"/>
-      <line num="158" count="1" type="stmt"/>
+      <line num="148" count="2" type="stmt"/>
+      <line num="151" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="153" count="1" type="stmt"/>
+      <line num="157" count="1" type="stmt"/>
       <line num="159" count="1" type="stmt"/>
-      <line num="167" count="1" type="stmt"/>
-      <line num="168" count="5" type="stmt"/>
+      <line num="160" count="1" type="stmt"/>
+      <line num="168" count="1" type="stmt"/>
       <line num="169" count="5" type="stmt"/>
-      <line num="172" count="5" type="cond" truecount="2" falsecount="0"/>
-      <line num="173" count="1" type="stmt"/>
-      <line num="177" count="4" type="stmt"/>
-      <line num="180" count="4" type="cond" truecount="2" falsecount="0"/>
-      <line num="181" count="1" type="stmt"/>
-      <line num="182" count="3" type="cond" truecount="4" falsecount="0"/>
-      <line num="183" count="1" type="stmt"/>
-      <line num="184" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="185" count="1" type="stmt"/>
-      <line num="187" count="1" type="stmt"/>
-      <line num="191" count="4" type="stmt"/>
-      <line num="193" count="0" type="stmt"/>
-      <line num="200" count="1" type="stmt"/>
+      <line num="170" count="5" type="stmt"/>
+      <line num="173" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="174" count="1" type="stmt"/>
+      <line num="178" count="4" type="stmt"/>
+      <line num="181" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="182" count="1" type="stmt"/>
+      <line num="183" count="3" type="cond" truecount="4" falsecount="0"/>
+      <line num="184" count="1" type="stmt"/>
+      <line num="185" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="186" count="1" type="stmt"/>
+      <line num="188" count="1" type="stmt"/>
+      <line num="192" count="4" type="stmt"/>
+      <line num="194" count="0" type="stmt"/>
       <line num="201" count="1" type="stmt"/>
-      <line num="204" count="1" type="stmt"/>
+      <line num="202" count="1" type="stmt"/>
       <line num="205" count="1" type="stmt"/>
-      <line num="206" count="0" type="stmt"/>
-      <line num="210" count="1" type="stmt"/>
+      <line num="206" count="1" type="stmt"/>
+      <line num="207" count="0" type="stmt"/>
+      <line num="211" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

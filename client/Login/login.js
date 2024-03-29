@@ -89,3 +89,14 @@ document
             reg_error.innerHTML = error.message || "User registration failed";
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function() { // for the log out button!
+        const logoutButton = document.getElementById('logoutBtn');
+      
+        logoutButton.addEventListener('click', function() {
+          localStorage.removeItem('clientID');
+      
+          window.location.href = '/client/Login/login.html'; 
+        });
+      });
+    

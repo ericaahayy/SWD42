@@ -136,6 +136,7 @@ app.get("/api/profile", async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
 //For updating profile
 app.put("/api/update_profile", async (req, res) => {
     try {

@@ -17,11 +17,17 @@
     <header>
         <span class="logo">ReFUEL</span>
         <nav class="navigation">
-            <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
-            <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
-            <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
+          <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
+          <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
+          <div class="dropdown">
+            <button class="dropbtn" id="myAcctBtn">My Account</button>
+            <div class="dropdown-content" id="myAcctDropdown">
+              <a href="/client/Profile/profile.html">Profile</a>
+              <a href="/client/Login/login.html" id="logoutBtn">Logout</a>
+            </div>
+          </div>
         </nav>
-    </header>
+      </header>
 
     <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center">
         <div class="color-overlay"></div>

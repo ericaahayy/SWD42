@@ -21,9 +21,16 @@
     <nav class="navigation">
       <a href="/client/FuelQuoteForm/fuelquote.html" class="b">New Quote</a>
       <a href="/client/FuelHistory/fuelhistory.html" class="b">Quote History</a>
-      <a href="/client/Profile/profile.html" class="b" id="myacct">My Account</a>
+      <div class="dropdown">
+        <button class="dropbtn" id="myAcctBtn">My Account</button>
+        <div class="dropdown-content" id="myAcctDropdown">
+          <a href="/client/Profile/profile.html">Profile</a>
+          <a href="/client/Login/login.html" id="logoutBtn">Logout</a>
+        </div>
+      </div>
     </nav>
-    </header>
+  </header>
+
   <main>
     <div class="color-overlay"></div>
     <section class="form_sec" id="input_form">
@@ -37,21 +44,17 @@
                       <input type="number" name="galreq" id="galreq" required>
                   </div>
                   <div class="input_container">
-                      <label for="deliveryaddress">Delivery Address:</label>
-                      <input type="text" name="deliveryaddress" id="deliveryaddress" required>
-                  </div>
-                  <!-- <div class="input_container">
                     <label for="deliveryaddress">Delivery Address:</label>
                     <select id="deliveryaddress">
                         <option value="" disabled selected>Select Delivery Address</option>
-                    </select> -->
+                    </select>
                   <div class="input_container">
                       <label for="deliverydate">Delivery Date:</label>
                       <input type="date" name="deliverydate" id="deliverydate" required>
                   </div>
                   <div class="input_container">
                       <label for="suggestedprice">Suggested Price / Gallon:</label>
-                      <input type="number" name="suggestedprice" id="suggestedprice" value="2.57">
+                      <input type="number" name="suggestedprice" id="suggestedprice" readonly>
                   </div>
                   <div class="input_container">
                       <label for="totaldue">Total Amount Due:</label>
