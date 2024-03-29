@@ -95,6 +95,7 @@ document
       
         logoutButton.addEventListener('click', function() {
           localStorage.removeItem('clientID');
+          localStorage.removeItem('username');
       
           window.location.href = '/client/Login/login.html'; 
         });
