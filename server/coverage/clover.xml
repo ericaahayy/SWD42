@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711688919560" clover="3.2.0">
-  <project timestamp="1711688919560" name="All files">
+<coverage generated="1712449400973" clover="3.2.0">
+  <project timestamp="1712449400973" name="All files">
     <metrics statements="284" coveredstatements="280" conditionals="146" coveredconditionals="136" methods="52" coveredmethods="51" elements="482" coveredelements="467" complexity="0" loc="284" ncloc="284" packages="1" files="2" classes="2"/>
-    <file name="db.js" path="C:\Users\erica\SWD42REPO\SWD42\server\db.js">
+    <file name="db.js" path="C:\Users\khuong\OneDrive - University Of Houston\Documents\COSC4353\SWD42\server\db.js">
       <metrics statements="184" coveredstatements="183" conditionals="92" coveredconditionals="85" methods="40" coveredmethods="40"/>
       <line num="1" count="5" type="stmt"/>
       <line num="2" count="5" type="stmt"/>
@@ -189,7 +189,7 @@
       <line num="381" count="0" type="stmt"/>
       <line num="386" count="5" type="stmt"/>
     </file>
-    <file name="server.js" path="C:\Users\erica\SWD42REPO\SWD42\server\server.js">
+    <file name="server.js" path="C:\Users\khuong\OneDrive - University Of Houston\Documents\COSC4353\SWD42\server\server.js">
       <metrics statements="100" coveredstatements="97" conditionals="54" coveredconditionals="51" methods="12" coveredmethods="11"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
