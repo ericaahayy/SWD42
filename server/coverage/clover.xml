@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1712449400973" clover="3.2.0">
-  <project timestamp="1712449400973" name="All files">
+<coverage generated="1712540888580" clover="3.2.0">
+  <project timestamp="1712540888580" name="All files">
     <metrics statements="284" coveredstatements="280" conditionals="146" coveredconditionals="136" methods="52" coveredmethods="51" elements="482" coveredelements="467" complexity="0" loc="284" ncloc="284" packages="1" files="2" classes="2"/>
     <file name="db.js" path="C:\Users\khuong\OneDrive - University Of Houston\Documents\COSC4353\SWD42\server\db.js">
       <metrics statements="184" coveredstatements="183" conditionals="92" coveredconditionals="85" methods="40" coveredmethods="40"/>
