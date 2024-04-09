@@ -36,6 +36,7 @@ document
             })
             .then((data) => {
                 log_error.innerText = "";
+                // console.log(data.data[0]);
                 let { username, first_login, clientID } = data.data[0];
                 window.localStorage.setItem("username", username);
                 window.localStorage.setItem("first_login", first_login);

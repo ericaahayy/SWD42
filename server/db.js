@@ -93,7 +93,8 @@ class dbService {
             const match = await bcrypt.compare(password, hashedPassword);
     
             if (match) {
-                return userData; // Return user data if passwords match
+                // console.log(userData);
+                return [userData]; // Return user data if passwords match
             } else {
                 return null; // Return null if passwords don't match
             }
