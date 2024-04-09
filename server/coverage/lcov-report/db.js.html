@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.39% </span>
+                <span class="strong">97.94% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>184/187</span>
+                <span class='fraction'>191/195</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.39% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>85/92</span>
+                <span class='fraction'>88/96</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.45% </span>
+                <span class="strong">98.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>184/185</span>
+                <span class='fraction'>191/193</span>
             </div>
         
             
@@ -449,7 +449,28 @@
 <a name='L384'></a><a href='#L384'>384</a>
 <a name='L385'></a><a href='#L385'>385</a>
 <a name='L386'></a><a href='#L386'>386</a>
-<a name='L387'></a><a href='#L387'>387</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<a name='L387'></a><a href='#L387'>387</a>
+<a name='L388'></a><a href='#L388'>388</a>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -532,9 +553,24 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -565,6 +601,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -837,6 +877,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const mysql = require("mysql2");
 const bcrypt = require('bcrypt');
+const saltRounds = 10;
 let instance = null;
 &nbsp;
 //connecting locally
@@ -904,25 +945,40 @@ class dbService {
             if (!username || !password) {
                 throw new Error("Username and password are required.");
             }
-&nbsp;
-            const query = "SELECT username, first_login, clientID FROM login WHERE username = ? AND password = ?;";
+    
+            const query = "SELECT username, first_login, clientID, password FROM login WHERE username = ?;";
             const connection = this.getConnection();
     
-            const response = await new Promise((resolve, reject) =&gt; {
-                connection.query(query, [username, password], (err, result) =&gt; {
+            const userData = await new Promise((resolve, reject) =&gt; {
+                connection.query(query, [username], (err, result) =&gt; {
                     if (err) {
                         console.error("Error executing database query:", err);
                         reject(new Error(err.message));
                         return;
                     }
-                    resolve(result);
+                    resolve(result[0]);
                 });
             });
-            return response;
+    
+            // If no user found, return null
+            if (!userData) {
+                throw new Error("Username and password do not match");
+            }
+    
+            // Compare hashed passwords
+            const hashedPassword = userData.password;
+            const match = await bcrypt.compare(password, hashedPassword);
+    
+            if (match) {
+                // console.log(userData);
+                return [userData]; // Return user data if passwords match
+            } else <span class="missing-if-branch" title="else path not taken" >E</span>{
+<span class="cstat-no" title="statement not covered" >                throw new Error("Username and password do not match");</span>
+            }
         } catch (error) {
-            throw error; // Re-throw the error to propagate it to the caller
+            throw error;
         }
-    }    
+    }
 &nbsp;
     //check if email already exists
     async checkUsernameExists(username) {
@@ -953,11 +1009,15 @@ class dbService {
                 throw new Error("Username, password, and first_login are required.");
             }
     
+            // Hash the password
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
+            // Insert hashed password into the database
             const query = "INSERT INTO login (username, password, first_login) VALUES (?,?,?);";
             const connection = this.getConnection();
     
             const response = await new Promise((resolve, reject) =&gt; {
-                connection.query(query, [username, password, first_login], (err, result) =&gt; {
+                connection.query(query, [username, hashedPassword, first_login], (err, result) =&gt; {
                     if (err) {
                         console.error("Error inserting data into database:", err);
                         reject(new Error("User registration failed"));
@@ -1228,7 +1288,7 @@ module.exports = dbService;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-09T03:11:46.439Z
+                at 2024-04-09T23:50:50.865Z
             </div>
         <script src="prettify.js"></script>
         <script>

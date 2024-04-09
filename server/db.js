@@ -85,7 +85,7 @@ class dbService {
     
             // If no user found, return null
             if (!userData) {
-                return null;
+                throw new Error("Username and password do not match");
             }
     
             // Compare hashed passwords
@@ -96,7 +96,7 @@ class dbService {
                 // console.log(userData);
                 return [userData]; // Return user data if passwords match
             } else {
-                return null; // Return null if passwords don't match
+                throw new Error("Username and password do not match");
             }
         } catch (error) {
             throw error;
