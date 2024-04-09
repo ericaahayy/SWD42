@@ -1,4 +1,6 @@
 const mysql = require("mysql2");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 let instance = null;
 
 //connecting locally
@@ -66,25 +68,39 @@ class dbService {
             if (!username || !password) {
                 throw new Error("Username and password are required.");
             }
-
-            const query = "SELECT username, first_login, clientID FROM login WHERE username = ? AND password = ?;";
+    
+            const query = "SELECT username, first_login, clientID, password FROM login WHERE username = ?;";
             const connection = this.getConnection();
     
-            const response = await new Promise((resolve, reject) => {
-                connection.query(query, [username, password], (err, result) => {
+            const userData = await new Promise((resolve, reject) => {
+                connection.query(query, [username], (err, result) => {
                     if (err) {
                         console.error("Error executing database query:", err);
                         reject(new Error(err.message));
                         return;
                     }
-                    resolve(result);
+                    resolve(result[0]);
                 });
             });
-            return response;
+    
+            // If no user found, return null
+            if (!userData) {
+                return null;
+            }
+    
+            // Compare hashed passwords
+            const hashedPassword = userData.password;
+            const match = await bcrypt.compare(password, hashedPassword);
+    
+            if (match) {
+                return userData; // Return user data if passwords match
+            } else {
+                return null; // Return null if passwords don't match
+            }
         } catch (error) {
-            throw error; // Re-throw the error to propagate it to the caller
+            throw error;
         }
-    }    
+    }
 
     //check if email already exists
     async checkUsernameExists(username) {
@@ -115,11 +131,15 @@ class dbService {
                 throw new Error("Username, password, and first_login are required.");
             }
     
+            // Hash the password
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
+            // Insert hashed password into the database
             const query = "INSERT INTO login (username, password, first_login) VALUES (?,?,?);";
             const connection = this.getConnection();
     
             const response = await new Promise((resolve, reject) => {
-                connection.query(query, [username, password, first_login], (err, result) => {
+                connection.query(query, [username, hashedPassword, first_login], (err, result) => {
                     if (err) {
                         console.error("Error inserting data into database:", err);
                         reject(new Error("User registration failed"));
