@@ -1,6 +1,10 @@
-# SWD42
-Group 42's Spring 2024 Software Design Project.
+````````````````
+Fuel Quote Web Application
 
-message to the TAs 
-1. We are using the client's email in place of a username.
-2. Please 'cd server' -> 'npm i' -> 'npm test' to run the unit tests. 
+Collaborators:
+Kenia Benitez
+Erica Hay
+Khuong Ngo
+Thien Ngo
+
+Spring 2024
